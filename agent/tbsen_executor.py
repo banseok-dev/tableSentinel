@@ -32,16 +32,16 @@ class TbsenExecutor:
         except  FileNotFoundError:
             return False, f"명령어 '{command[0]}'를 찾을 수 없습니다."
 
-    # Public API
-    def execute_ntf_command(self) -> Tuple[bool, Any]:
-        command = ["ntf", "-j", "list", "ruleset"]
-        return self._execute_command(command, is_json_output=True)
-    
+    # ----------------------------------------
+    # nftables API
+    # ----------------------------------------
     def execute_iptables_command(self) -> Tuple[bool, Any]:
         command = ["iptables", "-L", "-n"]
         return self._execute_command(command)
 
-    # --------------------   XDP   API   --------------------
+    # ----------------------------------------
+    # XDP API
+    # ----------------------------------------
 
     # [status] read rule
     def get_xdp_status(self) -> Tuple[bool, Any]:

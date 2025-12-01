@@ -9,12 +9,6 @@ from typing import Tuple, Any
 class TbsenParser:
 
     @staticmethod
-    def parse_iptables_detail(iptables_data: str) -> Tuple[bool, Any]:
-        parser_data = iptables_data.strip('\n')
-        print(parser_data)
-        return True, parser_data
-
-    @staticmethod
     def parse_nftables_detail(nftables_data: str) -> Tuple[bool, Any]:
         parser_data = nftables_data.strip('\n')
         print(parser_data)

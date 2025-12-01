@@ -36,7 +36,9 @@ public class XdpCommandController {
 
     // Agents Polling commands 
     @GetMapping("/commands/poll")
-    public List<XdpCommandDto> pollCommands(@PathVariable("agentId") String agentId) {
+    public List<XdpCommandDto> pollCommands(
+        @PathVariable("agentId") String agentId
+    ) {
 
         List<XdpCommandDto> commands = commandQueue.get(agentId);
 
@@ -51,16 +53,16 @@ public class XdpCommandController {
         return List.of();
 
     }
-    
+
     @PostMapping("/reports")
     public String receiveReport(
         @PathVariable("agentId") String agentId,
-        @RequestBody Map<String, Object> reportData // (일단 Map으로 받아서 로그만 찍어봅시다)
+        @RequestBody Map<String, Object> reportData // 일단 Map으로 받아서 로그만 찍음
     ) {
         System.out.println("📊 [Report 수신] From: " + agentId);
         System.out.println("   내용: " + reportData);
         
-        // 나중에는 여기서 DB에 저장하거나, 웹소켓으로 프론트에 뿌려주면 됩니다.
+        // 추후 프론트 엔드와 연결 필요(DB 연결은 하지말것)
         return "Report Received";
     }
 }
