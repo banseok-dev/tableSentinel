@@ -35,9 +35,11 @@ class TbsenExecutor:
     # ----------------------------------------
     # nftables API
     # ----------------------------------------
-    def execute_iptables_command(self) -> Tuple[bool, Any]:
-        command = ["iptables", "-L", "-n"]
-        return self._execute_command(command)
+
+    # [status] read rule
+    def execute_ntf_command(self) -> Tuple[bool, Any]:
+        command = ["ntf", "-j", "list", "ruleset"]
+        return self._execute_command(command, is_json_output=True)
 
     # ----------------------------------------
     # XDP API

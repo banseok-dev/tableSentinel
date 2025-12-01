@@ -2,8 +2,9 @@
 import { ref } from 'vue'
 import axios from 'axios'
 
+const engineType = ref('XDP')
 const targetIp = ref('1.1.1.1')
-const commandType = ref('ADD_IP')
+const cmdType = ref('ADD_IP')
 const logs = ref([])
 
 // [핵심] 백엔드로 명령 발사
@@ -11,7 +12,8 @@ const sendCommand = async () => {
   try {
     // API 규격(DTO)에 맞춰 데이터 생성
     const payload = {
-      type: commandType.value,
+      engineType: engineType.value,
+      commandType: cmdType.value,
       ipAddress: targetIp.value
     }
 
@@ -30,9 +32,13 @@ const sendCommand = async () => {
 
 <template>
   <div>
-    <h1>🛡️ tableSentinel Commander</h1>
+    <h1>tableSentinel Commander</h1>
     
     <div>
+      <select v-model="engineType">
+        <option value="XDP">XDP</option>
+        <option value="nftables">nftables</option>
+      </select>
       <select v-model="commandType">
         <option value="ADD_IP">IP 차단 (ADD)</option>
         <option value="DEL_IP">차단 해제 (DEL)</option>

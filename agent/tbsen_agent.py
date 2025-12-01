@@ -52,28 +52,35 @@ def main():
                         for cmd in commands:
                             # TODO: 여기서 cmd['type']에 따라 executor.add_xdp_ip_rule() 등 호출
                             print(f"  -> 명령 실행: {cmd}")
-                            cmd_type = cmd.get('type')
+                            engineType = cmd.get('engineType')
+                            cmd_type = cmd.get('commandType')
                             target_ip = cmd.get('ipAddress')
                             
                             # 명령어 수행(macth case 이용)
-                            match cmd_type:
-                                case "ADD_IP":
-                                    print(f" [Action] IP 차단 실행: {target_ip}")
-                                    success, result = executor.add_xdp_ip_rule(target_ip)
-                                    if success:
-                                        print(" O 성공 ")
-                                    else:
-                                        print(f" X 실패: {result}")
-                                case "DEL_IP":
-                                    print(f" [Action] IP 차단 해제: {target_ip}")
-                                    success, result = executor.delete_xdp_ip_rule(target_ip)
-                                    if success:
-                                        print(" O 성공 ")
-                                    else:
-                                        print(f" X 실패: {result}")
-                                case _:
-                                    pass
 
+                            match engineType:
+                                case "XDP":
+                                    match cmd_type:
+                                        case "ADD_IP":
+                                            print(f" [Action] IP 차단 실행: {target_ip}")
+                                            success, result = executor.add_xdp_ip_rule(target_ip)
+                                            if success:
+                                                print(" O 성공 ")
+                                            else:
+                                                print(f" X 실패: {result}")
+                                        case "DEL_IP":
+                                            print(f" [Action] IP 차단 해제: {target_ip}")
+                                            success, result = executor.delete_xdp_ip_rule(target_ip)
+                                            if success:
+                                                print(" O 성공 ")
+                                            else:
+                                                print(f" X 실패: {result}")
+                                        case _:
+                                            pass
+                                case "nftables":
+                                    match cmd_type:
+                                        case "ADD_IP":
+                                            pass
                 else:
                     print(f"[Polling 실패] 상태 코드: {response.status_code}, 상태: {response.ok}")
             except Exception as e:
