@@ -1,0 +1,81 @@
+# ===================================
+# Global (OS & Editor)
+# ===================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*.log
+
+# ===================================
+# Backend (Spring Boot / Gradle)
+# ===================================
+backend/HELP.md
+backend/.gradle/
+backend/build/
+backend/out/
+backend/bin/
+.gradle/
+
+!backend/gradle/wrapper/gradle-wrapper.jar
+
+# 로컬 설정/시크릿 파일
+backend/src/main/resources/application-secret.yml
+backend/src/main/resources/application-dev.properties
+
+# IDE specific inside backend
+backend/.settings/
+backend/.classpath
+backend/.project
+backend/.factorypath
+
+# ===================================
+# Frontend (Vue.js / Node)
+# ===================================
+# 의존성 패키지
+frontend/node_modules/
+
+# 빌드 결과물
+frontend/dist/
+
+# 로컬 환경 변수
+frontend/.env.local
+frontend/.env.*.local
+
+# 로그 파일
+frontend/npm-debug.log*
+frontend/yarn-error.log*
+
+# Editor directories
+frontend/.vscode/
+frontend/.idea/
+
+# ===================================
+# Agent (Python / System)
+# ===================================
+agent/__pycache__/
+agent/*.py[cod]
+agent/venv/
+agent/.venv/
+agent/env/
+
+# 에이전트 식별자 및 임시 파일
+agent/agent-uuid
+agent/*.log
+
+# 빌드 아티팩트
+agent/build/
+agent/dist/
+agent/*.spec
+
+# ===================================
+# Infrastructure (Docker etc.)
+# ===================================
+*.tar
+
+# 개인키 값
+*.pem
+*.key
+id_rsa

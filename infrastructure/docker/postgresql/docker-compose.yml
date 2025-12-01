@@ -1,0 +1,5 @@
+tbsen-db:
+    images: postgresql:latest
+    
+networks:
+  service-net:
