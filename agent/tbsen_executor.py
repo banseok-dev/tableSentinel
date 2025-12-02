@@ -37,9 +37,18 @@ class TbsenExecutor:
     # ----------------------------------------
 
     # [status] read rule
-    def execute_ntf_command(self) -> Tuple[bool, Any]:
-        command = ["ntf", "-j", "list", "ruleset"]
+    def execute_nft_ruleset(self) -> Tuple[bool, Any]:
+        command = ["nft", "-j", "list", "ruleset"]
         return self._execute_command(command, is_json_output=True)
+    
+    def execute_nft_blocked_ip(self, ip_address: str) -> Tuple[bool, Any]:
+        command = [
+            "nft", "add", "rule", 
+            "inet", "filter", "input", 
+            "ip", "saddr", ip_address, 
+            "drop"
+        ]
+        return self._execute_command(command)
 
     # ----------------------------------------
     # XDP API
