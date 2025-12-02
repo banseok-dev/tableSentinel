@@ -1,4 +1,4 @@
-package internal.app.tableSentinel;
+package internal.app.tableSentinel.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

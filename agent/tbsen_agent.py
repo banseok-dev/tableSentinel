@@ -57,7 +57,7 @@ def main():
                             target_ip = cmd.get('ipAddress')
                             
                             # 명령어 수행(macth case 이용)
-
+                            # XDP의 경우 백엔드 폴링으로 통신중
                             match engineType:
                                 case "XDP":
                                     match cmd_type:
@@ -77,19 +77,26 @@ def main():
                                                 print(f" X 실패: {result}")
                                         case _:
                                             pass
+
+                                # TODO: nftables 백엔드와 통신처리 결정 <- Polling으로 예정
                                 case "nftables":
                                     match cmd_type:
-                                        case "ADD_IP":
+                                        case "ALLOW_IP":
+                                            print(f" [Action] IP 허용 실행: {target_ip}")
+                                        case "DROP_IP":
                                             pass
+                                        case _:
+                                            pass
+                                ## 더블 폴링 이슈 트래킹 필요함
                 else:
                     print(f"[Polling 실패] 상태 코드: {response.status_code}, 상태: {response.ok}")
             except Exception as e:
                 print(f"[통신 에러] 백엔드 연결 불가: {e}")
 
             # -------------------------------------------------
-            # Step 2: 상태 보고 (Reporting) - (일단 XDP 상태만)
+            # 상태 보고 (Reporting) - (일단 XDP 상태만 보고 불러옮)
             # -------------------------------------------------
-            # 2-1. Executor로 '날것' 가져오기
+            # Executor로 raw data 가져오기
             success, raw_data = executor.get_xdp_status()
 
             if success:
@@ -123,8 +130,6 @@ def main():
                         print(f"    ⚠️ [Report] 백엔드 통신(전송) 실패: {res.status_code} - {res.text}")
                 except Exception as e:
                      print(f"    ❌ [Report] 통신 에러: {e}")
-            
-
             # TODO: 이걸로 괜찮은건지? Rust로 전환시 호스트 방화벽을 어떻게 이슈처리할지 고민.
             # -> Polling 방식은 클라이언트 단에서 OUTPUT 되는 패킷이므로, establish 될 경우 안정적인 통신 가능
             # -> 그런데 호스트 자원을 꽤 먹을것 같아서 좀 걱정됨
