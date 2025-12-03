@@ -4,23 +4,42 @@ import axios from 'axios'
 
 const engineType = ref('XDP')
 const targetIp = ref('1.1.1.1')
-const cmdType = ref('ADD_IP')
+const commandType = ref('ADD_IP')
 const logs = ref([])
 
-// [핵심] 백엔드로 명령 발사
 const sendCommand = async () => {
   try {
-    // API 규격(DTO)에 맞춰 데이터 생성
-    const payload = {
-      engineType: engineType.value,
-      commandType: cmdType.value,
-      ipAddress: targetIp.value
+    let url = ''
+    let payload = {}
+
+    if (engineType.value === 'XDP') {
+      // XDP
+      url = 'http://localhost:8080/api/agents/node1/xdp/commands'
+      
+      payload = {
+        engineType: 'XDP',
+        commandType: commandType.value,
+        ipAddress: targetIp.value, 
+        timestamp: Date.now()
+      }
+    } else {
+      // NFT
+      url = 'http://localhost:8080/api/agents/node1/nft/commands'
+      
+      payload = {
+        engineType: 'nftables',
+        commandType: commandType.value,
+        targetIp: targetIp.value,
+        table: 'filter',
+        chain: 'input',
+        action: 'drop',
+        timestamp: Date.now()
+      }
     }
 
-    // POST 요청 (백엔드 주소 확인 필수)
-    const response = await axios.post('http://localhost:8080/api/agents/node1/xdp/commands', payload)
+    const response = await axios.post(url, payload)
     
-    logs.value.push(`성공: ${response.data}`)
+    logs.value.push(`[${engineType.value}] 성공: ${response.data}`)
     console.log('백엔드 응답:', response)
 
   } catch (error) {
@@ -40,8 +59,8 @@ const sendCommand = async () => {
         <option value="nftables">nftables</option>
       </select>
       <select v-model="commandType">
-        <option value="ADD_IP">IP 차단 (ADD)</option>
-        <option value="DEL_IP">차단 해제 (DEL)</option>
+        <option value="ADD_IP">IP 차단 (ADD), nft는 IP Accept</option> // 임시 처리
+        <option value="DEL_IP">차단 해제 (DEL), nft는 IP Drop</option> // 임시 처리
       </select>
       <input v-model="targetIp" placeholder="IP 주소 입력" />
       <button @click="sendCommand">명령 전송</button>

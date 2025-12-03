@@ -1,15 +1,17 @@
 package internal.app.tableSentinel.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
-public class NftCommandDto {
-    // DTO 내용 수정 필요
-    private String type;
-    private String ipAddress;
-    private String protocol;
-    private String port;
+@SuperBuilder
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class NftCommandDto extends BaseCommandDto {
+    private String table;
     private String chain;
+    private String targetIp;
     private String action;
-    private long timestamp;
 }

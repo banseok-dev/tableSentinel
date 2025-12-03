@@ -41,14 +41,14 @@ class TbsenExecutor:
         command = ["nft", "-j", "list", "ruleset"]
         return self._execute_command(command, is_json_output=True)
     
-    # [ip] ip accept
-    def execute_nft_allow_ip(self, ip_address: str) -> Tuple[bool, Any]:
-        command = ["nft", "-j", "add", "rule", "inet", "filter", "input", "ip", "saddr", ip_address, "accept"]
+    # [ip] add ip accept
+    def add_nft_allow_ip(self, ip_address: str) -> Tuple[bool, Any]:
+        command = ["nft", "add", "rule", "inet", "filter", "input", "ip", "saddr", ip_address, "accept"]
         return self._execute_command(command)
 
-    # [] ip drop
-    def execute_nft_drop_ip(self, ip_address: str) -> Tuple[bool, Any]:
-        command = ["nft", "-j", "add", "rule", "inet", "filter", "input", "ip", "saddr", ip_address, "drop"]
+    # [] add ip drop
+    def add_nft_drop_ip(self, ip_address: str) -> Tuple[bool, Any]:
+        command = ["nft", "add", "rule", "inet", "filter", "input", "ip", "saddr", ip_address, "drop"]
         return self._execute_command(command)
 
     # ----------------------------------------

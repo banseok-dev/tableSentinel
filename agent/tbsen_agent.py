@@ -8,6 +8,7 @@ from tbsen_parser import TbsenParser
 # 에이전트 호스트 uuid 설정
 import uuid
 
+'''
 ## UUID Setup
 HOST_UUID_FILE = "/etc/tbsen-agent/agent-uuid"
 
@@ -20,19 +21,18 @@ else:
         agent_uuid = f.read().strip()
 
 print(f"Agent ID: {agent_uuid}")
-
+'''
 
 # 설정 (나중에는 환경변수로 분리)
 BACKEND_URL = "http://192.168.0.11:8080/api/agents" # <- 추후 백엔드 URL 수정할 수 있도록 해야함
-AGENT_ID = agent_uuid
+AGENT_ID = 'node1'
 
 def main():
     print(f"    🛎️ tableSentinel Agent ({AGENT_ID}) Started")
     
-    # 1. 부품 인스턴스 생성
-    # (알파 버전은 sudo=True 강제, Docker 안이니까)
+    # 인스턴스 생성 (sudo 강제 on)
     executor = TbsenExecutor(use_sudo=True)
-    
+
     # Parser는 @staticmethod라서 인스턴스 생성 불필요
 
     while True:
@@ -40,9 +40,9 @@ def main():
             print("\n[Loop] 작업 시작...")
 
             # -------------------------------------------------
-            # Step 1: 명령 가져오기 (Polling)
+            # get agent command
             # -------------------------------------------------
-            poll_url = f"{BACKEND_URL}/{AGENT_ID}/xdp/commands/poll"
+            poll_url = f"{BACKEND_URL}/{AGENT_ID}/commands/poll"
             try:
                 response = requests.get(poll_url, timeout=5)
                 if response.status_code == 200:
@@ -56,8 +56,7 @@ def main():
                             cmd_type = cmd.get('commandType')
                             target_ip = cmd.get('ipAddress')
                             
-                            # 명령어 수행(macth case 이용)
-                            # XDP의 경우 백엔드 폴링으로 통신중
+                            # XDP 액션 수행
                             match engineType:
                                 case "XDP":
                                     match cmd_type:
@@ -77,22 +76,24 @@ def main():
                                                 print(f" X 실패: {result}")
                                         case _:
                                             pass
-
-                                # TODO: nftables 백엔드와 통신처리 결정 <- Polling으로 예정
+                                
+                                # nftables 액션
                                 case "nftables":
                                     match cmd_type:
-                                        case "ALLOW_IP":
-                                            print(f" [Action] IP 허용 실행: {target_ip}")
-                                        case "DROP_IP":
-                                            pass
+                                        case "ADD_IP":
+                                            success, result = executor.add_nft_allow_ip(target_ip)
+                                            print(f" nftables [Action] IP 허용 실행: {target_ip}")
+                                        case "DEL_IP":
+                                            success, result = executor.add_nft_drop_ip(target_ip)
+                                            print(f" nftables [Action] IP 거부 실행: {target_ip}")
                                         case _:
                                             pass
-                                ## 더블 폴링 이슈 트래킹 필요함
                 else:
                     print(f"[Polling 실패] 상태 코드: {response.status_code}, 상태: {response.ok}")
             except Exception as e:
                 print(f"[통신 에러] 백엔드 연결 불가: {e}")
-
+            time.sleep(5)
+            ''' 상태보고 OFF
             # -------------------------------------------------
             # 상태 보고 (Reporting) - (일단 XDP 상태만 보고 불러옮)
             # -------------------------------------------------
@@ -135,7 +136,7 @@ def main():
             # -> 그런데 호스트 자원을 꽤 먹을것 같아서 좀 걱정됨
             # 반복 대기(10s, CPU 부하 줄임)
             time.sleep(10)
-
+            '''
         # 예외처리
         except KeyboardInterrupt:
             print("에이전트를 종료합니다.")
