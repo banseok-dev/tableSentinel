@@ -1,9 +1,11 @@
 FROM ubuntu:24.04
+# AWS에서 Image 불러올 경우
+# FROM public.ecr.aws/ubuntu/ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 # 필수 패키지 설치
-RUN apt update && apt-get install -y \
+RUN apt update && apt install -y \
     gnupg \
     git \
     curl \
@@ -25,7 +27,8 @@ WORKDIR /app
 
 # 명령어 추가
 RUN pip3 install requests --break-system-packages
-
+# UUID DIR 설정
+RUN mkdir -p /etc/tbsen-agent
 COPY tbsen_executor.py .
 COPY tbsen_parser.py .
 COPY tbsen_agent.py .
