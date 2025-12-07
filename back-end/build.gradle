@@ -6,7 +6,7 @@ plugins {
 
 group = 'internal.app'
 version = '0.0.1-SNAPSHOT'
-description = 'nftables + XDPtool GUI web app'
+description = 'XDP/eBPF + nftables Intergrated System'
 
 java {
 	toolchain {
