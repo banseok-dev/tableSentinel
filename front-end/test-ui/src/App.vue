@@ -6,6 +6,7 @@ const engineType = ref('XDP')
 const targetIp = ref('1.1.1.1')
 const commandType = ref('ADD_IP')
 const logs = ref([])
+const agentsId = ref('node1')
 
 const sendCommand = async () => {
   try {
@@ -14,7 +15,7 @@ const sendCommand = async () => {
 
     if (engineType.value === 'XDP') {
       // XDP
-      url = 'http://localhost:8080/api/agents/node1/xdp/commands'
+      url = `http://localhost:8080/api/agents${agentsId.value}/xdp/commands`
       
       payload = {
         engineType: 'XDP',
@@ -24,7 +25,7 @@ const sendCommand = async () => {
       }
     } else {
       // NFT
-      url = 'http://localhost:8080/api/agents/node1/nft/commands'
+      url = `http://localhost:8080/api/agents/${agentsId.value}/nft/commands`
       
       payload = {
         engineType: 'nftables',

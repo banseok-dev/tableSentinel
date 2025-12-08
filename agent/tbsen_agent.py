@@ -50,11 +50,11 @@ def main():
                     if commands:
                         print(f"[명령 수신] {len(commands)}개의 명령을 처리합니다.")
                         for cmd in commands:
-                            # TODO: 여기서 cmd['type']에 따라 executor.add_xdp_ip_rule() 등 호출
                             print(f"  -> 명령 실행: {cmd}")
                             engineType = cmd.get('engineType')
                             cmd_type = cmd.get('commandType')
                             target_ip = cmd.get('ipAddress')
+                            taget_chain = cmd.get('targetChain')
                             
                             # XDP 액션 수행
                             match engineType:
@@ -76,16 +76,16 @@ def main():
                                                 print(f" X 실패: {result}")
                                         case _:
                                             pass
-                                
+
                                 # nftables 액션
                                 case "nftables":
                                     match cmd_type:
                                         case "ADD_IP":
-                                            success, result = executor.add_nft_allow_ip(target_ip)
-                                            print(f" nftables [Action] IP 허용 실행: {target_ip}")
+                                            success, result = executor.add_nft_allow_ip(taget_chain, target_ip)
+                                            print(f" nftables [Action] IP 허용 실행: {taget_chain, target_ip}")
                                         case "DEL_IP":
-                                            success, result = executor.add_nft_drop_ip(target_ip)
-                                            print(f" nftables [Action] IP 거부 실행: {target_ip}")
+                                            success, result = executor.add_nft_drop_ip(taget_chain, target_ip)
+                                            print(f" nftables [Action] IP 거부 실행: {taget_chain, target_ip}")
                                         case _:
                                             pass
                 else:

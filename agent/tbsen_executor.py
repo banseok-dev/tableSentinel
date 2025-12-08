@@ -42,14 +42,26 @@ class TbsenExecutor:
         return self._execute_command(command, is_json_output=True)
     
     # [ip] add ip accept
-    def add_nft_allow_ip(self, ip_address: str) -> Tuple[bool, Any]:
-        command = ["nft", "add", "rule", "inet", "filter", "input", "ip", "saddr", ip_address, "accept"]
+    def add_nft_allow_ip(self, chain: str, ip_address: str) -> Tuple[bool, Any]:
+        command = ["nft", "add", "rule", "inet", "filter", chain, "ip", "saddr", ip_address, "accept"]
         return self._execute_command(command)
 
-    # [] add ip drop
-    def add_nft_drop_ip(self, ip_address: str) -> Tuple[bool, Any]:
-        command = ["nft", "add", "rule", "inet", "filter", "input", "ip", "saddr", ip_address, "drop"]
+    # [ip] delete ip accept
+    def del_nft_allow_ip(self, chain: str, ip_address: str) -> Tuple[bool, Any]:
+        command = ["nft", "delete", "rule", "inet", "filter", chain, "ip", "saddr", ip_address, "accept"]
         return self._execute_command(command)
+
+    # [ip] add ip drop
+    def add_nft_drop_ip(self, chain: str, ip_address: str) -> Tuple[bool, Any]:
+        command = ["nft", "add", "rule", "inet", "filter", chain, "ip", "saddr", ip_address, "drop"]
+        return self._execute_command(command)
+
+    # [ip] add ip drop
+    def delete_nft_drop_ip(self, chain: str, ip_address: str) -> Tuple[bool, Any]:
+        command = ["nft", "delete", "rule", "inet", "filter", chain, "ip", "saddr", ip_address, "drop"]
+        return self._execute_command(command)
+    
+    # TODO: TCP UDP 구분 차단, 포트 차단, 각 메서드에 Interface 선택 기능 넣어야함(에러 가능성을 생각해서 메서드 선택이 필요함 <- 정보는 파서가 가져온다)
 
     # ----------------------------------------
     # XDP API
@@ -79,3 +91,5 @@ class TbsenExecutor:
     def delete_xdp_mac_rule(self, mac_address: str, mode: str = "src,dst") -> Tuple[bool, Any]:
         command = ["xdp-filter", "ether", "-r", "-m", mode, mac_address,]
         return self._execute_command(command)
+    
+    # TODO: xdp-loader 래핑해서 인터페이스 ON / OFF 기능 넣어야할듯

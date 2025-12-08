@@ -57,7 +57,7 @@ class TbsenParser:
             elif line_stripped.startswith("Filtered MAC addresses:"):
                 current_section = "macs"
                 continue
-            
+
             # [macth section] 파싱 부분별 match
             match current_section:
                 case "stats":
@@ -87,12 +87,10 @@ class TbsenParser:
                             "value": ip,
                             "mode": mode_str.split(','),
                             "hits": int(hits)
-                                })     
+                                })
                 # (TODO: 'ports', 'macs' 케이스 추가)
-                
+
                 case _:
-                    # "stats"도, "ifaces"도 아닌 '헤더'나 '빈 줄'은
-                    # '기본값(default)' 케이스에 걸려 '무시'됨
                     pass
 
         return True, parsed_data
