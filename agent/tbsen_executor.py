@@ -41,24 +41,19 @@ class TbsenExecutor:
         command = ["nft", "-j", "list", "ruleset"]
         return self._execute_command(command, is_json_output=True)
     
+    # [ALL] delete rule
+    def del_nft_allow_ip(self, chain: str, rule_number: int) -> Tuple[bool, Any]:
+        command = ["nft", "delete", "rule", "inet", "filter", chain, "handle", rule_number]
+        return self._execute_command(command)
+    
     # [ip] add ip accept
     def add_nft_allow_ip(self, chain: str, ip_address: str) -> Tuple[bool, Any]:
         command = ["nft", "add", "rule", "inet", "filter", chain, "ip", "saddr", ip_address, "accept"]
         return self._execute_command(command)
 
-    # [ip] delete ip accept
-    def del_nft_allow_ip(self, chain: str, ip_address: str) -> Tuple[bool, Any]:
-        command = ["nft", "delete", "rule", "inet", "filter", chain, "ip", "saddr", ip_address, "accept"]
-        return self._execute_command(command)
-
     # [ip] add ip drop
     def add_nft_drop_ip(self, chain: str, ip_address: str) -> Tuple[bool, Any]:
         command = ["nft", "add", "rule", "inet", "filter", chain, "ip", "saddr", ip_address, "drop"]
-        return self._execute_command(command)
-
-    # [ip] add ip drop
-    def delete_nft_drop_ip(self, chain: str, ip_address: str) -> Tuple[bool, Any]:
-        command = ["nft", "delete", "rule", "inet", "filter", chain, "ip", "saddr", ip_address, "drop"]
         return self._execute_command(command)
     
     # TODO: TCP UDP 구분 차단, 포트 차단, 각 메서드에 Interface 선택 기능 넣어야함(에러 가능성을 생각해서 메서드 선택이 필요함 <- 정보는 파서가 가져온다)
@@ -71,25 +66,43 @@ class TbsenExecutor:
     def get_xdp_status(self) -> Tuple[bool, Any]:
         command = ["xdp-filter", "status"]
         return self._execute_command(command)
+    
+    # [interface] 인터페이스 로드
+    def load_xdp_ineterface(self, interface: str) -> Tuple[bool, Any]:
+        # 로드 실패시 명령어 반환 되므로 기본 값으로 설정 -> 기본이 native이므로,
+        # native가 아닐 경우 Couldn't attach XDP program on iface '인터페이스 이름': Operation not supported(-95)
+        # 에러를 띄우므로 이걸 반환하도록 하면됨.
+        command = ["xdp-filter", "load", interface]
+        return self._execute_command(command)
 
-    # [ip] add ip rule
-    def add_xdp_ip_rule(self, ip_address: str, mode: str = "src,dst") -> Tuple[bool, Any]:
+    # [interface] interface 호환성 모드로 로드 -> 프론트에서 체크옵션으로 처리하면 될듯
+    def load_xdp_interface_skb(self, interface: str) -> Tuple[bool, Any]:
+        command = ["xdp-filter", "load", interface, "-m", "skb"]
+        return self._execute_command(command)
+
+    # [interface] 인터페이스 언로드
+    def unload_force_xdp_interface(self, interface: str) -> Tuple[bool, Any]:
+        command = ["xdp-filter", "unload", interface]
+        return self._execute_command(command)
+
+    # 프론트/백엔드에서 src, dst 모드 추가해줘야할듯.
+    # [ip] 규칙 IP주소 추가
+    # mode = direction (fe,be 데이터와 연결되어있음)
+    def add_xdp_ip_rule(self, ip_address: str, mode: str) -> Tuple[bool, Any]:
         command = ["xdp-filter", "ip", "-m", mode, ip_address]
         return self._execute_command(command)
 
-    # [ip] delete ip rule
-    def delete_xdp_ip_rule(self, ip_address: str, mode: str = "src,dst") -> Tuple[bool, Any]:
+    # [ip] 규칙 IP주소 제거
+    def delete_xdp_ip_rule(self, ip_address: str, mode: str) -> Tuple[bool, Any]:
         command = ["xdp-filter", "ip", "-r", "-m", mode, ip_address,]
         return self._execute_command(command)
     
-    # [mac] add mac rule
-    def add_xdp_mac_rule(self, mac_address: str, mode: str = "src,dst") -> Tuple[bool, Any]:
+    # [mac] 규칙 MAC주소 추가
+    def add_xdp_mac_rule(self, mac_address: str, mode: str) -> Tuple[bool, Any]:
         command = ["xdp-filter", "ether", "-m", mode, mac_address,]
         return self._execute_command(command)
 
-    # [mac] delete mac rule
-    def delete_xdp_mac_rule(self, mac_address: str, mode: str = "src,dst") -> Tuple[bool, Any]:
+    # [mac] 규칙 MAC주소 제거
+    def delete_xdp_mac_rule(self, mac_address: str, mode: str) -> Tuple[bool, Any]:
         command = ["xdp-filter", "ether", "-r", "-m", mode, mac_address,]
         return self._execute_command(command)
-    
-    # TODO: xdp-loader 래핑해서 인터페이스 ON / OFF 기능 넣어야할듯

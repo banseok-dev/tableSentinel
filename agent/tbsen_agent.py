@@ -51,10 +51,19 @@ def main():
                         print(f"[명령 수신] {len(commands)}개의 명령을 처리합니다.")
                         for cmd in commands:
                             print(f"  -> 명령 실행: {cmd}")
+
+                            ## 코드 개선 필요 -> XDP, nftables에 필요한 요소로 나눠서 기록해둬야할듯
+                            # cmd.get 변수명이랑 DTO, Back-end 쪽 변수명도 어떻게 통일할건지?
+                            # Base Action
                             engineType = cmd.get('engineType')
                             cmd_type = cmd.get('commandType')
                             target_ip = cmd.get('ipAddress')
+
+                            # nftables only action
                             taget_chain = cmd.get('targetChain')
+
+                            # xdp only action
+                            direction = cmd.get('ruleMode')
                             
                             # XDP 액션 수행
                             match engineType:
@@ -62,14 +71,14 @@ def main():
                                     match cmd_type:
                                         case "ADD_IP":
                                             print(f" [Action] IP 차단 실행: {target_ip}")
-                                            success, result = executor.add_xdp_ip_rule(target_ip)
+                                            success, result = executor.add_xdp_ip_rule(direction, target_ip)
                                             if success:
                                                 print(" O 성공 ")
                                             else:
                                                 print(f" X 실패: {result}")
                                         case "DEL_IP":
                                             print(f" [Action] IP 차단 해제: {target_ip}")
-                                            success, result = executor.delete_xdp_ip_rule(target_ip)
+                                            success, result = executor.delete_xdp_ip_rule(direction, target_ip)
                                             if success:
                                                 print(" O 성공 ")
                                             else:
