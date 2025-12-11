@@ -33,15 +33,15 @@ class TbsenExecutor:
             return False, f"명령어 '{command[0]}'를 찾을 수 없습니다."
 
     # ----------------------------------------
-    # nftables API
+    # nftables API - filter only
     # ----------------------------------------
 
     # [status] read rule
-    def execute_nft_ruleset(self) -> Tuple[bool, Any]:
+    def get_nft_ruleset(self) -> Tuple[bool, Any]:
         command = ["nft", "-j", "list", "ruleset"]
         return self._execute_command(command, is_json_output=True)
     
-    # [ALL] delete rule
+    # [all] delete rule
     def del_nft_allow_ip(self, chain: str, rule_number: int) -> Tuple[bool, Any]:
         command = ["nft", "delete", "rule", "inet", "filter", chain, "handle", rule_number]
         return self._execute_command(command)
@@ -56,11 +56,22 @@ class TbsenExecutor:
         command = ["nft", "add", "rule", "inet", "filter", chain, "ip", "saddr", ip_address, "drop"]
         return self._execute_command(command)
     
-    # TODO: TCP UDP 구분 차단, 포트 차단, 각 메서드에 Interface 선택 기능 넣어야함(에러 가능성을 생각해서 메서드 선택이 필요함 <- 정보는 파서가 가져온다)
+    # [ip] add TCP/UDP accept
+    def add_nft_accept_l4_protocol(self, chain: str, l4_protocol: str, port:int, ip_address: str) -> Tuple[bool, Any]:
+        command = ["nft", "add", "rule", "inet", "filter", chain, l4_protocol, "dport", port, "ip", "saddr", ip_address, "accept"]
+        return self._execute_command(command)
+
+    # [ip] add TCP/UDP drop
+    def add_nft_drop_l4_protocol(self, chain: str, l4_protocol: str, port:int, ip_address: str) -> Tuple[bool, Any]:
+        command = ["nft", "add", "rule", "inet", "filter", chain, l4_protocol, "dport", port, "ip", "saddr", ip_address, "drop"]
+        return self._execute_command(command)
+
 
     # ----------------------------------------
     # XDP API
     # ----------------------------------------
+
+    # 인터페이스는 XDP Filter에서 먼저 선택되어 처리되므로, nftables 인터페이스 선택기능은 빼기
 
     # [status] read rule
     def get_xdp_status(self) -> Tuple[bool, Any]:
