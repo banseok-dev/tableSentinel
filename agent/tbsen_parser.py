@@ -2,7 +2,6 @@
 # 해당 프로그램의 목표는 각 Tool의 테이블을 불러오고, 모니터링 요약을 목적으로 가지고 있습니다.
 # 파이프라인 구성중입니다.
 
-import tbsen_executor
 import re
 from typing import Tuple, Any
 
@@ -93,33 +92,3 @@ class TbsenParser:
                     pass
 
         return True, parsed_data
-
-# 테스트 코드로 분리 필요함(메인함수 그만쓰자)
-if __name__ == "__main__":
-    print("tableSentinel 에이전트 parser 테스트")
-
-    executor = tbsen_executor.TbsenExecutor(use_sudo=True)
-    print("테스트")
-    success, data = executor.get_xdp_status()
-    if success:
-        print(f"성공 (텍스트 수신): {data}")
-    else:
-        print(f"실패: {data}")
-
-    success, rule = TbsenParser.parse_xdp_status(data)
-    if success:
-        print(f"출력성공: {rule}")
-    else:
-        print(f"출력실패: {rule}")
-
-    success, data = executor.get_nft_ruleset()
-    if success:
-        print(f"성공: {data}")
-    else:
-        print(f"실패: {data}")
-
-    success, rule = TbsenParser.parse_xdp_status(data)
-    if success:
-        print(f"출력성공: {rule}")
-    else:
-        print(f"출력실패: {rule}")

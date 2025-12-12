@@ -34,3 +34,26 @@
 - iptables, nftables, xdptool 등 방화벽 유기적 연결
 - DB를 통한 유저/로그/감사 관리
 - 커널 소스를 통한 호스트 방화벽 실시간 모니터링
+
+---
+
+# License & Credits
+The 'tableSentinel' is released under the MIT License.
+See [LICENSE](LICENSE) file for details.
+
+# Third Party Notices
+This project uses the following open source software:
+
+## Frontend (Vue.js)
+* **Vue.js** (MIT License) - Copyright (c) 2015-present Evan You
+* **TailAdmin** (MIT License / Free) - Copyright (c) 2023 TailAdmin
+* **Axios** (MIT License)
+
+## Backend (Spring Boot)
+* **Spring Boot** (Apache License 2.0)
+* **Netty** (Apache License 2.0)
+* **gRPC** (Apache License 2.0)
+
+## Agent (Python & Kernel)
+* **bcc / libbpf** (LGPL or BSD 2-Clause)
+* **nftables** (GPL v2) - *Used via CLI interactions*

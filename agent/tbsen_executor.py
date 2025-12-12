@@ -42,7 +42,7 @@ class TbsenExecutor:
         return self._execute_command(command, is_json_output=True)
     
     # [all] delete rule
-    def del_nft_allow_ip(self, chain: str, rule_number: int) -> Tuple[bool, Any]:
+    def del_nft_rule(self, chain: str, rule_number: str) -> Tuple[bool, Any]:
         command = ["nft", "delete", "rule", "inet", "filter", chain, "handle", rule_number]
         return self._execute_command(command)
     
@@ -57,12 +57,12 @@ class TbsenExecutor:
         return self._execute_command(command)
     
     # [ip] add TCP/UDP accept
-    def add_nft_accept_l4_protocol(self, chain: str, l4_protocol: str, port:int, ip_address: str) -> Tuple[bool, Any]:
+    def add_nft_accept_l4_protocol(self, chain: str, l4_protocol: str, port:str, ip_address: str) -> Tuple[bool, Any]:
         command = ["nft", "add", "rule", "inet", "filter", chain, l4_protocol, "dport", port, "ip", "saddr", ip_address, "accept"]
         return self._execute_command(command)
 
     # [ip] add TCP/UDP drop
-    def add_nft_drop_l4_protocol(self, chain: str, l4_protocol: str, port:int, ip_address: str) -> Tuple[bool, Any]:
+    def add_nft_drop_l4_protocol(self, chain: str, l4_protocol: str, port:str, ip_address: str) -> Tuple[bool, Any]:
         command = ["nft", "add", "rule", "inet", "filter", chain, l4_protocol, "dport", port, "ip", "saddr", ip_address, "drop"]
         return self._execute_command(command)
 
