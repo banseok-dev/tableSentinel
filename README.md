@@ -55,5 +55,5 @@ This project uses the following open source software:
 * **gRPC** (Apache License 2.0)
 
 ## Agent (Python & Kernel)
-* **bcc / libbpf** (LGPL or BSD 2-Clause)
+* **xdp-tools** (GPL-2.0, LGPL-2.1 and BSD-2-Clause) - *Used via CLI interactions*
 * **nftables** (GPL v2) - *Used via CLI interactions*
