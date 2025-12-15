@@ -31,9 +31,21 @@
 - **DevOps:** Docker
 
 ## 🎯 Goal
-- iptables, nftables, xdptool 등 방화벽 유기적 연결
+- nftables, xdptool 등 방화벽 유기적 연결
 - DB를 통한 유저/로그/감사 관리
 - 커널 소스를 통한 호스트 방화벽 실시간 모니터링
+
+---
+
+## TODO (short plan)
+ - ☐ 백엔드 및 에이전트 통신 gRPC 리팩터링
+ - ☐ 프론트엔드 Test UI → TailAdmin 리팩터링
+ - ☑︎ 프로젝트 알파버전 v0.1.0 완성(기능 구현 PoC)
+  
+## TODO (long plan)
+ - ☐ nftables 및 XDP 필터링 지능적 분류
+ - ☐ DDoS 의심 패킷 혹은 공격자 패킷 구분 기능 추가
+
 
 ---
 
