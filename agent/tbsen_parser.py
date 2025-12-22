@@ -26,13 +26,14 @@ class TbsenParser:
             "ips": [],
             "macs": []
         }
-
+        
         current_section = None
 
         patterns = {
             "stats": re.compile(r"^\s+XDP_(\w+)\s+(\d+)\s+pkts\s+(\d+)\s+KiB$"),
             "ifaces": re.compile(r"^\s+([\w\.-]+)\s+\(([\w\s]+)\)\s+([\w,]+)$"),
             "ips": re.compile(r"^\s+([\d\.]+)\s+([\w,]+)\s+(\d+)$")
+            
         }
 
         for line in xdp_raw_text.strip().split('\n'):

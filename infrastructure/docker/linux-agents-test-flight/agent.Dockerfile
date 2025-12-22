@@ -26,7 +26,8 @@ RUN apt update && apt install -y \
 WORKDIR /app
 
 # 명령어 추가
-RUN pip3 install requests --break-system-packages
+RUN pip3 install grpcio grpcio-tools protobuf --break-system-packages
+
 # UUID DIR 설정
 RUN mkdir -p /etc/tbsen-agent
 COPY tbsen_executor.py .

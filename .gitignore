@@ -14,6 +14,8 @@ Thumbs.db
 # ===================================
 backend/HELP.md
 backend/.gradle/
+
+# 리빌드 필요 ! (proto 의존성)
 backend/build/
 backend/out/
 backend/bin/
@@ -57,8 +59,8 @@ frontend/.idea/
 # ===================================
 agent/__pycache__/
 agent/*.py[cod]
-agent/venv/
-agent/.venv/
+venv/
+.venv/
 agent/env/
 
 # 에이전트 식별자 및 임시 파일
