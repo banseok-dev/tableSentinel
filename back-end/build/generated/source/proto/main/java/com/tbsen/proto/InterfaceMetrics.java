@@ -17,7 +17,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private InterfaceMetrics() {
-    currentMode_ = 0;
+    interfaceName_ = "";
   }
 
   @java.lang.Override
@@ -40,33 +40,54 @@ private static final long serialVersionUID = 0L;
             com.tbsen.proto.InterfaceMetrics.class, com.tbsen.proto.InterfaceMetrics.Builder.class);
   }
 
-  public static final int CURRENT_MODE_FIELD_NUMBER = 1;
-  private int currentMode_ = 0;
+  public static final int INTERFACE_NAME_FIELD_NUMBER = 1;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object interfaceName_ = "";
   /**
-   * <code>.com.tbsen.proto.XdpMode current_mode = 1;</code>
-   * @return The enum numeric value on the wire for currentMode.
-   */
-  @java.lang.Override public int getCurrentModeValue() {
-    return currentMode_;
-  }
-  /**
-   * <code>.com.tbsen.proto.XdpMode current_mode = 1;</code>
-   * @return The currentMode.
-   */
-  @java.lang.Override public com.tbsen.proto.XdpMode getCurrentMode() {
-    com.tbsen.proto.XdpMode result = com.tbsen.proto.XdpMode.forNumber(currentMode_);
-    return result == null ? com.tbsen.proto.XdpMode.UNRECOGNIZED : result;
-  }
-
-  public static final int PASS_COUNT_FIELD_NUMBER = 2;
-  private long passCount_ = 0L;
-  /**
-   * <code>uint64 pass_count = 2;</code>
-   * @return The passCount.
+   * <code>string interface_name = 1;</code>
+   * @return The interfaceName.
    */
   @java.lang.Override
-  public long getPassCount() {
-    return passCount_;
+  public java.lang.String getInterfaceName() {
+    java.lang.Object ref = interfaceName_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      interfaceName_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string interface_name = 1;</code>
+   * @return The bytes for interfaceName.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getInterfaceNameBytes() {
+    java.lang.Object ref = interfaceName_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      interfaceName_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int XDP_ATTACHED_FIELD_NUMBER = 2;
+  private boolean xdpAttached_ = false;
+  /**
+   * <code>bool xdp_attached = 2;</code>
+   * @return The xdpAttached.
+   */
+  @java.lang.Override
+  public boolean getXdpAttached() {
+    return xdpAttached_;
   }
 
   public static final int DROP_COUNT_FIELD_NUMBER = 3;
@@ -80,15 +101,15 @@ private static final long serialVersionUID = 0L;
     return dropCount_;
   }
 
-  public static final int PPS_FIELD_NUMBER = 4;
-  private double pps_ = 0D;
+  public static final int PASS_COUNT_FIELD_NUMBER = 4;
+  private long passCount_ = 0L;
   /**
-   * <code>double pps = 4;</code>
-   * @return The pps.
+   * <code>uint64 pass_count = 4;</code>
+   * @return The passCount.
    */
   @java.lang.Override
-  public double getPps() {
-    return pps_;
+  public long getPassCount() {
+    return passCount_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -105,17 +126,17 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (currentMode_ != com.tbsen.proto.XdpMode.MODE_UNKNOWN.getNumber()) {
-      output.writeEnum(1, currentMode_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(interfaceName_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, interfaceName_);
     }
-    if (passCount_ != 0L) {
-      output.writeUInt64(2, passCount_);
+    if (xdpAttached_ != false) {
+      output.writeBool(2, xdpAttached_);
     }
     if (dropCount_ != 0L) {
       output.writeUInt64(3, dropCount_);
     }
-    if (java.lang.Double.doubleToRawLongBits(pps_) != 0) {
-      output.writeDouble(4, pps_);
+    if (passCount_ != 0L) {
+      output.writeUInt64(4, passCount_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -126,21 +147,20 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (currentMode_ != com.tbsen.proto.XdpMode.MODE_UNKNOWN.getNumber()) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeEnumSize(1, currentMode_);
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(interfaceName_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, interfaceName_);
     }
-    if (passCount_ != 0L) {
+    if (xdpAttached_ != false) {
       size += com.google.protobuf.CodedOutputStream
-        .computeUInt64Size(2, passCount_);
+        .computeBoolSize(2, xdpAttached_);
     }
     if (dropCount_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
         .computeUInt64Size(3, dropCount_);
     }
-    if (java.lang.Double.doubleToRawLongBits(pps_) != 0) {
+    if (passCount_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(4, pps_);
+        .computeUInt64Size(4, passCount_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -157,14 +177,14 @@ private static final long serialVersionUID = 0L;
     }
     com.tbsen.proto.InterfaceMetrics other = (com.tbsen.proto.InterfaceMetrics) obj;
 
-    if (currentMode_ != other.currentMode_) return false;
-    if (getPassCount()
-        != other.getPassCount()) return false;
+    if (!getInterfaceName()
+        .equals(other.getInterfaceName())) return false;
+    if (getXdpAttached()
+        != other.getXdpAttached()) return false;
     if (getDropCount()
         != other.getDropCount()) return false;
-    if (java.lang.Double.doubleToLongBits(getPps())
-        != java.lang.Double.doubleToLongBits(
-            other.getPps())) return false;
+    if (getPassCount()
+        != other.getPassCount()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -176,17 +196,17 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + CURRENT_MODE_FIELD_NUMBER;
-    hash = (53 * hash) + currentMode_;
-    hash = (37 * hash) + PASS_COUNT_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getPassCount());
+    hash = (37 * hash) + INTERFACE_NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getInterfaceName().hashCode();
+    hash = (37 * hash) + XDP_ATTACHED_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getXdpAttached());
     hash = (37 * hash) + DROP_COUNT_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         getDropCount());
-    hash = (37 * hash) + PPS_FIELD_NUMBER;
+    hash = (37 * hash) + PASS_COUNT_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        java.lang.Double.doubleToLongBits(getPps()));
+        getPassCount());
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -318,10 +338,10 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      currentMode_ = 0;
-      passCount_ = 0L;
+      interfaceName_ = "";
+      xdpAttached_ = false;
       dropCount_ = 0L;
-      pps_ = 0D;
+      passCount_ = 0L;
       return this;
     }
 
@@ -356,16 +376,16 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(com.tbsen.proto.InterfaceMetrics result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.currentMode_ = currentMode_;
+        result.interfaceName_ = interfaceName_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.passCount_ = passCount_;
+        result.xdpAttached_ = xdpAttached_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.dropCount_ = dropCount_;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.pps_ = pps_;
+        result.passCount_ = passCount_;
       }
     }
 
@@ -413,17 +433,19 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.tbsen.proto.InterfaceMetrics other) {
       if (other == com.tbsen.proto.InterfaceMetrics.getDefaultInstance()) return this;
-      if (other.currentMode_ != 0) {
-        setCurrentModeValue(other.getCurrentModeValue());
+      if (!other.getInterfaceName().isEmpty()) {
+        interfaceName_ = other.interfaceName_;
+        bitField0_ |= 0x00000001;
+        onChanged();
       }
-      if (other.getPassCount() != 0L) {
-        setPassCount(other.getPassCount());
+      if (other.getXdpAttached() != false) {
+        setXdpAttached(other.getXdpAttached());
       }
       if (other.getDropCount() != 0L) {
         setDropCount(other.getDropCount());
       }
-      if (other.getPps() != 0D) {
-        setPps(other.getPps());
+      if (other.getPassCount() != 0L) {
+        setPassCount(other.getPassCount());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -451,13 +473,13 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 8: {
-              currentMode_ = input.readEnum();
+            case 10: {
+              interfaceName_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
-            } // case 8
+            } // case 10
             case 16: {
-              passCount_ = input.readUInt64();
+              xdpAttached_ = input.readBool();
               bitField0_ |= 0x00000002;
               break;
             } // case 16
@@ -466,11 +488,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000004;
               break;
             } // case 24
-            case 33: {
-              pps_ = input.readDouble();
+            case 32: {
+              passCount_ = input.readUInt64();
               bitField0_ |= 0x00000008;
               break;
-            } // case 33
+            } // case 32
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -488,87 +510,106 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private int currentMode_ = 0;
+    private java.lang.Object interfaceName_ = "";
     /**
-     * <code>.com.tbsen.proto.XdpMode current_mode = 1;</code>
-     * @return The enum numeric value on the wire for currentMode.
+     * <code>string interface_name = 1;</code>
+     * @return The interfaceName.
      */
-    @java.lang.Override public int getCurrentModeValue() {
-      return currentMode_;
-    }
-    /**
-     * <code>.com.tbsen.proto.XdpMode current_mode = 1;</code>
-     * @param value The enum numeric value on the wire for currentMode to set.
-     * @return This builder for chaining.
-     */
-    public Builder setCurrentModeValue(int value) {
-      currentMode_ = value;
-      bitField0_ |= 0x00000001;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>.com.tbsen.proto.XdpMode current_mode = 1;</code>
-     * @return The currentMode.
-     */
-    @java.lang.Override
-    public com.tbsen.proto.XdpMode getCurrentMode() {
-      com.tbsen.proto.XdpMode result = com.tbsen.proto.XdpMode.forNumber(currentMode_);
-      return result == null ? com.tbsen.proto.XdpMode.UNRECOGNIZED : result;
-    }
-    /**
-     * <code>.com.tbsen.proto.XdpMode current_mode = 1;</code>
-     * @param value The currentMode to set.
-     * @return This builder for chaining.
-     */
-    public Builder setCurrentMode(com.tbsen.proto.XdpMode value) {
-      if (value == null) {
-        throw new NullPointerException();
+    public java.lang.String getInterfaceName() {
+      java.lang.Object ref = interfaceName_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        interfaceName_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
       }
+    }
+    /**
+     * <code>string interface_name = 1;</code>
+     * @return The bytes for interfaceName.
+     */
+    public com.google.protobuf.ByteString
+        getInterfaceNameBytes() {
+      java.lang.Object ref = interfaceName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        interfaceName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string interface_name = 1;</code>
+     * @param value The interfaceName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setInterfaceName(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      interfaceName_ = value;
       bitField0_ |= 0x00000001;
-      currentMode_ = value.getNumber();
       onChanged();
       return this;
     }
     /**
-     * <code>.com.tbsen.proto.XdpMode current_mode = 1;</code>
+     * <code>string interface_name = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearCurrentMode() {
+    public Builder clearInterfaceName() {
+      interfaceName_ = getDefaultInstance().getInterfaceName();
       bitField0_ = (bitField0_ & ~0x00000001);
-      currentMode_ = 0;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string interface_name = 1;</code>
+     * @param value The bytes for interfaceName to set.
+     * @return This builder for chaining.
+     */
+    public Builder setInterfaceNameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      interfaceName_ = value;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
 
-    private long passCount_ ;
+    private boolean xdpAttached_ ;
     /**
-     * <code>uint64 pass_count = 2;</code>
-     * @return The passCount.
+     * <code>bool xdp_attached = 2;</code>
+     * @return The xdpAttached.
      */
     @java.lang.Override
-    public long getPassCount() {
-      return passCount_;
+    public boolean getXdpAttached() {
+      return xdpAttached_;
     }
     /**
-     * <code>uint64 pass_count = 2;</code>
-     * @param value The passCount to set.
+     * <code>bool xdp_attached = 2;</code>
+     * @param value The xdpAttached to set.
      * @return This builder for chaining.
      */
-    public Builder setPassCount(long value) {
+    public Builder setXdpAttached(boolean value) {
 
-      passCount_ = value;
+      xdpAttached_ = value;
       bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>uint64 pass_count = 2;</code>
+     * <code>bool xdp_attached = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearPassCount() {
+    public Builder clearXdpAttached() {
       bitField0_ = (bitField0_ & ~0x00000002);
-      passCount_ = 0L;
+      xdpAttached_ = false;
       onChanged();
       return this;
     }
@@ -605,34 +646,34 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private double pps_ ;
+    private long passCount_ ;
     /**
-     * <code>double pps = 4;</code>
-     * @return The pps.
+     * <code>uint64 pass_count = 4;</code>
+     * @return The passCount.
      */
     @java.lang.Override
-    public double getPps() {
-      return pps_;
+    public long getPassCount() {
+      return passCount_;
     }
     /**
-     * <code>double pps = 4;</code>
-     * @param value The pps to set.
+     * <code>uint64 pass_count = 4;</code>
+     * @param value The passCount to set.
      * @return This builder for chaining.
      */
-    public Builder setPps(double value) {
+    public Builder setPassCount(long value) {
 
-      pps_ = value;
+      passCount_ = value;
       bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
-     * <code>double pps = 4;</code>
+     * <code>uint64 pass_count = 4;</code>
      * @return This builder for chaining.
      */
-    public Builder clearPps() {
+    public Builder clearPassCount() {
       bitField0_ = (bitField0_ & ~0x00000008);
-      pps_ = 0D;
+      passCount_ = 0L;
       onChanged();
       return this;
     }

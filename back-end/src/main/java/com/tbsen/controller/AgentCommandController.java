@@ -1,53 +1,47 @@
 package com.tbsen.controller;
 
-import com.tbsen.dto.BaseCommandDto;
-import com.tbsen.dto.NftCommandDto;
 import com.tbsen.dto.XdpCommandDto;
+import com.tbsen.dto.NftCommandDto;
+import com.tbsen.service.FilterAgentService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/agents/{agentId}")
 @RequiredArgsConstructor
 public class AgentCommandController {
 
-    private final Map<String, List<BaseCommandDto>> commandQueue = new ConcurrentHashMap<>();
+    private final FilterAgentService filterAgentService;
 
-    // XDP Commands 처리부
+    // XDP Commnads 처리 (Front <-> Back)
     @PostMapping("/xdp/commands")
-    public String addXdpCommand(
-            @PathVariable("agentId") String agentId,
-            @RequestBody XdpCommandDto dto 
-    ) {
-        dto.setAgentId(agentId);
-        dto.setTimestamp(System.currentTimeMillis());
+    public ResponseEntity<String> sendXdpCommand(@PathVariable("agentId") String agentId, @RequestBody XdpCommandDto dto) {
+        log.info("[INFO] XDP 요청 수신: Agent={}, Action={}", agentId, dto.getAction());
 
-        addCommandToQueue(agentId, dto);
+        boolean success = filterAgentService.executeXdpCommand(agentId, dto);
 
-        return "XDP Command Queued";
+        if (success) {
+            return ResponseEntity.ok("[SUCCESS] XDP Command 전송 성공");
+        } else {
+            return ResponseEntity.status(503).body("[FAILED] XDP Command 전송 실패: 에이전트 확인 필요");
+        }
     }
 
+    // NFT Commands 처리 (Front <-> Back)
     @PostMapping("/nft/commands")
-    public String addNftCommand(
-            @PathVariable("agentId") String agentId,
-            @RequestBody NftCommandDto dto
-    ) {
-        dto.setAgentId(agentId);
-        dto.setTimestamp(System.currentTimeMillis());
+    public ResponseEntity<String> sendNftCommand(@PathVariable("agentId") String agentId, @RequestBody NftCommandDto dto) {
+        log.info("[INFO] NFT 요청 수신: Agent={}, Action={}", agentId, dto.getAction());
 
-        addCommandToQueue(agentId, dto);
+        boolean success = filterAgentService.executeNftCommand(agentId, dto);
 
-        return "NFT Command Queued";
-    }
-
-    private void addCommandToQueue(String agentId, BaseCommandDto dto) {
-        commandQueue.computeIfAbsent(agentId, k -> new ArrayList<>()).add(dto);
-        System.out.println("[Queue] Command added for " + agentId + ": " + dto);
+        if (success) {
+            return ResponseEntity.ok("[SUCCESS] NFT Command 전송 성공");
+        } else {
+            return ResponseEntity.status(503).body("[FAILED] NFT Command 전송 실패: 에이전트 확인 필요");
+        }
     }
 }

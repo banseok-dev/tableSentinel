@@ -1,14 +1,13 @@
 package com.tbsen.dto;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 @Data
-@SuperBuilder
-@NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class XdpCommandDto extends BaseCommandDto {
-    private String ipAddress; 
+public class XdpCommandDto {
+    private String action;
+    private String targetIp;
+    private String targetMac;     // [XDP 단독] MAC 주소
+    private String mode;          // [XDP 단독] src, dst
+    private String interfaceName; // [XDP 단독] interface name
+    private String interfaceMode; // [XDP 단독] skb, native 등
 }

@@ -33,91 +33,14 @@ public interface AgentIdentityOrBuilder extends
       getHostnameBytes();
 
   /**
-   * <code>string host_ip = 3;</code>
-   * @return The hostIp.
-   */
-  java.lang.String getHostIp();
-  /**
-   * <code>string host_ip = 3;</code>
-   * @return The bytes for hostIp.
-   */
-  com.google.protobuf.ByteString
-      getHostIpBytes();
-
-  /**
-   * <code>string kernel_version = 4;</code>
-   * @return The kernelVersion.
-   */
-  java.lang.String getKernelVersion();
-  /**
-   * <code>string kernel_version = 4;</code>
-   * @return The bytes for kernelVersion.
-   */
-  com.google.protobuf.ByteString
-      getKernelVersionBytes();
-
-  /**
-   * <code>string os_version = 5;</code>
-   * @return The osVersion.
-   */
-  java.lang.String getOsVersion();
-  /**
-   * <code>string os_version = 5;</code>
-   * @return The bytes for osVersion.
-   */
-  com.google.protobuf.ByteString
-      getOsVersionBytes();
-
-  /**
-   * <code>string agent_version = 6;</code>
+   * <code>string agent_version = 3;</code>
    * @return The agentVersion.
    */
   java.lang.String getAgentVersion();
   /**
-   * <code>string agent_version = 6;</code>
+   * <code>string agent_version = 3;</code>
    * @return The bytes for agentVersion.
    */
   com.google.protobuf.ByteString
       getAgentVersionBytes();
-
-  /**
-   * <pre>
-   * 인터페이스 배열(리스트) 할당
-   * </pre>
-   *
-   * <code>repeated string interfaces = 7;</code>
-   * @return A list containing the interfaces.
-   */
-  java.util.List<java.lang.String>
-      getInterfacesList();
-  /**
-   * <pre>
-   * 인터페이스 배열(리스트) 할당
-   * </pre>
-   *
-   * <code>repeated string interfaces = 7;</code>
-   * @return The count of interfaces.
-   */
-  int getInterfacesCount();
-  /**
-   * <pre>
-   * 인터페이스 배열(리스트) 할당
-   * </pre>
-   *
-   * <code>repeated string interfaces = 7;</code>
-   * @param index The index of the element to return.
-   * @return The interfaces at the given index.
-   */
-  java.lang.String getInterfaces(int index);
-  /**
-   * <pre>
-   * 인터페이스 배열(리스트) 할당
-   * </pre>
-   *
-   * <code>repeated string interfaces = 7;</code>
-   * @param index The index of the value to return.
-   * @return The bytes of the interfaces at the given index.
-   */
-  com.google.protobuf.ByteString
-      getInterfacesBytes(int index);
 }

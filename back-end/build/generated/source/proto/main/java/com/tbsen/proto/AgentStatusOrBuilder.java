@@ -38,72 +38,26 @@ public interface AgentStatusOrBuilder extends
   com.tbsen.proto.AgentState getGlobalState();
 
   /**
-   * <pre>
-   * 각 인터페이스별 지표
-   * </pre>
-   *
-   * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
+   * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
    */
-  int getInterfaceMetricsCount();
+  java.util.List<com.tbsen.proto.InterfaceMetrics> 
+      getMetricsList();
   /**
-   * <pre>
-   * 각 인터페이스별 지표
-   * </pre>
-   *
-   * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
+   * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
    */
-  boolean containsInterfaceMetrics(
-      java.lang.String key);
+  com.tbsen.proto.InterfaceMetrics getMetrics(int index);
   /**
-   * Use {@link #getInterfaceMetricsMap()} instead.
+   * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
    */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetrics>
-  getInterfaceMetrics();
+  int getMetricsCount();
   /**
-   * <pre>
-   * 각 인터페이스별 지표
-   * </pre>
-   *
-   * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
+   * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
    */
-  java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetrics>
-  getInterfaceMetricsMap();
+  java.util.List<? extends com.tbsen.proto.InterfaceMetricsOrBuilder> 
+      getMetricsOrBuilderList();
   /**
-   * <pre>
-   * 각 인터페이스별 지표
-   * </pre>
-   *
-   * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
+   * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
    */
-  /* nullable */
-com.tbsen.proto.InterfaceMetrics getInterfaceMetricsOrDefault(
-      java.lang.String key,
-      /* nullable */
-com.tbsen.proto.InterfaceMetrics defaultValue);
-  /**
-   * <pre>
-   * 각 인터페이스별 지표
-   * </pre>
-   *
-   * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
-   */
-  com.tbsen.proto.InterfaceMetrics getInterfaceMetricsOrThrow(
-      java.lang.String key);
-
-  /**
-   * <pre>
-   * 리소스 상태
-   * </pre>
-   *
-   * <code>double cpu_usage_percent = 5;</code>
-   * @return The cpuUsagePercent.
-   */
-  double getCpuUsagePercent();
-
-  /**
-   * <code>double memory_usage_percent = 6;</code>
-   * @return The memoryUsagePercent.
-   */
-  double getMemoryUsagePercent();
+  com.tbsen.proto.InterfaceMetricsOrBuilder getMetricsOrBuilder(
+      int index);
 }

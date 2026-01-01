@@ -6,8 +6,8 @@ plugins {
 }
 
 group = 'com.tbsen'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '21' // Java 21 명시
+version = '0.2.0-SNAPSHOT'
+sourceCompatibility = '21'
 
 repositories {
     mavenCentral()

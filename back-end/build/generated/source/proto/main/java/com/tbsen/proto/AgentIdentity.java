@@ -5,10 +5,6 @@
 package com.tbsen.proto;
 
 /**
- * <pre>
- * Agent 정보 등록
- * </pre>
- *
  * Protobuf type {@code com.tbsen.proto.AgentIdentity}
  */
 public final class AgentIdentity extends
@@ -23,12 +19,7 @@ private static final long serialVersionUID = 0L;
   private AgentIdentity() {
     uuid_ = "";
     hostname_ = "";
-    hostIp_ = "";
-    kernelVersion_ = "";
-    osVersion_ = "";
     agentVersion_ = "";
-    interfaces_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
   }
 
   @java.lang.Override
@@ -129,128 +120,11 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int HOST_IP_FIELD_NUMBER = 3;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object hostIp_ = "";
-  /**
-   * <code>string host_ip = 3;</code>
-   * @return The hostIp.
-   */
-  @java.lang.Override
-  public java.lang.String getHostIp() {
-    java.lang.Object ref = hostIp_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      hostIp_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string host_ip = 3;</code>
-   * @return The bytes for hostIp.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getHostIpBytes() {
-    java.lang.Object ref = hostIp_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      hostIp_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int KERNEL_VERSION_FIELD_NUMBER = 4;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object kernelVersion_ = "";
-  /**
-   * <code>string kernel_version = 4;</code>
-   * @return The kernelVersion.
-   */
-  @java.lang.Override
-  public java.lang.String getKernelVersion() {
-    java.lang.Object ref = kernelVersion_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      kernelVersion_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string kernel_version = 4;</code>
-   * @return The bytes for kernelVersion.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getKernelVersionBytes() {
-    java.lang.Object ref = kernelVersion_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      kernelVersion_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int OS_VERSION_FIELD_NUMBER = 5;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object osVersion_ = "";
-  /**
-   * <code>string os_version = 5;</code>
-   * @return The osVersion.
-   */
-  @java.lang.Override
-  public java.lang.String getOsVersion() {
-    java.lang.Object ref = osVersion_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      osVersion_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string os_version = 5;</code>
-   * @return The bytes for osVersion.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getOsVersionBytes() {
-    java.lang.Object ref = osVersion_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      osVersion_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int AGENT_VERSION_FIELD_NUMBER = 6;
+  public static final int AGENT_VERSION_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
   private volatile java.lang.Object agentVersion_ = "";
   /**
-   * <code>string agent_version = 6;</code>
+   * <code>string agent_version = 3;</code>
    * @return The agentVersion.
    */
   @java.lang.Override
@@ -267,7 +141,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string agent_version = 6;</code>
+   * <code>string agent_version = 3;</code>
    * @return The bytes for agentVersion.
    */
   @java.lang.Override
@@ -283,59 +157,6 @@ private static final long serialVersionUID = 0L;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
-  }
-
-  public static final int INTERFACES_FIELD_NUMBER = 7;
-  @SuppressWarnings("serial")
-  private com.google.protobuf.LazyStringArrayList interfaces_ =
-      com.google.protobuf.LazyStringArrayList.emptyList();
-  /**
-   * <pre>
-   * 인터페이스 배열(리스트) 할당
-   * </pre>
-   *
-   * <code>repeated string interfaces = 7;</code>
-   * @return A list containing the interfaces.
-   */
-  public com.google.protobuf.ProtocolStringList
-      getInterfacesList() {
-    return interfaces_;
-  }
-  /**
-   * <pre>
-   * 인터페이스 배열(리스트) 할당
-   * </pre>
-   *
-   * <code>repeated string interfaces = 7;</code>
-   * @return The count of interfaces.
-   */
-  public int getInterfacesCount() {
-    return interfaces_.size();
-  }
-  /**
-   * <pre>
-   * 인터페이스 배열(리스트) 할당
-   * </pre>
-   *
-   * <code>repeated string interfaces = 7;</code>
-   * @param index The index of the element to return.
-   * @return The interfaces at the given index.
-   */
-  public java.lang.String getInterfaces(int index) {
-    return interfaces_.get(index);
-  }
-  /**
-   * <pre>
-   * 인터페이스 배열(리스트) 할당
-   * </pre>
-   *
-   * <code>repeated string interfaces = 7;</code>
-   * @param index The index of the value to return.
-   * @return The bytes of the interfaces at the given index.
-   */
-  public com.google.protobuf.ByteString
-      getInterfacesBytes(int index) {
-    return interfaces_.getByteString(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -358,20 +179,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hostname_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, hostname_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hostIp_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, hostIp_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(kernelVersion_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, kernelVersion_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(osVersion_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, osVersion_);
-    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(agentVersion_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, agentVersion_);
-    }
-    for (int i = 0; i < interfaces_.size(); i++) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 7, interfaces_.getRaw(i));
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, agentVersion_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -388,25 +197,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hostname_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, hostname_);
     }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hostIp_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, hostIp_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(kernelVersion_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, kernelVersion_);
-    }
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(osVersion_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, osVersion_);
-    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(agentVersion_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, agentVersion_);
-    }
-    {
-      int dataSize = 0;
-      for (int i = 0; i < interfaces_.size(); i++) {
-        dataSize += computeStringSizeNoTag(interfaces_.getRaw(i));
-      }
-      size += dataSize;
-      size += 1 * getInterfacesList().size();
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, agentVersion_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -427,16 +219,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getUuid())) return false;
     if (!getHostname()
         .equals(other.getHostname())) return false;
-    if (!getHostIp()
-        .equals(other.getHostIp())) return false;
-    if (!getKernelVersion()
-        .equals(other.getKernelVersion())) return false;
-    if (!getOsVersion()
-        .equals(other.getOsVersion())) return false;
     if (!getAgentVersion()
         .equals(other.getAgentVersion())) return false;
-    if (!getInterfacesList()
-        .equals(other.getInterfacesList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -452,18 +236,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getUuid().hashCode();
     hash = (37 * hash) + HOSTNAME_FIELD_NUMBER;
     hash = (53 * hash) + getHostname().hashCode();
-    hash = (37 * hash) + HOST_IP_FIELD_NUMBER;
-    hash = (53 * hash) + getHostIp().hashCode();
-    hash = (37 * hash) + KERNEL_VERSION_FIELD_NUMBER;
-    hash = (53 * hash) + getKernelVersion().hashCode();
-    hash = (37 * hash) + OS_VERSION_FIELD_NUMBER;
-    hash = (53 * hash) + getOsVersion().hashCode();
     hash = (37 * hash) + AGENT_VERSION_FIELD_NUMBER;
     hash = (53 * hash) + getAgentVersion().hashCode();
-    if (getInterfacesCount() > 0) {
-      hash = (37 * hash) + INTERFACES_FIELD_NUMBER;
-      hash = (53 * hash) + getInterfacesList().hashCode();
-    }
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -562,10 +336,6 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * <pre>
-   * Agent 정보 등록
-   * </pre>
-   *
    * Protobuf type {@code com.tbsen.proto.AgentIdentity}
    */
   public static final class Builder extends
@@ -601,12 +371,7 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       uuid_ = "";
       hostname_ = "";
-      hostIp_ = "";
-      kernelVersion_ = "";
-      osVersion_ = "";
       agentVersion_ = "";
-      interfaces_ =
-          com.google.protobuf.LazyStringArrayList.emptyList();
       return this;
     }
 
@@ -647,20 +412,7 @@ private static final long serialVersionUID = 0L;
         result.hostname_ = hostname_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.hostIp_ = hostIp_;
-      }
-      if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.kernelVersion_ = kernelVersion_;
-      }
-      if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.osVersion_ = osVersion_;
-      }
-      if (((from_bitField0_ & 0x00000020) != 0)) {
         result.agentVersion_ = agentVersion_;
-      }
-      if (((from_bitField0_ & 0x00000040) != 0)) {
-        interfaces_.makeImmutable();
-        result.interfaces_ = interfaces_;
       }
     }
 
@@ -718,34 +470,9 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (!other.getHostIp().isEmpty()) {
-        hostIp_ = other.hostIp_;
-        bitField0_ |= 0x00000004;
-        onChanged();
-      }
-      if (!other.getKernelVersion().isEmpty()) {
-        kernelVersion_ = other.kernelVersion_;
-        bitField0_ |= 0x00000008;
-        onChanged();
-      }
-      if (!other.getOsVersion().isEmpty()) {
-        osVersion_ = other.osVersion_;
-        bitField0_ |= 0x00000010;
-        onChanged();
-      }
       if (!other.getAgentVersion().isEmpty()) {
         agentVersion_ = other.agentVersion_;
-        bitField0_ |= 0x00000020;
-        onChanged();
-      }
-      if (!other.interfaces_.isEmpty()) {
-        if (interfaces_.isEmpty()) {
-          interfaces_ = other.interfaces_;
-          bitField0_ |= 0x00000040;
-        } else {
-          ensureInterfacesIsMutable();
-          interfaces_.addAll(other.interfaces_);
-        }
+        bitField0_ |= 0x00000004;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -785,31 +512,10 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 18
             case 26: {
-              hostIp_ = input.readStringRequireUtf8();
+              agentVersion_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
             } // case 26
-            case 34: {
-              kernelVersion_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000008;
-              break;
-            } // case 34
-            case 42: {
-              osVersion_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000010;
-              break;
-            } // case 42
-            case 50: {
-              agentVersion_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000020;
-              break;
-            } // case 50
-            case 58: {
-              java.lang.String s = input.readStringRequireUtf8();
-              ensureInterfacesIsMutable();
-              interfaces_.add(s);
-              break;
-            } // case 58
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -971,225 +677,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object hostIp_ = "";
-    /**
-     * <code>string host_ip = 3;</code>
-     * @return The hostIp.
-     */
-    public java.lang.String getHostIp() {
-      java.lang.Object ref = hostIp_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        hostIp_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string host_ip = 3;</code>
-     * @return The bytes for hostIp.
-     */
-    public com.google.protobuf.ByteString
-        getHostIpBytes() {
-      java.lang.Object ref = hostIp_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        hostIp_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string host_ip = 3;</code>
-     * @param value The hostIp to set.
-     * @return This builder for chaining.
-     */
-    public Builder setHostIp(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      hostIp_ = value;
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string host_ip = 3;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearHostIp() {
-      hostIp_ = getDefaultInstance().getHostIp();
-      bitField0_ = (bitField0_ & ~0x00000004);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string host_ip = 3;</code>
-     * @param value The bytes for hostIp to set.
-     * @return This builder for chaining.
-     */
-    public Builder setHostIpBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      hostIp_ = value;
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object kernelVersion_ = "";
-    /**
-     * <code>string kernel_version = 4;</code>
-     * @return The kernelVersion.
-     */
-    public java.lang.String getKernelVersion() {
-      java.lang.Object ref = kernelVersion_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        kernelVersion_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string kernel_version = 4;</code>
-     * @return The bytes for kernelVersion.
-     */
-    public com.google.protobuf.ByteString
-        getKernelVersionBytes() {
-      java.lang.Object ref = kernelVersion_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        kernelVersion_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string kernel_version = 4;</code>
-     * @param value The kernelVersion to set.
-     * @return This builder for chaining.
-     */
-    public Builder setKernelVersion(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      kernelVersion_ = value;
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string kernel_version = 4;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearKernelVersion() {
-      kernelVersion_ = getDefaultInstance().getKernelVersion();
-      bitField0_ = (bitField0_ & ~0x00000008);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string kernel_version = 4;</code>
-     * @param value The bytes for kernelVersion to set.
-     * @return This builder for chaining.
-     */
-    public Builder setKernelVersionBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      kernelVersion_ = value;
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-
-    private java.lang.Object osVersion_ = "";
-    /**
-     * <code>string os_version = 5;</code>
-     * @return The osVersion.
-     */
-    public java.lang.String getOsVersion() {
-      java.lang.Object ref = osVersion_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        osVersion_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string os_version = 5;</code>
-     * @return The bytes for osVersion.
-     */
-    public com.google.protobuf.ByteString
-        getOsVersionBytes() {
-      java.lang.Object ref = osVersion_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        osVersion_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string os_version = 5;</code>
-     * @param value The osVersion to set.
-     * @return This builder for chaining.
-     */
-    public Builder setOsVersion(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      osVersion_ = value;
-      bitField0_ |= 0x00000010;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string os_version = 5;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearOsVersion() {
-      osVersion_ = getDefaultInstance().getOsVersion();
-      bitField0_ = (bitField0_ & ~0x00000010);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string os_version = 5;</code>
-     * @param value The bytes for osVersion to set.
-     * @return This builder for chaining.
-     */
-    public Builder setOsVersionBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      osVersion_ = value;
-      bitField0_ |= 0x00000010;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object agentVersion_ = "";
     /**
-     * <code>string agent_version = 6;</code>
+     * <code>string agent_version = 3;</code>
      * @return The agentVersion.
      */
     public java.lang.String getAgentVersion() {
@@ -1205,7 +695,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string agent_version = 6;</code>
+     * <code>string agent_version = 3;</code>
      * @return The bytes for agentVersion.
      */
     public com.google.protobuf.ByteString
@@ -1222,7 +712,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string agent_version = 6;</code>
+     * <code>string agent_version = 3;</code>
      * @param value The agentVersion to set.
      * @return This builder for chaining.
      */
@@ -1230,22 +720,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       agentVersion_ = value;
-      bitField0_ |= 0x00000020;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string agent_version = 6;</code>
+     * <code>string agent_version = 3;</code>
      * @return This builder for chaining.
      */
     public Builder clearAgentVersion() {
       agentVersion_ = getDefaultInstance().getAgentVersion();
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
-     * <code>string agent_version = 6;</code>
+     * <code>string agent_version = 3;</code>
      * @param value The bytes for agentVersion to set.
      * @return This builder for chaining.
      */
@@ -1254,154 +744,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       agentVersion_ = value;
-      bitField0_ |= 0x00000020;
-      onChanged();
-      return this;
-    }
-
-    private com.google.protobuf.LazyStringArrayList interfaces_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
-    private void ensureInterfacesIsMutable() {
-      if (!interfaces_.isModifiable()) {
-        interfaces_ = new com.google.protobuf.LazyStringArrayList(interfaces_);
-      }
-      bitField0_ |= 0x00000040;
-    }
-    /**
-     * <pre>
-     * 인터페이스 배열(리스트) 할당
-     * </pre>
-     *
-     * <code>repeated string interfaces = 7;</code>
-     * @return A list containing the interfaces.
-     */
-    public com.google.protobuf.ProtocolStringList
-        getInterfacesList() {
-      interfaces_.makeImmutable();
-      return interfaces_;
-    }
-    /**
-     * <pre>
-     * 인터페이스 배열(리스트) 할당
-     * </pre>
-     *
-     * <code>repeated string interfaces = 7;</code>
-     * @return The count of interfaces.
-     */
-    public int getInterfacesCount() {
-      return interfaces_.size();
-    }
-    /**
-     * <pre>
-     * 인터페이스 배열(리스트) 할당
-     * </pre>
-     *
-     * <code>repeated string interfaces = 7;</code>
-     * @param index The index of the element to return.
-     * @return The interfaces at the given index.
-     */
-    public java.lang.String getInterfaces(int index) {
-      return interfaces_.get(index);
-    }
-    /**
-     * <pre>
-     * 인터페이스 배열(리스트) 할당
-     * </pre>
-     *
-     * <code>repeated string interfaces = 7;</code>
-     * @param index The index of the value to return.
-     * @return The bytes of the interfaces at the given index.
-     */
-    public com.google.protobuf.ByteString
-        getInterfacesBytes(int index) {
-      return interfaces_.getByteString(index);
-    }
-    /**
-     * <pre>
-     * 인터페이스 배열(리스트) 할당
-     * </pre>
-     *
-     * <code>repeated string interfaces = 7;</code>
-     * @param index The index to set the value at.
-     * @param value The interfaces to set.
-     * @return This builder for chaining.
-     */
-    public Builder setInterfaces(
-        int index, java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      ensureInterfacesIsMutable();
-      interfaces_.set(index, value);
-      bitField0_ |= 0x00000040;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * 인터페이스 배열(리스트) 할당
-     * </pre>
-     *
-     * <code>repeated string interfaces = 7;</code>
-     * @param value The interfaces to add.
-     * @return This builder for chaining.
-     */
-    public Builder addInterfaces(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      ensureInterfacesIsMutable();
-      interfaces_.add(value);
-      bitField0_ |= 0x00000040;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * 인터페이스 배열(리스트) 할당
-     * </pre>
-     *
-     * <code>repeated string interfaces = 7;</code>
-     * @param values The interfaces to add.
-     * @return This builder for chaining.
-     */
-    public Builder addAllInterfaces(
-        java.lang.Iterable<java.lang.String> values) {
-      ensureInterfacesIsMutable();
-      com.google.protobuf.AbstractMessageLite.Builder.addAll(
-          values, interfaces_);
-      bitField0_ |= 0x00000040;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * 인터페이스 배열(리스트) 할당
-     * </pre>
-     *
-     * <code>repeated string interfaces = 7;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearInterfaces() {
-      interfaces_ =
-        com.google.protobuf.LazyStringArrayList.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000040);;
-      onChanged();
-      return this;
-    }
-    /**
-     * <pre>
-     * 인터페이스 배열(리스트) 할당
-     * </pre>
-     *
-     * <code>repeated string interfaces = 7;</code>
-     * @param value The bytes of the interfaces to add.
-     * @return This builder for chaining.
-     */
-    public Builder addInterfacesBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      ensureInterfacesIsMutable();
-      interfaces_.add(value);
-      bitField0_ |= 0x00000040;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }

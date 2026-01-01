@@ -12,5 +12,4 @@ public class ReportsDto {
     private String chain;
     private String name;
     private String ipAddress;
-    
 }

@@ -1,31 +1,16 @@
 syntax = "proto3";
 
 package com.tbsen.proto;
+
 option java_multiple_files = true;
 option java_outer_classname = "FilterProto";
 
-// 공통 자료형
+// Enums (공통)
 enum AgentState {
     STATE_UNKNOWN = 0;
     STATE_RUNNING = 1;
     STATE_WARNING = 2;
     STATE_ERROR = 3;
-    STATE_STOPPED = 4;
-}
-
-// XDP 정의
-enum XdpMode {
-    MODE_UNKNOWN = 0;
-    MODE_NATIVE = 1;
-    MODE_SKB = 2;
-    MODE_OFFLOAD = 3;
-}
-
-// 필터 백엔드 정의
-enum FilterBackend {
-  BACKEND_UNKNOWN = 0;
-  BACKEND_XDP = 1;
-  BACKEND_NFTABLES = 2;
 }
 
 enum ActionType {
@@ -34,62 +19,89 @@ enum ActionType {
     ACTION_DELETE = 2;
 }
 
-// ----- 메시지 정의 -----
 
-// Agent 정보 등록
-message AgentIdentity {
-    string uuid = 1;
-    string hostname =2;
-    string host_ip = 3;
-    string kernel_version = 4;
-    string os_version = 5;
-    string agent_version = 6;
-    repeated string interfaces = 7; // 인터페이스 배열(리스트) 할당
+// XDP Domain Messages //
+
+// XDP Mode 분류
+enum XdpMode {
+    XDP_MODE_UNKNOWN = 0;
+    XDP_MODE_NATIVE = 1;
+    XDP_MODE_SKB = 2;
+    XDP_MODE_OFFLOAD = 3;
+}
+
+// XDP 명령 통합 래퍼
+message XdpCommand {
+    ActionType action = 1;
+    string target_ip = 2;
+    string target_mac = 3;
+    string mode = 4; // {"src", "dst"}
+    string interface_name = 5; // 인터페이스 로드/언로드
+    XdpMode interface_mode = 6; // 인터페이스 스펙 정의
+}
+
+
+// Nftables Domain Messages //
+
+// nftables 룰 제어
+message NftCommand {
+    ActionType action = 1;
+    string chain = 2;       // INPUT, OUTPUT, FORWARD 등
+    string target_ip = 3;
+    string protocol = 4;    // tcp, udp
+    string port = 5;        // port
+    string handle = 6; // delete 옵션시 handle number 필요 
+}
+
+
+// Main Command Structure //
+
+// 서버 -> 에이전트 명령
+message Command {
+    string command_id = 1;
+    
+    // 명령 분기
+    oneof payload {
+        XdpCommand xdp = 2;
+        NftCommand nft = 3;
+    }
+}
+
+// Response & Status
+message CommandResponse {
+    string command_id = 1;
+    bool success = 2;
+    string message = 3;
 }
 
 message InterfaceMetrics {
-    XdpMode current_mode = 1;
-    uint64 pass_count = 2;
+    string interface_name = 1;
+    bool xdp_attached = 2;
     uint64 drop_count = 3;
-    double pps = 4;
+    uint64 pass_count = 4;
 }
 
-// Agent Heartbeat
 message AgentStatus {
     string uuid = 1;
     int64 timestamp = 2;
     AgentState global_state = 3;
-    
-    // 각 인터페이스별 지표
-    map<string, InterfaceMetrics> interface_metrics = 4;
-
-    // 리소스 상태
-    double cpu_usage_percent = 5;
-    double memory_usage_percent = 6;
+    repeated InterfaceMetrics metrics = 4;
 }
 
-// 룰 커맨드
-message RuleCommand {
-  string target_ip = 1;
-  ActionType type = 2;
-  string interface = 3; 
-  FilterBackend backend_type = 4; // XDP / NFTABLES 
+message AgentIdentity {
+    string uuid = 1;
+    string hostname = 2;
+    string agent_version = 3;
 }
 
-// 커맨드 응답
-message CommandResponse {
-    bool success = 1;
-    string message = 2;
-}
-
-// RPC
+// Services //
 service FilterAgent {
-
+    // 등록 (에이전트 -> 서버)
     rpc RegisterAgent (AgentIdentity) returns (CommandResponse);
-
+    // 상태보고 (에이전트 -> 서버)
     rpc ReportStatus (stream AgentStatus) returns (CommandResponse);
-
-    rpc ManageRule (RuleCommand) returns (CommandResponse);
-
-    rpc SubscribeCommands (AgentIdentity) returns (stream RuleCommand);
+    // 명령 수신 (서버 -> 에이전트)
+    rpc SubscribeCommands (AgentIdentity) returns (stream Command);
+    // 명령 결과 보고 (에이전트 -> 서버)
+    rpc ReportCommandResult (CommandResponse) returns (CommandResponse);
 }

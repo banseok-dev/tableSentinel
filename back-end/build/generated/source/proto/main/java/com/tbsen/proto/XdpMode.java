@@ -6,7 +6,7 @@ package com.tbsen.proto;
 
 /**
  * <pre>
- * XDP 정의
+ * XDP Mode 분류
  * </pre>
  *
  * Protobuf enum {@code com.tbsen.proto.XdpMode}
@@ -14,40 +14,40 @@ package com.tbsen.proto;
 public enum XdpMode
     implements com.google.protobuf.ProtocolMessageEnum {
   /**
-   * <code>MODE_UNKNOWN = 0;</code>
+   * <code>XDP_MODE_UNKNOWN = 0;</code>
    */
-  MODE_UNKNOWN(0),
+  XDP_MODE_UNKNOWN(0),
   /**
-   * <code>MODE_NATIVE = 1;</code>
+   * <code>XDP_MODE_NATIVE = 1;</code>
    */
-  MODE_NATIVE(1),
+  XDP_MODE_NATIVE(1),
   /**
-   * <code>MODE_SKB = 2;</code>
+   * <code>XDP_MODE_SKB = 2;</code>
    */
-  MODE_SKB(2),
+  XDP_MODE_SKB(2),
   /**
-   * <code>MODE_OFFLOAD = 3;</code>
+   * <code>XDP_MODE_OFFLOAD = 3;</code>
    */
-  MODE_OFFLOAD(3),
+  XDP_MODE_OFFLOAD(3),
   UNRECOGNIZED(-1),
   ;
 
   /**
-   * <code>MODE_UNKNOWN = 0;</code>
+   * <code>XDP_MODE_UNKNOWN = 0;</code>
    */
-  public static final int MODE_UNKNOWN_VALUE = 0;
+  public static final int XDP_MODE_UNKNOWN_VALUE = 0;
   /**
-   * <code>MODE_NATIVE = 1;</code>
+   * <code>XDP_MODE_NATIVE = 1;</code>
    */
-  public static final int MODE_NATIVE_VALUE = 1;
+  public static final int XDP_MODE_NATIVE_VALUE = 1;
   /**
-   * <code>MODE_SKB = 2;</code>
+   * <code>XDP_MODE_SKB = 2;</code>
    */
-  public static final int MODE_SKB_VALUE = 2;
+  public static final int XDP_MODE_SKB_VALUE = 2;
   /**
-   * <code>MODE_OFFLOAD = 3;</code>
+   * <code>XDP_MODE_OFFLOAD = 3;</code>
    */
-  public static final int MODE_OFFLOAD_VALUE = 3;
+  public static final int XDP_MODE_OFFLOAD_VALUE = 3;
 
 
   public final int getNumber() {
@@ -74,10 +74,10 @@ public enum XdpMode
    */
   public static XdpMode forNumber(int value) {
     switch (value) {
-      case 0: return MODE_UNKNOWN;
-      case 1: return MODE_NATIVE;
-      case 2: return MODE_SKB;
-      case 3: return MODE_OFFLOAD;
+      case 0: return XDP_MODE_UNKNOWN;
+      case 1: return XDP_MODE_NATIVE;
+      case 2: return XDP_MODE_SKB;
+      case 3: return XDP_MODE_OFFLOAD;
       default: return null;
     }
   }
@@ -108,7 +108,7 @@ public enum XdpMode
   }
   public static final com.google.protobuf.Descriptors.EnumDescriptor
       getDescriptor() {
-    return com.tbsen.proto.FilterProto.getDescriptor().getEnumTypes().get(1);
+    return com.tbsen.proto.FilterProto.getDescriptor().getEnumTypes().get(2);
   }
 
   private static final XdpMode[] VALUES = values();

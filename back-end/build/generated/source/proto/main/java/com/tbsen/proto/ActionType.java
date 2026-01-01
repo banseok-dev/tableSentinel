@@ -95,7 +95,7 @@ public enum ActionType
   }
   public static final com.google.protobuf.Descriptors.EnumDescriptor
       getDescriptor() {
-    return com.tbsen.proto.FilterProto.getDescriptor().getEnumTypes().get(3);
+    return com.tbsen.proto.FilterProto.getDescriptor().getEnumTypes().get(1);
   }
 
   private static final ActionType[] VALUES = values();

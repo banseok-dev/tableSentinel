@@ -26,7 +26,9 @@ if _version_not_supported:
 
 
 class FilterAgentStub(object):
-    """RPC
+    """----------------------------------------
+    Services
+    ----------------------------------------
     """
 
     def __init__(self, channel):
@@ -45,42 +47,48 @@ class FilterAgentStub(object):
                 request_serializer=filter__pb2.AgentStatus.SerializeToString,
                 response_deserializer=filter__pb2.CommandResponse.FromString,
                 _registered_method=True)
-        self.ManageRule = channel.unary_unary(
-                '/com.tbsen.proto.FilterAgent/ManageRule',
-                request_serializer=filter__pb2.RuleCommand.SerializeToString,
-                response_deserializer=filter__pb2.CommandResponse.FromString,
-                _registered_method=True)
         self.SubscribeCommands = channel.unary_stream(
                 '/com.tbsen.proto.FilterAgent/SubscribeCommands',
                 request_serializer=filter__pb2.AgentIdentity.SerializeToString,
-                response_deserializer=filter__pb2.RuleCommand.FromString,
+                response_deserializer=filter__pb2.Command.FromString,
+                _registered_method=True)
+        self.ReportCommandResult = channel.unary_unary(
+                '/com.tbsen.proto.FilterAgent/ReportCommandResult',
+                request_serializer=filter__pb2.CommandResponse.SerializeToString,
+                response_deserializer=filter__pb2.CommandResponse.FromString,
                 _registered_method=True)
 
 
 class FilterAgentServicer(object):
-    """RPC
+    """----------------------------------------
+    Services
+    ----------------------------------------
     """
 
     def RegisterAgent(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """등록 (에이전트 -> 서버)
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ReportStatus(self, request_iterator, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ManageRule(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """상태보고 (에이전트 -> 서버)
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def SubscribeCommands(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """명령 수신 (서버 -> 에이전트)
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReportCommandResult(self, request, context):
+        """명령 결과 보고 (에이전트 -> 서버)
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -98,15 +106,15 @@ def add_FilterAgentServicer_to_server(servicer, server):
                     request_deserializer=filter__pb2.AgentStatus.FromString,
                     response_serializer=filter__pb2.CommandResponse.SerializeToString,
             ),
-            'ManageRule': grpc.unary_unary_rpc_method_handler(
-                    servicer.ManageRule,
-                    request_deserializer=filter__pb2.RuleCommand.FromString,
-                    response_serializer=filter__pb2.CommandResponse.SerializeToString,
-            ),
             'SubscribeCommands': grpc.unary_stream_rpc_method_handler(
                     servicer.SubscribeCommands,
                     request_deserializer=filter__pb2.AgentIdentity.FromString,
-                    response_serializer=filter__pb2.RuleCommand.SerializeToString,
+                    response_serializer=filter__pb2.Command.SerializeToString,
+            ),
+            'ReportCommandResult': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReportCommandResult,
+                    request_deserializer=filter__pb2.CommandResponse.FromString,
+                    response_serializer=filter__pb2.CommandResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -117,7 +125,9 @@ def add_FilterAgentServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class FilterAgent(object):
-    """RPC
+    """----------------------------------------
+    Services
+    ----------------------------------------
     """
 
     @staticmethod
@@ -175,33 +185,6 @@ class FilterAgent(object):
             _registered_method=True)
 
     @staticmethod
-    def ManageRule(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/com.tbsen.proto.FilterAgent/ManageRule',
-            filter__pb2.RuleCommand.SerializeToString,
-            filter__pb2.CommandResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
     def SubscribeCommands(request,
             target,
             options=(),
@@ -217,7 +200,34 @@ class FilterAgent(object):
             target,
             '/com.tbsen.proto.FilterAgent/SubscribeCommands',
             filter__pb2.AgentIdentity.SerializeToString,
-            filter__pb2.RuleCommand.FromString,
+            filter__pb2.Command.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ReportCommandResult(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/com.tbsen.proto.FilterAgent/ReportCommandResult',
+            filter__pb2.CommandResponse.SerializeToString,
+            filter__pb2.CommandResponse.FromString,
             options,
             channel_credentials,
             insecure,

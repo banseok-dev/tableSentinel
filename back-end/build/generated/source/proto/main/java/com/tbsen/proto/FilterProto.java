@@ -16,10 +16,25 @@ public final class FilterProto {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_tbsen_proto_AgentIdentity_descriptor;
+    internal_static_com_tbsen_proto_XdpCommand_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_tbsen_proto_AgentIdentity_fieldAccessorTable;
+      internal_static_com_tbsen_proto_XdpCommand_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_tbsen_proto_NftCommand_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_tbsen_proto_NftCommand_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_tbsen_proto_Command_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_tbsen_proto_Command_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_tbsen_proto_CommandResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_tbsen_proto_CommandResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_tbsen_proto_InterfaceMetrics_descriptor;
   static final 
@@ -31,20 +46,10 @@ public final class FilterProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_tbsen_proto_AgentStatus_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_tbsen_proto_AgentStatus_InterfaceMetricsEntry_descriptor;
+    internal_static_com_tbsen_proto_AgentIdentity_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_tbsen_proto_AgentStatus_InterfaceMetricsEntry_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_tbsen_proto_RuleCommand_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_tbsen_proto_RuleCommand_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_tbsen_proto_CommandResponse_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_tbsen_proto_CommandResponse_fieldAccessorTable;
+      internal_static_com_tbsen_proto_AgentIdentity_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -54,86 +59,92 @@ public final class FilterProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014filter.proto\022\017com.tbsen.proto\"\227\001\n\rAgen" +
-      "tIdentity\022\014\n\004uuid\030\001 \001(\t\022\020\n\010hostname\030\002 \001(" +
-      "\t\022\017\n\007host_ip\030\003 \001(\t\022\026\n\016kernel_version\030\004 \001" +
-      "(\t\022\022\n\nos_version\030\005 \001(\t\022\025\n\ragent_version\030" +
-      "\006 \001(\t\022\022\n\ninterfaces\030\007 \003(\t\"w\n\020InterfaceMe" +
-      "trics\022.\n\014current_mode\030\001 \001(\0162\030.com.tbsen." +
-      "proto.XdpMode\022\022\n\npass_count\030\002 \001(\004\022\022\n\ndro" +
-      "p_count\030\003 \001(\004\022\013\n\003pps\030\004 \001(\001\"\305\002\n\013AgentStat" +
-      "us\022\014\n\004uuid\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\0221\n\014g" +
-      "lobal_state\030\003 \001(\0162\033.com.tbsen.proto.Agen" +
-      "tState\022M\n\021interface_metrics\030\004 \003(\01322.com." +
-      "tbsen.proto.AgentStatus.InterfaceMetrics" +
-      "Entry\022\031\n\021cpu_usage_percent\030\005 \001(\001\022\034\n\024memo" +
-      "ry_usage_percent\030\006 \001(\001\032Z\n\025InterfaceMetri" +
-      "csEntry\022\013\n\003key\030\001 \001(\t\0220\n\005value\030\002 \001(\0132!.co" +
-      "m.tbsen.proto.InterfaceMetrics:\0028\001\"\224\001\n\013R" +
-      "uleCommand\022\021\n\ttarget_ip\030\001 \001(\t\022)\n\004type\030\002 " +
-      "\001(\0162\033.com.tbsen.proto.ActionType\022\021\n\tinte" +
-      "rface\030\003 \001(\t\0224\n\014backend_type\030\004 \001(\0162\036.com." +
-      "tbsen.proto.FilterBackend\"3\n\017CommandResp" +
-      "onse\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t*i" +
-      "\n\nAgentState\022\021\n\rSTATE_UNKNOWN\020\000\022\021\n\rSTATE" +
-      "_RUNNING\020\001\022\021\n\rSTATE_WARNING\020\002\022\017\n\013STATE_E" +
-      "RROR\020\003\022\021\n\rSTATE_STOPPED\020\004*L\n\007XdpMode\022\020\n\014" +
-      "MODE_UNKNOWN\020\000\022\017\n\013MODE_NATIVE\020\001\022\014\n\010MODE_" +
-      "SKB\020\002\022\020\n\014MODE_OFFLOAD\020\003*K\n\rFilterBackend" +
-      "\022\023\n\017BACKEND_UNKNOWN\020\000\022\017\n\013BACKEND_XDP\020\001\022\024" +
-      "\n\020BACKEND_NFTABLES\020\002*C\n\nActionType\022\022\n\016AC" +
-      "TION_UNKNOWN\020\000\022\016\n\nACTION_ADD\020\001\022\021\n\rACTION" +
-      "_DELETE\020\0022\325\002\n\013FilterAgent\022Q\n\rRegisterAge" +
-      "nt\022\036.com.tbsen.proto.AgentIdentity\032 .com" +
-      ".tbsen.proto.CommandResponse\022P\n\014ReportSt" +
-      "atus\022\034.com.tbsen.proto.AgentStatus\032 .com" +
-      ".tbsen.proto.CommandResponse(\001\022L\n\nManage" +
-      "Rule\022\034.com.tbsen.proto.RuleCommand\032 .com" +
-      ".tbsen.proto.CommandResponse\022S\n\021Subscrib" +
-      "eCommands\022\036.com.tbsen.proto.AgentIdentit" +
-      "y\032\034.com.tbsen.proto.RuleCommand0\001B\017B\013Fil" +
-      "terProtoP\001b\006proto3"
+      "\n\014filter.proto\022\017com.tbsen.proto\"\270\001\n\nXdpC" +
+      "ommand\022+\n\006action\030\001 \001(\0162\033.com.tbsen.proto" +
+      ".ActionType\022\021\n\ttarget_ip\030\002 \001(\t\022\022\n\ntarget" +
+      "_mac\030\003 \001(\t\022\014\n\004mode\030\004 \001(\t\022\026\n\016interface_na" +
+      "me\030\005 \001(\t\0220\n\016interface_mode\030\006 \001(\0162\030.com.t" +
+      "bsen.proto.XdpMode\"\213\001\n\nNftCommand\022+\n\006act" +
+      "ion\030\001 \001(\0162\033.com.tbsen.proto.ActionType\022\r" +
+      "\n\005chain\030\002 \001(\t\022\021\n\ttarget_ip\030\003 \001(\t\022\020\n\010prot" +
+      "ocol\030\004 \001(\t\022\014\n\004port\030\005 \001(\t\022\016\n\006handle\030\006 \001(\t" +
+      "\"\200\001\n\007Command\022\022\n\ncommand_id\030\001 \001(\t\022*\n\003xdp\030" +
+      "\002 \001(\0132\033.com.tbsen.proto.XdpCommandH\000\022*\n\003" +
+      "nft\030\003 \001(\0132\033.com.tbsen.proto.NftCommandH\000" +
+      "B\t\n\007payload\"G\n\017CommandResponse\022\022\n\ncomman" +
+      "d_id\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\022\017\n\007message\030\003" +
+      " \001(\t\"h\n\020InterfaceMetrics\022\026\n\016interface_na" +
+      "me\030\001 \001(\t\022\024\n\014xdp_attached\030\002 \001(\010\022\022\n\ndrop_c" +
+      "ount\030\003 \001(\004\022\022\n\npass_count\030\004 \001(\004\"\225\001\n\013Agent" +
+      "Status\022\014\n\004uuid\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022" +
+      "1\n\014global_state\030\003 \001(\0162\033.com.tbsen.proto." +
+      "AgentState\0222\n\007metrics\030\004 \003(\0132!.com.tbsen." +
+      "proto.InterfaceMetrics\"F\n\rAgentIdentity\022" +
+      "\014\n\004uuid\030\001 \001(\t\022\020\n\010hostname\030\002 \001(\t\022\025\n\ragent" +
+      "_version\030\003 \001(\t*V\n\nAgentState\022\021\n\rSTATE_UN" +
+      "KNOWN\020\000\022\021\n\rSTATE_RUNNING\020\001\022\021\n\rSTATE_WARN" +
+      "ING\020\002\022\017\n\013STATE_ERROR\020\003*C\n\nActionType\022\022\n\016" +
+      "ACTION_UNKNOWN\020\000\022\016\n\nACTION_ADD\020\001\022\021\n\rACTI" +
+      "ON_DELETE\020\002*\\\n\007XdpMode\022\024\n\020XDP_MODE_UNKNO" +
+      "WN\020\000\022\023\n\017XDP_MODE_NATIVE\020\001\022\020\n\014XDP_MODE_SK" +
+      "B\020\002\022\024\n\020XDP_MODE_OFFLOAD\020\0032\336\002\n\013FilterAgen" +
+      "t\022Q\n\rRegisterAgent\022\036.com.tbsen.proto.Age" +
+      "ntIdentity\032 .com.tbsen.proto.CommandResp" +
+      "onse\022P\n\014ReportStatus\022\034.com.tbsen.proto.A" +
+      "gentStatus\032 .com.tbsen.proto.CommandResp" +
+      "onse(\001\022O\n\021SubscribeCommands\022\036.com.tbsen." +
+      "proto.AgentIdentity\032\030.com.tbsen.proto.Co" +
+      "mmand0\001\022Y\n\023ReportCommandResult\022 .com.tbs" +
+      "en.proto.CommandResponse\032 .com.tbsen.pro" +
+      "to.CommandResponseB\017B\013FilterProtoP\001b\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_com_tbsen_proto_AgentIdentity_descriptor =
+    internal_static_com_tbsen_proto_XdpCommand_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_com_tbsen_proto_AgentIdentity_fieldAccessorTable = new
+    internal_static_com_tbsen_proto_XdpCommand_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_tbsen_proto_AgentIdentity_descriptor,
-        new java.lang.String[] { "Uuid", "Hostname", "HostIp", "KernelVersion", "OsVersion", "AgentVersion", "Interfaces", });
-    internal_static_com_tbsen_proto_InterfaceMetrics_descriptor =
+        internal_static_com_tbsen_proto_XdpCommand_descriptor,
+        new java.lang.String[] { "Action", "TargetIp", "TargetMac", "Mode", "InterfaceName", "InterfaceMode", });
+    internal_static_com_tbsen_proto_NftCommand_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_com_tbsen_proto_InterfaceMetrics_fieldAccessorTable = new
+    internal_static_com_tbsen_proto_NftCommand_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_tbsen_proto_InterfaceMetrics_descriptor,
-        new java.lang.String[] { "CurrentMode", "PassCount", "DropCount", "Pps", });
-    internal_static_com_tbsen_proto_AgentStatus_descriptor =
+        internal_static_com_tbsen_proto_NftCommand_descriptor,
+        new java.lang.String[] { "Action", "Chain", "TargetIp", "Protocol", "Port", "Handle", });
+    internal_static_com_tbsen_proto_Command_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_com_tbsen_proto_AgentStatus_fieldAccessorTable = new
+    internal_static_com_tbsen_proto_Command_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_tbsen_proto_AgentStatus_descriptor,
-        new java.lang.String[] { "Uuid", "Timestamp", "GlobalState", "InterfaceMetrics", "CpuUsagePercent", "MemoryUsagePercent", });
-    internal_static_com_tbsen_proto_AgentStatus_InterfaceMetricsEntry_descriptor =
-      internal_static_com_tbsen_proto_AgentStatus_descriptor.getNestedTypes().get(0);
-    internal_static_com_tbsen_proto_AgentStatus_InterfaceMetricsEntry_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_tbsen_proto_AgentStatus_InterfaceMetricsEntry_descriptor,
-        new java.lang.String[] { "Key", "Value", });
-    internal_static_com_tbsen_proto_RuleCommand_descriptor =
-      getDescriptor().getMessageTypes().get(3);
-    internal_static_com_tbsen_proto_RuleCommand_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_tbsen_proto_RuleCommand_descriptor,
-        new java.lang.String[] { "TargetIp", "Type", "Interface", "BackendType", });
+        internal_static_com_tbsen_proto_Command_descriptor,
+        new java.lang.String[] { "CommandId", "Xdp", "Nft", "Payload", });
     internal_static_com_tbsen_proto_CommandResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_com_tbsen_proto_CommandResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_tbsen_proto_CommandResponse_descriptor,
-        new java.lang.String[] { "Success", "Message", });
+        new java.lang.String[] { "CommandId", "Success", "Message", });
+    internal_static_com_tbsen_proto_InterfaceMetrics_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_tbsen_proto_InterfaceMetrics_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_tbsen_proto_InterfaceMetrics_descriptor,
+        new java.lang.String[] { "InterfaceName", "XdpAttached", "DropCount", "PassCount", });
+    internal_static_com_tbsen_proto_AgentStatus_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_tbsen_proto_AgentStatus_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_tbsen_proto_AgentStatus_descriptor,
+        new java.lang.String[] { "Uuid", "Timestamp", "GlobalState", "Metrics", });
+    internal_static_com_tbsen_proto_AgentIdentity_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_com_tbsen_proto_AgentIdentity_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_tbsen_proto_AgentIdentity_descriptor,
+        new java.lang.String[] { "Uuid", "Hostname", "AgentVersion", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

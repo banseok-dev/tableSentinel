@@ -9,18 +9,30 @@ public interface CommandResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>bool success = 1;</code>
+   * <code>string command_id = 1;</code>
+   * @return The commandId.
+   */
+  java.lang.String getCommandId();
+  /**
+   * <code>string command_id = 1;</code>
+   * @return The bytes for commandId.
+   */
+  com.google.protobuf.ByteString
+      getCommandIdBytes();
+
+  /**
+   * <code>bool success = 2;</code>
    * @return The success.
    */
   boolean getSuccess();
 
   /**
-   * <code>string message = 2;</code>
+   * <code>string message = 3;</code>
    * @return The message.
    */
   java.lang.String getMessage();
   /**
-   * <code>string message = 2;</code>
+   * <code>string message = 3;</code>
    * @return The bytes for message.
    */
   com.google.protobuf.ByteString

@@ -6,7 +6,7 @@ package com.tbsen.proto;
 
 /**
  * <pre>
- * 커맨드 응답
+ * Response &amp; Status
  * </pre>
  *
  * Protobuf type {@code com.tbsen.proto.CommandResponse}
@@ -21,6 +21,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private CommandResponse() {
+    commandId_ = "";
     message_ = "";
   }
 
@@ -44,10 +45,49 @@ private static final long serialVersionUID = 0L;
             com.tbsen.proto.CommandResponse.class, com.tbsen.proto.CommandResponse.Builder.class);
   }
 
-  public static final int SUCCESS_FIELD_NUMBER = 1;
+  public static final int COMMAND_ID_FIELD_NUMBER = 1;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object commandId_ = "";
+  /**
+   * <code>string command_id = 1;</code>
+   * @return The commandId.
+   */
+  @java.lang.Override
+  public java.lang.String getCommandId() {
+    java.lang.Object ref = commandId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      commandId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string command_id = 1;</code>
+   * @return The bytes for commandId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getCommandIdBytes() {
+    java.lang.Object ref = commandId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      commandId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int SUCCESS_FIELD_NUMBER = 2;
   private boolean success_ = false;
   /**
-   * <code>bool success = 1;</code>
+   * <code>bool success = 2;</code>
    * @return The success.
    */
   @java.lang.Override
@@ -55,11 +95,11 @@ private static final long serialVersionUID = 0L;
     return success_;
   }
 
-  public static final int MESSAGE_FIELD_NUMBER = 2;
+  public static final int MESSAGE_FIELD_NUMBER = 3;
   @SuppressWarnings("serial")
   private volatile java.lang.Object message_ = "";
   /**
-   * <code>string message = 2;</code>
+   * <code>string message = 3;</code>
    * @return The message.
    */
   @java.lang.Override
@@ -76,7 +116,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string message = 2;</code>
+   * <code>string message = 3;</code>
    * @return The bytes for message.
    */
   @java.lang.Override
@@ -108,11 +148,14 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(commandId_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, commandId_);
+    }
     if (success_ != false) {
-      output.writeBool(1, success_);
+      output.writeBool(2, success_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, message_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -123,12 +166,15 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(commandId_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, commandId_);
+    }
     if (success_ != false) {
       size += com.google.protobuf.CodedOutputStream
-        .computeBoolSize(1, success_);
+        .computeBoolSize(2, success_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(message_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, message_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -145,6 +191,8 @@ private static final long serialVersionUID = 0L;
     }
     com.tbsen.proto.CommandResponse other = (com.tbsen.proto.CommandResponse) obj;
 
+    if (!getCommandId()
+        .equals(other.getCommandId())) return false;
     if (getSuccess()
         != other.getSuccess()) return false;
     if (!getMessage()
@@ -160,6 +208,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
+    hash = (37 * hash) + COMMAND_ID_FIELD_NUMBER;
+    hash = (53 * hash) + getCommandId().hashCode();
     hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getSuccess());
@@ -264,7 +314,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * 커맨드 응답
+   * Response &amp; Status
    * </pre>
    *
    * Protobuf type {@code com.tbsen.proto.CommandResponse}
@@ -300,6 +350,7 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
+      commandId_ = "";
       success_ = false;
       message_ = "";
       return this;
@@ -336,9 +387,12 @@ private static final long serialVersionUID = 0L;
     private void buildPartial0(com.tbsen.proto.CommandResponse result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.success_ = success_;
+        result.commandId_ = commandId_;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.success_ = success_;
+      }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
         result.message_ = message_;
       }
     }
@@ -387,12 +441,17 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.tbsen.proto.CommandResponse other) {
       if (other == com.tbsen.proto.CommandResponse.getDefaultInstance()) return this;
+      if (!other.getCommandId().isEmpty()) {
+        commandId_ = other.commandId_;
+        bitField0_ |= 0x00000001;
+        onChanged();
+      }
       if (other.getSuccess() != false) {
         setSuccess(other.getSuccess());
       }
       if (!other.getMessage().isEmpty()) {
         message_ = other.message_;
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -421,16 +480,21 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 8: {
-              success_ = input.readBool();
+            case 10: {
+              commandId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
-            } // case 8
-            case 18: {
-              message_ = input.readStringRequireUtf8();
+            } // case 10
+            case 16: {
+              success_ = input.readBool();
               bitField0_ |= 0x00000002;
               break;
-            } // case 18
+            } // case 16
+            case 26: {
+              message_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 26
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -448,9 +512,81 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
+    private java.lang.Object commandId_ = "";
+    /**
+     * <code>string command_id = 1;</code>
+     * @return The commandId.
+     */
+    public java.lang.String getCommandId() {
+      java.lang.Object ref = commandId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        commandId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string command_id = 1;</code>
+     * @return The bytes for commandId.
+     */
+    public com.google.protobuf.ByteString
+        getCommandIdBytes() {
+      java.lang.Object ref = commandId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        commandId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string command_id = 1;</code>
+     * @param value The commandId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCommandId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      commandId_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string command_id = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCommandId() {
+      commandId_ = getDefaultInstance().getCommandId();
+      bitField0_ = (bitField0_ & ~0x00000001);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string command_id = 1;</code>
+     * @param value The bytes for commandId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCommandIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      commandId_ = value;
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return this;
+    }
+
     private boolean success_ ;
     /**
-     * <code>bool success = 1;</code>
+     * <code>bool success = 2;</code>
      * @return The success.
      */
     @java.lang.Override
@@ -458,23 +594,23 @@ private static final long serialVersionUID = 0L;
       return success_;
     }
     /**
-     * <code>bool success = 1;</code>
+     * <code>bool success = 2;</code>
      * @param value The success to set.
      * @return This builder for chaining.
      */
     public Builder setSuccess(boolean value) {
 
       success_ = value;
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
-     * <code>bool success = 1;</code>
+     * <code>bool success = 2;</code>
      * @return This builder for chaining.
      */
     public Builder clearSuccess() {
-      bitField0_ = (bitField0_ & ~0x00000001);
+      bitField0_ = (bitField0_ & ~0x00000002);
       success_ = false;
       onChanged();
       return this;
@@ -482,7 +618,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object message_ = "";
     /**
-     * <code>string message = 2;</code>
+     * <code>string message = 3;</code>
      * @return The message.
      */
     public java.lang.String getMessage() {
@@ -498,7 +634,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string message = 2;</code>
+     * <code>string message = 3;</code>
      * @return The bytes for message.
      */
     public com.google.protobuf.ByteString
@@ -515,7 +651,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string message = 2;</code>
+     * <code>string message = 3;</code>
      * @param value The message to set.
      * @return This builder for chaining.
      */
@@ -523,22 +659,22 @@ private static final long serialVersionUID = 0L;
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
       message_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>string message = 2;</code>
+     * <code>string message = 3;</code>
      * @return This builder for chaining.
      */
     public Builder clearMessage() {
       message_ = getDefaultInstance().getMessage();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000004);
       onChanged();
       return this;
     }
     /**
-     * <code>string message = 2;</code>
+     * <code>string message = 3;</code>
      * @param value The bytes for message to set.
      * @return This builder for chaining.
      */
@@ -547,7 +683,7 @@ private static final long serialVersionUID = 0L;
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
       message_ = value;
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }

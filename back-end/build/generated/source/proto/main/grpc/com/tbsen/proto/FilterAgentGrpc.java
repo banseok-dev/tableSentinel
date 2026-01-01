@@ -4,7 +4,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  * <pre>
- * RPC
+ * Services //
  * </pre>
  */
 @javax.annotation.Generated(
@@ -80,66 +80,66 @@ public final class FilterAgentGrpc {
     return getReportStatusMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<com.tbsen.proto.RuleCommand,
-      com.tbsen.proto.CommandResponse> getManageRuleMethod;
-
-  @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "ManageRule",
-      requestType = com.tbsen.proto.RuleCommand.class,
-      responseType = com.tbsen.proto.CommandResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.tbsen.proto.RuleCommand,
-      com.tbsen.proto.CommandResponse> getManageRuleMethod() {
-    io.grpc.MethodDescriptor<com.tbsen.proto.RuleCommand, com.tbsen.proto.CommandResponse> getManageRuleMethod;
-    if ((getManageRuleMethod = FilterAgentGrpc.getManageRuleMethod) == null) {
-      synchronized (FilterAgentGrpc.class) {
-        if ((getManageRuleMethod = FilterAgentGrpc.getManageRuleMethod) == null) {
-          FilterAgentGrpc.getManageRuleMethod = getManageRuleMethod =
-              io.grpc.MethodDescriptor.<com.tbsen.proto.RuleCommand, com.tbsen.proto.CommandResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ManageRule"))
-              .setSampledToLocalTracing(true)
-              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.tbsen.proto.RuleCommand.getDefaultInstance()))
-              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.tbsen.proto.CommandResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new FilterAgentMethodDescriptorSupplier("ManageRule"))
-              .build();
-        }
-      }
-    }
-    return getManageRuleMethod;
-  }
-
   private static volatile io.grpc.MethodDescriptor<com.tbsen.proto.AgentIdentity,
-      com.tbsen.proto.RuleCommand> getSubscribeCommandsMethod;
+      com.tbsen.proto.Command> getSubscribeCommandsMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "SubscribeCommands",
       requestType = com.tbsen.proto.AgentIdentity.class,
-      responseType = com.tbsen.proto.RuleCommand.class,
+      responseType = com.tbsen.proto.Command.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
   public static io.grpc.MethodDescriptor<com.tbsen.proto.AgentIdentity,
-      com.tbsen.proto.RuleCommand> getSubscribeCommandsMethod() {
-    io.grpc.MethodDescriptor<com.tbsen.proto.AgentIdentity, com.tbsen.proto.RuleCommand> getSubscribeCommandsMethod;
+      com.tbsen.proto.Command> getSubscribeCommandsMethod() {
+    io.grpc.MethodDescriptor<com.tbsen.proto.AgentIdentity, com.tbsen.proto.Command> getSubscribeCommandsMethod;
     if ((getSubscribeCommandsMethod = FilterAgentGrpc.getSubscribeCommandsMethod) == null) {
       synchronized (FilterAgentGrpc.class) {
         if ((getSubscribeCommandsMethod = FilterAgentGrpc.getSubscribeCommandsMethod) == null) {
           FilterAgentGrpc.getSubscribeCommandsMethod = getSubscribeCommandsMethod =
-              io.grpc.MethodDescriptor.<com.tbsen.proto.AgentIdentity, com.tbsen.proto.RuleCommand>newBuilder()
+              io.grpc.MethodDescriptor.<com.tbsen.proto.AgentIdentity, com.tbsen.proto.Command>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "SubscribeCommands"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.tbsen.proto.AgentIdentity.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.tbsen.proto.RuleCommand.getDefaultInstance()))
+                  com.tbsen.proto.Command.getDefaultInstance()))
               .setSchemaDescriptor(new FilterAgentMethodDescriptorSupplier("SubscribeCommands"))
               .build();
         }
       }
     }
     return getSubscribeCommandsMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.tbsen.proto.CommandResponse,
+      com.tbsen.proto.CommandResponse> getReportCommandResultMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "ReportCommandResult",
+      requestType = com.tbsen.proto.CommandResponse.class,
+      responseType = com.tbsen.proto.CommandResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.tbsen.proto.CommandResponse,
+      com.tbsen.proto.CommandResponse> getReportCommandResultMethod() {
+    io.grpc.MethodDescriptor<com.tbsen.proto.CommandResponse, com.tbsen.proto.CommandResponse> getReportCommandResultMethod;
+    if ((getReportCommandResultMethod = FilterAgentGrpc.getReportCommandResultMethod) == null) {
+      synchronized (FilterAgentGrpc.class) {
+        if ((getReportCommandResultMethod = FilterAgentGrpc.getReportCommandResultMethod) == null) {
+          FilterAgentGrpc.getReportCommandResultMethod = getReportCommandResultMethod =
+              io.grpc.MethodDescriptor.<com.tbsen.proto.CommandResponse, com.tbsen.proto.CommandResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ReportCommandResult"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tbsen.proto.CommandResponse.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.tbsen.proto.CommandResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new FilterAgentMethodDescriptorSupplier("ReportCommandResult"))
+              .build();
+        }
+      }
+    }
+    return getReportCommandResultMethod;
   }
 
   /**
@@ -188,12 +188,15 @@ public final class FilterAgentGrpc {
 
   /**
    * <pre>
-   * RPC
+   * Services //
    * </pre>
    */
   public interface AsyncService {
 
     /**
+     * <pre>
+     * 등록 (에이전트 -&gt; 서버)
+     * </pre>
      */
     default void registerAgent(com.tbsen.proto.AgentIdentity request,
         io.grpc.stub.StreamObserver<com.tbsen.proto.CommandResponse> responseObserver) {
@@ -201,6 +204,9 @@ public final class FilterAgentGrpc {
     }
 
     /**
+     * <pre>
+     * 상태보고 (에이전트 -&gt; 서버)
+     * </pre>
      */
     default io.grpc.stub.StreamObserver<com.tbsen.proto.AgentStatus> reportStatus(
         io.grpc.stub.StreamObserver<com.tbsen.proto.CommandResponse> responseObserver) {
@@ -208,24 +214,30 @@ public final class FilterAgentGrpc {
     }
 
     /**
+     * <pre>
+     * 명령 수신 (서버 -&gt; 에이전트)
+     * </pre>
      */
-    default void manageRule(com.tbsen.proto.RuleCommand request,
-        io.grpc.stub.StreamObserver<com.tbsen.proto.CommandResponse> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getManageRuleMethod(), responseObserver);
+    default void subscribeCommands(com.tbsen.proto.AgentIdentity request,
+        io.grpc.stub.StreamObserver<com.tbsen.proto.Command> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSubscribeCommandsMethod(), responseObserver);
     }
 
     /**
+     * <pre>
+     * 명령 결과 보고 (에이전트 -&gt; 서버)
+     * </pre>
      */
-    default void subscribeCommands(com.tbsen.proto.AgentIdentity request,
-        io.grpc.stub.StreamObserver<com.tbsen.proto.RuleCommand> responseObserver) {
-      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getSubscribeCommandsMethod(), responseObserver);
+    default void reportCommandResult(com.tbsen.proto.CommandResponse request,
+        io.grpc.stub.StreamObserver<com.tbsen.proto.CommandResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getReportCommandResultMethod(), responseObserver);
     }
   }
 
   /**
    * Base class for the server implementation of the service FilterAgent.
    * <pre>
-   * RPC
+   * Services //
    * </pre>
    */
   public static abstract class FilterAgentImplBase
@@ -239,7 +251,7 @@ public final class FilterAgentGrpc {
   /**
    * A stub to allow clients to do asynchronous rpc calls to service FilterAgent.
    * <pre>
-   * RPC
+   * Services //
    * </pre>
    */
   public static final class FilterAgentStub
@@ -256,6 +268,9 @@ public final class FilterAgentGrpc {
     }
 
     /**
+     * <pre>
+     * 등록 (에이전트 -&gt; 서버)
+     * </pre>
      */
     public void registerAgent(com.tbsen.proto.AgentIdentity request,
         io.grpc.stub.StreamObserver<com.tbsen.proto.CommandResponse> responseObserver) {
@@ -264,6 +279,9 @@ public final class FilterAgentGrpc {
     }
 
     /**
+     * <pre>
+     * 상태보고 (에이전트 -&gt; 서버)
+     * </pre>
      */
     public io.grpc.stub.StreamObserver<com.tbsen.proto.AgentStatus> reportStatus(
         io.grpc.stub.StreamObserver<com.tbsen.proto.CommandResponse> responseObserver) {
@@ -272,26 +290,32 @@ public final class FilterAgentGrpc {
     }
 
     /**
+     * <pre>
+     * 명령 수신 (서버 -&gt; 에이전트)
+     * </pre>
      */
-    public void manageRule(com.tbsen.proto.RuleCommand request,
-        io.grpc.stub.StreamObserver<com.tbsen.proto.CommandResponse> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncUnaryCall(
-          getChannel().newCall(getManageRuleMethod(), getCallOptions()), request, responseObserver);
+    public void subscribeCommands(com.tbsen.proto.AgentIdentity request,
+        io.grpc.stub.StreamObserver<com.tbsen.proto.Command> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
+          getChannel().newCall(getSubscribeCommandsMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
+     * <pre>
+     * 명령 결과 보고 (에이전트 -&gt; 서버)
+     * </pre>
      */
-    public void subscribeCommands(com.tbsen.proto.AgentIdentity request,
-        io.grpc.stub.StreamObserver<com.tbsen.proto.RuleCommand> responseObserver) {
-      io.grpc.stub.ClientCalls.asyncServerStreamingCall(
-          getChannel().newCall(getSubscribeCommandsMethod(), getCallOptions()), request, responseObserver);
+    public void reportCommandResult(com.tbsen.proto.CommandResponse request,
+        io.grpc.stub.StreamObserver<com.tbsen.proto.CommandResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getReportCommandResultMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
   /**
    * A stub to allow clients to do synchronous rpc calls to service FilterAgent.
    * <pre>
-   * RPC
+   * Services //
    * </pre>
    */
   public static final class FilterAgentBlockingStub
@@ -308,6 +332,9 @@ public final class FilterAgentGrpc {
     }
 
     /**
+     * <pre>
+     * 등록 (에이전트 -&gt; 서버)
+     * </pre>
      */
     public com.tbsen.proto.CommandResponse registerAgent(com.tbsen.proto.AgentIdentity request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -315,25 +342,31 @@ public final class FilterAgentGrpc {
     }
 
     /**
+     * <pre>
+     * 명령 수신 (서버 -&gt; 에이전트)
+     * </pre>
      */
-    public com.tbsen.proto.CommandResponse manageRule(com.tbsen.proto.RuleCommand request) {
-      return io.grpc.stub.ClientCalls.blockingUnaryCall(
-          getChannel(), getManageRuleMethod(), getCallOptions(), request);
-    }
-
-    /**
-     */
-    public java.util.Iterator<com.tbsen.proto.RuleCommand> subscribeCommands(
+    public java.util.Iterator<com.tbsen.proto.Command> subscribeCommands(
         com.tbsen.proto.AgentIdentity request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getSubscribeCommandsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     * <pre>
+     * 명령 결과 보고 (에이전트 -&gt; 서버)
+     * </pre>
+     */
+    public com.tbsen.proto.CommandResponse reportCommandResult(com.tbsen.proto.CommandResponse request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getReportCommandResultMethod(), getCallOptions(), request);
     }
   }
 
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service FilterAgent.
    * <pre>
-   * RPC
+   * Services //
    * </pre>
    */
   public static final class FilterAgentFutureStub
@@ -350,6 +383,9 @@ public final class FilterAgentGrpc {
     }
 
     /**
+     * <pre>
+     * 등록 (에이전트 -&gt; 서버)
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.tbsen.proto.CommandResponse> registerAgent(
         com.tbsen.proto.AgentIdentity request) {
@@ -358,17 +394,20 @@ public final class FilterAgentGrpc {
     }
 
     /**
+     * <pre>
+     * 명령 결과 보고 (에이전트 -&gt; 서버)
+     * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.tbsen.proto.CommandResponse> manageRule(
-        com.tbsen.proto.RuleCommand request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.tbsen.proto.CommandResponse> reportCommandResult(
+        com.tbsen.proto.CommandResponse request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
-          getChannel().newCall(getManageRuleMethod(), getCallOptions()), request);
+          getChannel().newCall(getReportCommandResultMethod(), getCallOptions()), request);
     }
   }
 
   private static final int METHODID_REGISTER_AGENT = 0;
-  private static final int METHODID_MANAGE_RULE = 1;
-  private static final int METHODID_SUBSCRIBE_COMMANDS = 2;
+  private static final int METHODID_SUBSCRIBE_COMMANDS = 1;
+  private static final int METHODID_REPORT_COMMAND_RESULT = 2;
   private static final int METHODID_REPORT_STATUS = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
@@ -392,13 +431,13 @@ public final class FilterAgentGrpc {
           serviceImpl.registerAgent((com.tbsen.proto.AgentIdentity) request,
               (io.grpc.stub.StreamObserver<com.tbsen.proto.CommandResponse>) responseObserver);
           break;
-        case METHODID_MANAGE_RULE:
-          serviceImpl.manageRule((com.tbsen.proto.RuleCommand) request,
-              (io.grpc.stub.StreamObserver<com.tbsen.proto.CommandResponse>) responseObserver);
-          break;
         case METHODID_SUBSCRIBE_COMMANDS:
           serviceImpl.subscribeCommands((com.tbsen.proto.AgentIdentity) request,
-              (io.grpc.stub.StreamObserver<com.tbsen.proto.RuleCommand>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.tbsen.proto.Command>) responseObserver);
+          break;
+        case METHODID_REPORT_COMMAND_RESULT:
+          serviceImpl.reportCommandResult((com.tbsen.proto.CommandResponse) request,
+              (io.grpc.stub.StreamObserver<com.tbsen.proto.CommandResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -436,19 +475,19 @@ public final class FilterAgentGrpc {
               com.tbsen.proto.CommandResponse>(
                 service, METHODID_REPORT_STATUS)))
         .addMethod(
-          getManageRuleMethod(),
-          io.grpc.stub.ServerCalls.asyncUnaryCall(
-            new MethodHandlers<
-              com.tbsen.proto.RuleCommand,
-              com.tbsen.proto.CommandResponse>(
-                service, METHODID_MANAGE_RULE)))
-        .addMethod(
           getSubscribeCommandsMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
             new MethodHandlers<
               com.tbsen.proto.AgentIdentity,
-              com.tbsen.proto.RuleCommand>(
+              com.tbsen.proto.Command>(
                 service, METHODID_SUBSCRIBE_COMMANDS)))
+        .addMethod(
+          getReportCommandResultMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.tbsen.proto.CommandResponse,
+              com.tbsen.proto.CommandResponse>(
+                service, METHODID_REPORT_COMMAND_RESULT)))
         .build();
   }
 
@@ -499,8 +538,8 @@ public final class FilterAgentGrpc {
               .setSchemaDescriptor(new FilterAgentFileDescriptorSupplier())
               .addMethod(getRegisterAgentMethod())
               .addMethod(getReportStatusMethod())
-              .addMethod(getManageRuleMethod())
               .addMethod(getSubscribeCommandsMethod())
+              .addMethod(getReportCommandResultMethod())
               .build();
         }
       }

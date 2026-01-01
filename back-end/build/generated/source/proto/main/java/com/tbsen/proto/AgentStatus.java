@@ -5,10 +5,6 @@
 package com.tbsen.proto;
 
 /**
- * <pre>
- * Agent Heartbeat
- * </pre>
- *
  * Protobuf type {@code com.tbsen.proto.AgentStatus}
  */
 public final class AgentStatus extends
@@ -23,6 +19,7 @@ private static final long serialVersionUID = 0L;
   private AgentStatus() {
     uuid_ = "";
     globalState_ = 0;
+    metrics_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -37,18 +34,6 @@ private static final long serialVersionUID = 0L;
     return com.tbsen.proto.FilterProto.internal_static_com_tbsen_proto_AgentStatus_descriptor;
   }
 
-  @SuppressWarnings({"rawtypes"})
-  @java.lang.Override
-  protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-      int number) {
-    switch (number) {
-      case 4:
-        return internalGetInterfaceMetrics();
-      default:
-        throw new RuntimeException(
-            "Invalid map field number: " + number);
-    }
-  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -125,125 +110,45 @@ private static final long serialVersionUID = 0L;
     return result == null ? com.tbsen.proto.AgentState.UNRECOGNIZED : result;
   }
 
-  public static final int INTERFACE_METRICS_FIELD_NUMBER = 4;
-  private static final class InterfaceMetricsDefaultEntryHolder {
-    static final com.google.protobuf.MapEntry<
-        java.lang.String, com.tbsen.proto.InterfaceMetrics> defaultEntry =
-            com.google.protobuf.MapEntry
-            .<java.lang.String, com.tbsen.proto.InterfaceMetrics>newDefaultInstance(
-                com.tbsen.proto.FilterProto.internal_static_com_tbsen_proto_AgentStatus_InterfaceMetricsEntry_descriptor, 
-                com.google.protobuf.WireFormat.FieldType.STRING,
-                "",
-                com.google.protobuf.WireFormat.FieldType.MESSAGE,
-                com.tbsen.proto.InterfaceMetrics.getDefaultInstance());
-  }
+  public static final int METRICS_FIELD_NUMBER = 4;
   @SuppressWarnings("serial")
-  private com.google.protobuf.MapField<
-      java.lang.String, com.tbsen.proto.InterfaceMetrics> interfaceMetrics_;
-  private com.google.protobuf.MapField<java.lang.String, com.tbsen.proto.InterfaceMetrics>
-  internalGetInterfaceMetrics() {
-    if (interfaceMetrics_ == null) {
-      return com.google.protobuf.MapField.emptyMapField(
-          InterfaceMetricsDefaultEntryHolder.defaultEntry);
-    }
-    return interfaceMetrics_;
-  }
-  public int getInterfaceMetricsCount() {
-    return internalGetInterfaceMetrics().getMap().size();
-  }
+  private java.util.List<com.tbsen.proto.InterfaceMetrics> metrics_;
   /**
-   * <pre>
-   * 각 인터페이스별 지표
-   * </pre>
-   *
-   * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
+   * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
    */
   @java.lang.Override
-  public boolean containsInterfaceMetrics(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    return internalGetInterfaceMetrics().getMap().containsKey(key);
+  public java.util.List<com.tbsen.proto.InterfaceMetrics> getMetricsList() {
+    return metrics_;
   }
   /**
-   * Use {@link #getInterfaceMetricsMap()} instead.
+   * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
    */
   @java.lang.Override
-  @java.lang.Deprecated
-  public java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetrics> getInterfaceMetrics() {
-    return getInterfaceMetricsMap();
+  public java.util.List<? extends com.tbsen.proto.InterfaceMetricsOrBuilder> 
+      getMetricsOrBuilderList() {
+    return metrics_;
   }
   /**
-   * <pre>
-   * 각 인터페이스별 지표
-   * </pre>
-   *
-   * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
+   * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
    */
   @java.lang.Override
-  public java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetrics> getInterfaceMetricsMap() {
-    return internalGetInterfaceMetrics().getMap();
+  public int getMetricsCount() {
+    return metrics_.size();
   }
   /**
-   * <pre>
-   * 각 인터페이스별 지표
-   * </pre>
-   *
-   * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
+   * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
    */
   @java.lang.Override
-  public /* nullable */
-com.tbsen.proto.InterfaceMetrics getInterfaceMetricsOrDefault(
-      java.lang.String key,
-      /* nullable */
-com.tbsen.proto.InterfaceMetrics defaultValue) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetrics> map =
-        internalGetInterfaceMetrics().getMap();
-    return map.containsKey(key) ? map.get(key) : defaultValue;
+  public com.tbsen.proto.InterfaceMetrics getMetrics(int index) {
+    return metrics_.get(index);
   }
   /**
-   * <pre>
-   * 각 인터페이스별 지표
-   * </pre>
-   *
-   * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
+   * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
    */
   @java.lang.Override
-  public com.tbsen.proto.InterfaceMetrics getInterfaceMetricsOrThrow(
-      java.lang.String key) {
-    if (key == null) { throw new NullPointerException("map key"); }
-    java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetrics> map =
-        internalGetInterfaceMetrics().getMap();
-    if (!map.containsKey(key)) {
-      throw new java.lang.IllegalArgumentException();
-    }
-    return map.get(key);
-  }
-
-  public static final int CPU_USAGE_PERCENT_FIELD_NUMBER = 5;
-  private double cpuUsagePercent_ = 0D;
-  /**
-   * <pre>
-   * 리소스 상태
-   * </pre>
-   *
-   * <code>double cpu_usage_percent = 5;</code>
-   * @return The cpuUsagePercent.
-   */
-  @java.lang.Override
-  public double getCpuUsagePercent() {
-    return cpuUsagePercent_;
-  }
-
-  public static final int MEMORY_USAGE_PERCENT_FIELD_NUMBER = 6;
-  private double memoryUsagePercent_ = 0D;
-  /**
-   * <code>double memory_usage_percent = 6;</code>
-   * @return The memoryUsagePercent.
-   */
-  @java.lang.Override
-  public double getMemoryUsagePercent() {
-    return memoryUsagePercent_;
+  public com.tbsen.proto.InterfaceMetricsOrBuilder getMetricsOrBuilder(
+      int index) {
+    return metrics_.get(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -269,17 +174,8 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
     if (globalState_ != com.tbsen.proto.AgentState.STATE_UNKNOWN.getNumber()) {
       output.writeEnum(3, globalState_);
     }
-    com.google.protobuf.GeneratedMessageV3
-      .serializeStringMapTo(
-        output,
-        internalGetInterfaceMetrics(),
-        InterfaceMetricsDefaultEntryHolder.defaultEntry,
-        4);
-    if (java.lang.Double.doubleToRawLongBits(cpuUsagePercent_) != 0) {
-      output.writeDouble(5, cpuUsagePercent_);
-    }
-    if (java.lang.Double.doubleToRawLongBits(memoryUsagePercent_) != 0) {
-      output.writeDouble(6, memoryUsagePercent_);
+    for (int i = 0; i < metrics_.size(); i++) {
+      output.writeMessage(4, metrics_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -301,23 +197,9 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(3, globalState_);
     }
-    for (java.util.Map.Entry<java.lang.String, com.tbsen.proto.InterfaceMetrics> entry
-         : internalGetInterfaceMetrics().getMap().entrySet()) {
-      com.google.protobuf.MapEntry<java.lang.String, com.tbsen.proto.InterfaceMetrics>
-      interfaceMetrics__ = InterfaceMetricsDefaultEntryHolder.defaultEntry.newBuilderForType()
-          .setKey(entry.getKey())
-          .setValue(entry.getValue())
-          .build();
+    for (int i = 0; i < metrics_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, interfaceMetrics__);
-    }
-    if (java.lang.Double.doubleToRawLongBits(cpuUsagePercent_) != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(5, cpuUsagePercent_);
-    }
-    if (java.lang.Double.doubleToRawLongBits(memoryUsagePercent_) != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(6, memoryUsagePercent_);
+        .computeMessageSize(4, metrics_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -339,14 +221,8 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
     if (getTimestamp()
         != other.getTimestamp()) return false;
     if (globalState_ != other.globalState_) return false;
-    if (!internalGetInterfaceMetrics().equals(
-        other.internalGetInterfaceMetrics())) return false;
-    if (java.lang.Double.doubleToLongBits(getCpuUsagePercent())
-        != java.lang.Double.doubleToLongBits(
-            other.getCpuUsagePercent())) return false;
-    if (java.lang.Double.doubleToLongBits(getMemoryUsagePercent())
-        != java.lang.Double.doubleToLongBits(
-            other.getMemoryUsagePercent())) return false;
+    if (!getMetricsList()
+        .equals(other.getMetricsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -365,16 +241,10 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
         getTimestamp());
     hash = (37 * hash) + GLOBAL_STATE_FIELD_NUMBER;
     hash = (53 * hash) + globalState_;
-    if (!internalGetInterfaceMetrics().getMap().isEmpty()) {
-      hash = (37 * hash) + INTERFACE_METRICS_FIELD_NUMBER;
-      hash = (53 * hash) + internalGetInterfaceMetrics().hashCode();
+    if (getMetricsCount() > 0) {
+      hash = (37 * hash) + METRICS_FIELD_NUMBER;
+      hash = (53 * hash) + getMetricsList().hashCode();
     }
-    hash = (37 * hash) + CPU_USAGE_PERCENT_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        java.lang.Double.doubleToLongBits(getCpuUsagePercent()));
-    hash = (37 * hash) + MEMORY_USAGE_PERCENT_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        java.lang.Double.doubleToLongBits(getMemoryUsagePercent()));
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -473,10 +343,6 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
     return builder;
   }
   /**
-   * <pre>
-   * Agent Heartbeat
-   * </pre>
-   *
    * Protobuf type {@code com.tbsen.proto.AgentStatus}
    */
   public static final class Builder extends
@@ -488,28 +354,6 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
       return com.tbsen.proto.FilterProto.internal_static_com_tbsen_proto_AgentStatus_descriptor;
     }
 
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 4:
-          return internalGetInterfaceMetrics();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
-    @SuppressWarnings({"rawtypes"})
-    protected com.google.protobuf.MapFieldReflectionAccessor internalGetMutableMapFieldReflection(
-        int number) {
-      switch (number) {
-        case 4:
-          return internalGetMutableInterfaceMetrics();
-        default:
-          throw new RuntimeException(
-              "Invalid map field number: " + number);
-      }
-    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -535,9 +379,13 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
       uuid_ = "";
       timestamp_ = 0L;
       globalState_ = 0;
-      internalGetMutableInterfaceMetrics().clear();
-      cpuUsagePercent_ = 0D;
-      memoryUsagePercent_ = 0D;
+      if (metricsBuilder_ == null) {
+        metrics_ = java.util.Collections.emptyList();
+      } else {
+        metrics_ = null;
+        metricsBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000008);
       return this;
     }
 
@@ -564,9 +412,22 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
     @java.lang.Override
     public com.tbsen.proto.AgentStatus buildPartial() {
       com.tbsen.proto.AgentStatus result = new com.tbsen.proto.AgentStatus(this);
+      buildPartialRepeatedFields(result);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
+    }
+
+    private void buildPartialRepeatedFields(com.tbsen.proto.AgentStatus result) {
+      if (metricsBuilder_ == null) {
+        if (((bitField0_ & 0x00000008) != 0)) {
+          metrics_ = java.util.Collections.unmodifiableList(metrics_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.metrics_ = metrics_;
+      } else {
+        result.metrics_ = metricsBuilder_.build();
+      }
     }
 
     private void buildPartial0(com.tbsen.proto.AgentStatus result) {
@@ -579,15 +440,6 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.globalState_ = globalState_;
-      }
-      if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.interfaceMetrics_ = internalGetInterfaceMetrics().build(InterfaceMetricsDefaultEntryHolder.defaultEntry);
-      }
-      if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.cpuUsagePercent_ = cpuUsagePercent_;
-      }
-      if (((from_bitField0_ & 0x00000020) != 0)) {
-        result.memoryUsagePercent_ = memoryUsagePercent_;
       }
     }
 
@@ -646,14 +498,31 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
       if (other.globalState_ != 0) {
         setGlobalStateValue(other.getGlobalStateValue());
       }
-      internalGetMutableInterfaceMetrics().mergeFrom(
-          other.internalGetInterfaceMetrics());
-      bitField0_ |= 0x00000008;
-      if (other.getCpuUsagePercent() != 0D) {
-        setCpuUsagePercent(other.getCpuUsagePercent());
-      }
-      if (other.getMemoryUsagePercent() != 0D) {
-        setMemoryUsagePercent(other.getMemoryUsagePercent());
+      if (metricsBuilder_ == null) {
+        if (!other.metrics_.isEmpty()) {
+          if (metrics_.isEmpty()) {
+            metrics_ = other.metrics_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureMetricsIsMutable();
+            metrics_.addAll(other.metrics_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.metrics_.isEmpty()) {
+          if (metricsBuilder_.isEmpty()) {
+            metricsBuilder_.dispose();
+            metricsBuilder_ = null;
+            metrics_ = other.metrics_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+            metricsBuilder_ = 
+              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                 getMetricsFieldBuilder() : null;
+          } else {
+            metricsBuilder_.addAllMessages(other.metrics_);
+          }
+        }
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -697,24 +566,18 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
               break;
             } // case 24
             case 34: {
-              com.google.protobuf.MapEntry<java.lang.String, com.tbsen.proto.InterfaceMetrics>
-              interfaceMetrics__ = input.readMessage(
-                  InterfaceMetricsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
-              internalGetMutableInterfaceMetrics().ensureBuilderMap().put(
-                  interfaceMetrics__.getKey(), interfaceMetrics__.getValue());
-              bitField0_ |= 0x00000008;
+              com.tbsen.proto.InterfaceMetrics m =
+                  input.readMessage(
+                      com.tbsen.proto.InterfaceMetrics.parser(),
+                      extensionRegistry);
+              if (metricsBuilder_ == null) {
+                ensureMetricsIsMutable();
+                metrics_.add(m);
+              } else {
+                metricsBuilder_.addMessage(m);
+              }
               break;
             } // case 34
-            case 41: {
-              cpuUsagePercent_ = input.readDouble();
-              bitField0_ |= 0x00000010;
-              break;
-            } // case 41
-            case 49: {
-              memoryUsagePercent_ = input.readDouble();
-              bitField0_ |= 0x00000020;
-              break;
-            } // case 49
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -889,267 +752,244 @@ com.tbsen.proto.InterfaceMetrics defaultValue) {
       return this;
     }
 
-    private static final class InterfaceMetricsConverter implements com.google.protobuf.MapFieldBuilder.Converter<java.lang.String, com.tbsen.proto.InterfaceMetricsOrBuilder, com.tbsen.proto.InterfaceMetrics> {
-      @java.lang.Override
-      public com.tbsen.proto.InterfaceMetrics build(com.tbsen.proto.InterfaceMetricsOrBuilder val) {
-        if (val instanceof com.tbsen.proto.InterfaceMetrics) { return (com.tbsen.proto.InterfaceMetrics) val; }
-        return ((com.tbsen.proto.InterfaceMetrics.Builder) val).build();
-      }
+    private java.util.List<com.tbsen.proto.InterfaceMetrics> metrics_ =
+      java.util.Collections.emptyList();
+    private void ensureMetricsIsMutable() {
+      if (!((bitField0_ & 0x00000008) != 0)) {
+        metrics_ = new java.util.ArrayList<com.tbsen.proto.InterfaceMetrics>(metrics_);
+        bitField0_ |= 0x00000008;
+       }
+    }
 
-      @java.lang.Override
-      public com.google.protobuf.MapEntry<java.lang.String, com.tbsen.proto.InterfaceMetrics> defaultEntry() {
-        return InterfaceMetricsDefaultEntryHolder.defaultEntry;
-      }
-    };
-    private static final InterfaceMetricsConverter interfaceMetricsConverter = new InterfaceMetricsConverter();
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        com.tbsen.proto.InterfaceMetrics, com.tbsen.proto.InterfaceMetrics.Builder, com.tbsen.proto.InterfaceMetricsOrBuilder> metricsBuilder_;
 
-    private com.google.protobuf.MapFieldBuilder<
-        java.lang.String, com.tbsen.proto.InterfaceMetricsOrBuilder, com.tbsen.proto.InterfaceMetrics, com.tbsen.proto.InterfaceMetrics.Builder> interfaceMetrics_;
-    private com.google.protobuf.MapFieldBuilder<java.lang.String, com.tbsen.proto.InterfaceMetricsOrBuilder, com.tbsen.proto.InterfaceMetrics, com.tbsen.proto.InterfaceMetrics.Builder>
-        internalGetInterfaceMetrics() {
-      if (interfaceMetrics_ == null) {
-        return new com.google.protobuf.MapFieldBuilder<>(interfaceMetricsConverter);
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public java.util.List<com.tbsen.proto.InterfaceMetrics> getMetricsList() {
+      if (metricsBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(metrics_);
+      } else {
+        return metricsBuilder_.getMessageList();
       }
-      return interfaceMetrics_;
     }
-    private com.google.protobuf.MapFieldBuilder<java.lang.String, com.tbsen.proto.InterfaceMetricsOrBuilder, com.tbsen.proto.InterfaceMetrics, com.tbsen.proto.InterfaceMetrics.Builder>
-        internalGetMutableInterfaceMetrics() {
-      if (interfaceMetrics_ == null) {
-        interfaceMetrics_ = new com.google.protobuf.MapFieldBuilder<>(interfaceMetricsConverter);
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public int getMetricsCount() {
+      if (metricsBuilder_ == null) {
+        return metrics_.size();
+      } else {
+        return metricsBuilder_.getCount();
       }
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return interfaceMetrics_;
-    }
-    public int getInterfaceMetricsCount() {
-      return internalGetInterfaceMetrics().ensureBuilderMap().size();
     }
     /**
-     * <pre>
-     * 각 인터페이스별 지표
-     * </pre>
-     *
-     * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
      */
-    @java.lang.Override
-    public boolean containsInterfaceMetrics(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      return internalGetInterfaceMetrics().ensureBuilderMap().containsKey(key);
-    }
-    /**
-     * Use {@link #getInterfaceMetricsMap()} instead.
-     */
-    @java.lang.Override
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetrics> getInterfaceMetrics() {
-      return getInterfaceMetricsMap();
-    }
-    /**
-     * <pre>
-     * 각 인터페이스별 지표
-     * </pre>
-     *
-     * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
-     */
-    @java.lang.Override
-    public java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetrics> getInterfaceMetricsMap() {
-      return internalGetInterfaceMetrics().getImmutableMap();
-    }
-    /**
-     * <pre>
-     * 각 인터페이스별 지표
-     * </pre>
-     *
-     * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
-     */
-    @java.lang.Override
-    public /* nullable */
-com.tbsen.proto.InterfaceMetrics getInterfaceMetricsOrDefault(
-        java.lang.String key,
-        /* nullable */
-com.tbsen.proto.InterfaceMetrics defaultValue) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetricsOrBuilder> map = internalGetMutableInterfaceMetrics().ensureBuilderMap();
-      return map.containsKey(key) ? interfaceMetricsConverter.build(map.get(key)) : defaultValue;
-    }
-    /**
-     * <pre>
-     * 각 인터페이스별 지표
-     * </pre>
-     *
-     * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
-     */
-    @java.lang.Override
-    public com.tbsen.proto.InterfaceMetrics getInterfaceMetricsOrThrow(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetricsOrBuilder> map = internalGetMutableInterfaceMetrics().ensureBuilderMap();
-      if (!map.containsKey(key)) {
-        throw new java.lang.IllegalArgumentException();
+    public com.tbsen.proto.InterfaceMetrics getMetrics(int index) {
+      if (metricsBuilder_ == null) {
+        return metrics_.get(index);
+      } else {
+        return metricsBuilder_.getMessage(index);
       }
-      return interfaceMetricsConverter.build(map.get(key));
-    }
-    public Builder clearInterfaceMetrics() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      internalGetMutableInterfaceMetrics().clear();
-      return this;
     }
     /**
-     * <pre>
-     * 각 인터페이스별 지표
-     * </pre>
-     *
-     * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
      */
-    public Builder removeInterfaceMetrics(
-        java.lang.String key) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      internalGetMutableInterfaceMetrics().ensureBuilderMap()
-          .remove(key);
-      return this;
-    }
-    /**
-     * Use alternate mutation accessors instead.
-     */
-    @java.lang.Deprecated
-    public java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetrics>
-        getMutableInterfaceMetrics() {
-      bitField0_ |= 0x00000008;
-      return internalGetMutableInterfaceMetrics().ensureMessageMap();
-    }
-    /**
-     * <pre>
-     * 각 인터페이스별 지표
-     * </pre>
-     *
-     * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
-     */
-    public Builder putInterfaceMetrics(
-        java.lang.String key,
-        com.tbsen.proto.InterfaceMetrics value) {
-      if (key == null) { throw new NullPointerException("map key"); }
-      if (value == null) { throw new NullPointerException("map value"); }
-      internalGetMutableInterfaceMetrics().ensureBuilderMap()
-          .put(key, value);
-      bitField0_ |= 0x00000008;
-      return this;
-    }
-    /**
-     * <pre>
-     * 각 인터페이스별 지표
-     * </pre>
-     *
-     * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
-     */
-    public Builder putAllInterfaceMetrics(
-        java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetrics> values) {
-      for (java.util.Map.Entry<java.lang.String, com.tbsen.proto.InterfaceMetrics> e : values.entrySet()) {
-        if (e.getKey() == null || e.getValue() == null) {
+    public Builder setMetrics(
+        int index, com.tbsen.proto.InterfaceMetrics value) {
+      if (metricsBuilder_ == null) {
+        if (value == null) {
           throw new NullPointerException();
         }
+        ensureMetricsIsMutable();
+        metrics_.set(index, value);
+        onChanged();
+      } else {
+        metricsBuilder_.setMessage(index, value);
       }
-      internalGetMutableInterfaceMetrics().ensureBuilderMap()
-          .putAll(values);
-      bitField0_ |= 0x00000008;
       return this;
     }
     /**
-     * <pre>
-     * 각 인터페이스별 지표
-     * </pre>
-     *
-     * <code>map&lt;string, .com.tbsen.proto.InterfaceMetrics&gt; interface_metrics = 4;</code>
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
      */
-    public com.tbsen.proto.InterfaceMetrics.Builder putInterfaceMetricsBuilderIfAbsent(
-        java.lang.String key) {
-      java.util.Map<java.lang.String, com.tbsen.proto.InterfaceMetricsOrBuilder> builderMap = internalGetMutableInterfaceMetrics().ensureBuilderMap();
-      com.tbsen.proto.InterfaceMetricsOrBuilder entry = builderMap.get(key);
-      if (entry == null) {
-        entry = com.tbsen.proto.InterfaceMetrics.newBuilder();
-        builderMap.put(key, entry);
+    public Builder setMetrics(
+        int index, com.tbsen.proto.InterfaceMetrics.Builder builderForValue) {
+      if (metricsBuilder_ == null) {
+        ensureMetricsIsMutable();
+        metrics_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        metricsBuilder_.setMessage(index, builderForValue.build());
       }
-      if (entry instanceof com.tbsen.proto.InterfaceMetrics) {
-        entry = ((com.tbsen.proto.InterfaceMetrics) entry).toBuilder();
-        builderMap.put(key, entry);
+      return this;
+    }
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public Builder addMetrics(com.tbsen.proto.InterfaceMetrics value) {
+      if (metricsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureMetricsIsMutable();
+        metrics_.add(value);
+        onChanged();
+      } else {
+        metricsBuilder_.addMessage(value);
       }
-      return (com.tbsen.proto.InterfaceMetrics.Builder) entry;
-    }
-
-    private double cpuUsagePercent_ ;
-    /**
-     * <pre>
-     * 리소스 상태
-     * </pre>
-     *
-     * <code>double cpu_usage_percent = 5;</code>
-     * @return The cpuUsagePercent.
-     */
-    @java.lang.Override
-    public double getCpuUsagePercent() {
-      return cpuUsagePercent_;
-    }
-    /**
-     * <pre>
-     * 리소스 상태
-     * </pre>
-     *
-     * <code>double cpu_usage_percent = 5;</code>
-     * @param value The cpuUsagePercent to set.
-     * @return This builder for chaining.
-     */
-    public Builder setCpuUsagePercent(double value) {
-
-      cpuUsagePercent_ = value;
-      bitField0_ |= 0x00000010;
-      onChanged();
       return this;
     }
     /**
-     * <pre>
-     * 리소스 상태
-     * </pre>
-     *
-     * <code>double cpu_usage_percent = 5;</code>
-     * @return This builder for chaining.
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
      */
-    public Builder clearCpuUsagePercent() {
-      bitField0_ = (bitField0_ & ~0x00000010);
-      cpuUsagePercent_ = 0D;
-      onChanged();
-      return this;
-    }
-
-    private double memoryUsagePercent_ ;
-    /**
-     * <code>double memory_usage_percent = 6;</code>
-     * @return The memoryUsagePercent.
-     */
-    @java.lang.Override
-    public double getMemoryUsagePercent() {
-      return memoryUsagePercent_;
-    }
-    /**
-     * <code>double memory_usage_percent = 6;</code>
-     * @param value The memoryUsagePercent to set.
-     * @return This builder for chaining.
-     */
-    public Builder setMemoryUsagePercent(double value) {
-
-      memoryUsagePercent_ = value;
-      bitField0_ |= 0x00000020;
-      onChanged();
+    public Builder addMetrics(
+        int index, com.tbsen.proto.InterfaceMetrics value) {
+      if (metricsBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureMetricsIsMutable();
+        metrics_.add(index, value);
+        onChanged();
+      } else {
+        metricsBuilder_.addMessage(index, value);
+      }
       return this;
     }
     /**
-     * <code>double memory_usage_percent = 6;</code>
-     * @return This builder for chaining.
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
      */
-    public Builder clearMemoryUsagePercent() {
-      bitField0_ = (bitField0_ & ~0x00000020);
-      memoryUsagePercent_ = 0D;
-      onChanged();
+    public Builder addMetrics(
+        com.tbsen.proto.InterfaceMetrics.Builder builderForValue) {
+      if (metricsBuilder_ == null) {
+        ensureMetricsIsMutable();
+        metrics_.add(builderForValue.build());
+        onChanged();
+      } else {
+        metricsBuilder_.addMessage(builderForValue.build());
+      }
       return this;
+    }
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public Builder addMetrics(
+        int index, com.tbsen.proto.InterfaceMetrics.Builder builderForValue) {
+      if (metricsBuilder_ == null) {
+        ensureMetricsIsMutable();
+        metrics_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        metricsBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public Builder addAllMetrics(
+        java.lang.Iterable<? extends com.tbsen.proto.InterfaceMetrics> values) {
+      if (metricsBuilder_ == null) {
+        ensureMetricsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, metrics_);
+        onChanged();
+      } else {
+        metricsBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public Builder clearMetrics() {
+      if (metricsBuilder_ == null) {
+        metrics_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+      } else {
+        metricsBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public Builder removeMetrics(int index) {
+      if (metricsBuilder_ == null) {
+        ensureMetricsIsMutable();
+        metrics_.remove(index);
+        onChanged();
+      } else {
+        metricsBuilder_.remove(index);
+      }
+      return this;
+    }
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public com.tbsen.proto.InterfaceMetrics.Builder getMetricsBuilder(
+        int index) {
+      return getMetricsFieldBuilder().getBuilder(index);
+    }
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public com.tbsen.proto.InterfaceMetricsOrBuilder getMetricsOrBuilder(
+        int index) {
+      if (metricsBuilder_ == null) {
+        return metrics_.get(index);  } else {
+        return metricsBuilder_.getMessageOrBuilder(index);
+      }
+    }
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public java.util.List<? extends com.tbsen.proto.InterfaceMetricsOrBuilder> 
+         getMetricsOrBuilderList() {
+      if (metricsBuilder_ != null) {
+        return metricsBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(metrics_);
+      }
+    }
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public com.tbsen.proto.InterfaceMetrics.Builder addMetricsBuilder() {
+      return getMetricsFieldBuilder().addBuilder(
+          com.tbsen.proto.InterfaceMetrics.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public com.tbsen.proto.InterfaceMetrics.Builder addMetricsBuilder(
+        int index) {
+      return getMetricsFieldBuilder().addBuilder(
+          index, com.tbsen.proto.InterfaceMetrics.getDefaultInstance());
+    }
+    /**
+     * <code>repeated .com.tbsen.proto.InterfaceMetrics metrics = 4;</code>
+     */
+    public java.util.List<com.tbsen.proto.InterfaceMetrics.Builder> 
+         getMetricsBuilderList() {
+      return getMetricsFieldBuilder().getBuilderList();
+    }
+    private com.google.protobuf.RepeatedFieldBuilderV3<
+        com.tbsen.proto.InterfaceMetrics, com.tbsen.proto.InterfaceMetrics.Builder, com.tbsen.proto.InterfaceMetricsOrBuilder> 
+        getMetricsFieldBuilder() {
+      if (metricsBuilder_ == null) {
+        metricsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+            com.tbsen.proto.InterfaceMetrics, com.tbsen.proto.InterfaceMetrics.Builder, com.tbsen.proto.InterfaceMetricsOrBuilder>(
+                metrics_,
+                ((bitField0_ & 0x00000008) != 0),
+                getParentForChildren(),
+                isClean());
+        metrics_ = null;
+      }
+      return metricsBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

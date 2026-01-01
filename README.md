@@ -10,47 +10,52 @@
   <br>
 </div>
 
----
 
-## 🏗️ Architecture
-- **Agent:** Python + XDP (eBPF) for Kernel-level Packet Drop + netfilter (iptables, nftables)
-- **Backend:** Spring Boot (REST API, Polling Queue)
-- **Frontend:** Vue.js (Dashboard)
-- **Infrastructure:** Docker (Privileged Container)
+# tableSentinel Project
+tableSentinel 프로젝트는 XDP + netfilter을 웹 GUI로 수 많은 Agent를 제어할 수 있는 통합 관제 시스템입니다.
 
-## 🚀 Key Features
-- **XDP Native Mode**를 활용한 초고속 패킷 필터링
-- **netfilter** 기반 방화벽과 연계로 지능적 패킷 필터링 구현
-- **Polling Architecture**로 NAT/Firewall 환경 극복
-- **3-Tier Layered Design**으로 확장성 및 유지보수성 확보
-
-## 🛠️ Tech Stack
-- **Language:** Python, Java
-- **Framework:** Spring Boot, Vue.js
-- **Core:** eBPF/XDP, netfilter
-- **DevOps:** Docker
-
-## 🎯 Goal
+## 목표
 - nftables, xdptool 등 방화벽 유기적 연결
 - DB를 통한 유저/로그/감사 관리
 - 커널 소스를 통한 호스트 방화벽 실시간 모니터링
 
----
+# 프로젝트 구성
+본 프로젝트는 다음과 같은 구성으로 되어있습니다.
+## 아키텍쳐
+- **Agent:** Python + XDP (eBPF) for Kernel-level Packet Drop + netfilter (iptables, nftables)
+- **Backend:** Spring Boot (REST API, Polling Queue)
+- **Frontend:** Vue.js (Dashboard) + TailAdmin (UI)
+- **Infrastructure:** Docker (Privileged Container)
 
-## TODO (short plan)
+## 주요 기능
+- **XDP Native Mode**를 활용한 초고속 패킷 필터링
+- **netfilter** 기반 방화벽과 연계로 지능적 패킷 필터링 구현
+- **Wrapping** 구조로 추후 에이전트의 애플리케이션 변경점 영향도 낮음
+- **gRPC 구성**으로 기존 Polling 방식의 응답속도 개선
+- **3-Tier Layered Design**으로 확장성 및 유지보수성 확보
+
+## 기술 스택(Stack)
+- **Language:** Python, Java
+- **Design Pattern:** gRPC, REST API
+- **Framework:** Spring Boot, Vue.js
+- **Core:** eBPF/XDP, netfilter
+- **DevOps:** Docker
+
+# 계획(TODO)
+## 단기간 계획
  - ☐ 백엔드 및 에이전트 통신 gRPC 리팩터링
  - ☐ 프론트엔드 Test UI → TailAdmin 리팩터링
  - ☑︎ 프로젝트 알파버전 v0.1.0 완성(기능 구현 PoC)
-  
-## TODO (long plan)
+
+## 장기간 계획
  - ☐ nftables 및 XDP 필터링 지능적 분류
  - ☐ DDoS 의심 패킷 혹은 공격자 패킷 구분 기능 추가
-
-
----
+ - ☐ Agent Rust로 전환
+ - ☐ 프론트엔드, 백엔드, 에이전트 통신간 암호화 설정
+ - ☐ DB 연결을 통한 계정 제어 및 감사
 
 # License & Credits
-The 'tableSentinel' is released under the MIT License.
+The tableSentinel is released under the MIT License.
 See [LICENSE](LICENSE) file for details.
 
 # Third Party Notices

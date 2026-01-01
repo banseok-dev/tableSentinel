@@ -6,7 +6,7 @@ package com.tbsen.proto;
 
 /**
  * <pre>
- * 공통 자료형
+ * Enums (공통)
  * </pre>
  *
  * Protobuf enum {@code com.tbsen.proto.AgentState}
@@ -29,10 +29,6 @@ public enum AgentState
    * <code>STATE_ERROR = 3;</code>
    */
   STATE_ERROR(3),
-  /**
-   * <code>STATE_STOPPED = 4;</code>
-   */
-  STATE_STOPPED(4),
   UNRECOGNIZED(-1),
   ;
 
@@ -52,10 +48,6 @@ public enum AgentState
    * <code>STATE_ERROR = 3;</code>
    */
   public static final int STATE_ERROR_VALUE = 3;
-  /**
-   * <code>STATE_STOPPED = 4;</code>
-   */
-  public static final int STATE_STOPPED_VALUE = 4;
 
 
   public final int getNumber() {
@@ -86,7 +78,6 @@ public enum AgentState
       case 1: return STATE_RUNNING;
       case 2: return STATE_WARNING;
       case 3: return STATE_ERROR;
-      case 4: return STATE_STOPPED;
       default: return null;
     }
   }

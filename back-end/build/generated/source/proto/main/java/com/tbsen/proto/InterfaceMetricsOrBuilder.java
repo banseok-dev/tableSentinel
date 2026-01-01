@@ -9,21 +9,22 @@ public interface InterfaceMetricsOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>.com.tbsen.proto.XdpMode current_mode = 1;</code>
-   * @return The enum numeric value on the wire for currentMode.
+   * <code>string interface_name = 1;</code>
+   * @return The interfaceName.
    */
-  int getCurrentModeValue();
+  java.lang.String getInterfaceName();
   /**
-   * <code>.com.tbsen.proto.XdpMode current_mode = 1;</code>
-   * @return The currentMode.
+   * <code>string interface_name = 1;</code>
+   * @return The bytes for interfaceName.
    */
-  com.tbsen.proto.XdpMode getCurrentMode();
+  com.google.protobuf.ByteString
+      getInterfaceNameBytes();
 
   /**
-   * <code>uint64 pass_count = 2;</code>
-   * @return The passCount.
+   * <code>bool xdp_attached = 2;</code>
+   * @return The xdpAttached.
    */
-  long getPassCount();
+  boolean getXdpAttached();
 
   /**
    * <code>uint64 drop_count = 3;</code>
@@ -32,8 +33,8 @@ public interface InterfaceMetricsOrBuilder extends
   long getDropCount();
 
   /**
-   * <code>double pps = 4;</code>
-   * @return The pps.
+   * <code>uint64 pass_count = 4;</code>
+   * @return The passCount.
    */
-  double getPps();
+  long getPassCount();
 }
