@@ -75,29 +75,30 @@ public final class FilterProto {
       "d_id\030\001 \001(\t\022\017\n\007success\030\002 \001(\010\022\017\n\007message\030\003" +
       " \001(\t\"h\n\020InterfaceMetrics\022\026\n\016interface_na" +
       "me\030\001 \001(\t\022\024\n\014xdp_attached\030\002 \001(\010\022\022\n\ndrop_c" +
-      "ount\030\003 \001(\004\022\022\n\npass_count\030\004 \001(\004\"\225\001\n\013Agent" +
+      "ount\030\003 \001(\004\022\022\n\npass_count\030\004 \001(\004\"\273\001\n\013Agent" +
       "Status\022\014\n\004uuid\030\001 \001(\t\022\021\n\ttimestamp\030\002 \001(\003\022" +
       "1\n\014global_state\030\003 \001(\0162\033.com.tbsen.proto." +
       "AgentState\0222\n\007metrics\030\004 \003(\0132!.com.tbsen." +
-      "proto.InterfaceMetrics\"F\n\rAgentIdentity\022" +
-      "\014\n\004uuid\030\001 \001(\t\022\020\n\010hostname\030\002 \001(\t\022\025\n\ragent" +
-      "_version\030\003 \001(\t*V\n\nAgentState\022\021\n\rSTATE_UN" +
-      "KNOWN\020\000\022\021\n\rSTATE_RUNNING\020\001\022\021\n\rSTATE_WARN" +
-      "ING\020\002\022\017\n\013STATE_ERROR\020\003*C\n\nActionType\022\022\n\016" +
-      "ACTION_UNKNOWN\020\000\022\016\n\nACTION_ADD\020\001\022\021\n\rACTI" +
-      "ON_DELETE\020\002*\\\n\007XdpMode\022\024\n\020XDP_MODE_UNKNO" +
-      "WN\020\000\022\023\n\017XDP_MODE_NATIVE\020\001\022\020\n\014XDP_MODE_SK" +
-      "B\020\002\022\024\n\020XDP_MODE_OFFLOAD\020\0032\336\002\n\013FilterAgen" +
-      "t\022Q\n\rRegisterAgent\022\036.com.tbsen.proto.Age" +
-      "ntIdentity\032 .com.tbsen.proto.CommandResp" +
-      "onse\022P\n\014ReportStatus\022\034.com.tbsen.proto.A" +
-      "gentStatus\032 .com.tbsen.proto.CommandResp" +
-      "onse(\001\022O\n\021SubscribeCommands\022\036.com.tbsen." +
-      "proto.AgentIdentity\032\030.com.tbsen.proto.Co" +
-      "mmand0\001\022Y\n\023ReportCommandResult\022 .com.tbs" +
-      "en.proto.CommandResponse\032 .com.tbsen.pro" +
-      "to.CommandResponseB\017B\013FilterProtoP\001b\006pro" +
-      "to3"
+      "proto.InterfaceMetrics\022\020\n\010hostname\030\005 \001(\t" +
+      "\022\022\n\nip_address\030\006 \001(\t\"F\n\rAgentIdentity\022\014\n" +
+      "\004uuid\030\001 \001(\t\022\020\n\010hostname\030\002 \001(\t\022\025\n\ragent_v" +
+      "ersion\030\003 \001(\t*V\n\nAgentState\022\021\n\rSTATE_UNKN" +
+      "OWN\020\000\022\021\n\rSTATE_RUNNING\020\001\022\021\n\rSTATE_WARNIN" +
+      "G\020\002\022\017\n\013STATE_ERROR\020\003*C\n\nActionType\022\022\n\016AC" +
+      "TION_UNKNOWN\020\000\022\016\n\nACTION_ADD\020\001\022\021\n\rACTION" +
+      "_DELETE\020\002*\\\n\007XdpMode\022\024\n\020XDP_MODE_UNKNOWN" +
+      "\020\000\022\023\n\017XDP_MODE_NATIVE\020\001\022\020\n\014XDP_MODE_SKB\020" +
+      "\002\022\024\n\020XDP_MODE_OFFLOAD\020\0032\336\002\n\013FilterAgent\022" +
+      "Q\n\rRegisterAgent\022\036.com.tbsen.proto.Agent" +
+      "Identity\032 .com.tbsen.proto.CommandRespon" +
+      "se\022P\n\014ReportStatus\022\034.com.tbsen.proto.Age" +
+      "ntStatus\032 .com.tbsen.proto.CommandRespon" +
+      "se(\001\022O\n\021SubscribeCommands\022\036.com.tbsen.pr" +
+      "oto.AgentIdentity\032\030.com.tbsen.proto.Comm" +
+      "and0\001\022Y\n\023ReportCommandResult\022 .com.tbsen" +
+      ".proto.CommandResponse\032 .com.tbsen.proto" +
+      ".CommandResponseB\017B\013FilterProtoP\001b\006proto" +
+      "3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -138,7 +139,7 @@ public final class FilterProto {
     internal_static_com_tbsen_proto_AgentStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_tbsen_proto_AgentStatus_descriptor,
-        new java.lang.String[] { "Uuid", "Timestamp", "GlobalState", "Metrics", });
+        new java.lang.String[] { "Uuid", "Timestamp", "GlobalState", "Metrics", "Hostname", "IpAddress", });
     internal_static_com_tbsen_proto_AgentIdentity_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_com_tbsen_proto_AgentIdentity_fieldAccessorTable = new

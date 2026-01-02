@@ -6,7 +6,7 @@ const router = createRouter({
     return savedPosition || { left: 0, top: 0 }
   },
   routes: [
-    // 메인 대시보드 (Ecommerce 가져옮)
+    // 메인 대시보드
     {
       path: '/',
       name: 'Dashboard',

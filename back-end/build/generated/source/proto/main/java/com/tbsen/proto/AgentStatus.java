@@ -20,6 +20,8 @@ private static final long serialVersionUID = 0L;
     uuid_ = "";
     globalState_ = 0;
     metrics_ = java.util.Collections.emptyList();
+    hostname_ = "";
+    ipAddress_ = "";
   }
 
   @java.lang.Override
@@ -151,6 +153,84 @@ private static final long serialVersionUID = 0L;
     return metrics_.get(index);
   }
 
+  public static final int HOSTNAME_FIELD_NUMBER = 5;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object hostname_ = "";
+  /**
+   * <code>string hostname = 5;</code>
+   * @return The hostname.
+   */
+  @java.lang.Override
+  public java.lang.String getHostname() {
+    java.lang.Object ref = hostname_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      hostname_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string hostname = 5;</code>
+   * @return The bytes for hostname.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getHostnameBytes() {
+    java.lang.Object ref = hostname_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      hostname_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int IP_ADDRESS_FIELD_NUMBER = 6;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object ipAddress_ = "";
+  /**
+   * <code>string ip_address = 6;</code>
+   * @return The ipAddress.
+   */
+  @java.lang.Override
+  public java.lang.String getIpAddress() {
+    java.lang.Object ref = ipAddress_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      ipAddress_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string ip_address = 6;</code>
+   * @return The bytes for ipAddress.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getIpAddressBytes() {
+    java.lang.Object ref = ipAddress_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      ipAddress_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -177,6 +257,12 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < metrics_.size(); i++) {
       output.writeMessage(4, metrics_.get(i));
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hostname_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, hostname_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ipAddress_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, ipAddress_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -201,6 +287,12 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(4, metrics_.get(i));
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hostname_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, hostname_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(ipAddress_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, ipAddress_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -223,6 +315,10 @@ private static final long serialVersionUID = 0L;
     if (globalState_ != other.globalState_) return false;
     if (!getMetricsList()
         .equals(other.getMetricsList())) return false;
+    if (!getHostname()
+        .equals(other.getHostname())) return false;
+    if (!getIpAddress()
+        .equals(other.getIpAddress())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -245,6 +341,10 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + METRICS_FIELD_NUMBER;
       hash = (53 * hash) + getMetricsList().hashCode();
     }
+    hash = (37 * hash) + HOSTNAME_FIELD_NUMBER;
+    hash = (53 * hash) + getHostname().hashCode();
+    hash = (37 * hash) + IP_ADDRESS_FIELD_NUMBER;
+    hash = (53 * hash) + getIpAddress().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -386,6 +486,8 @@ private static final long serialVersionUID = 0L;
         metricsBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000008);
+      hostname_ = "";
+      ipAddress_ = "";
       return this;
     }
 
@@ -440,6 +542,12 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.globalState_ = globalState_;
+      }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.hostname_ = hostname_;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.ipAddress_ = ipAddress_;
       }
     }
 
@@ -524,6 +632,16 @@ private static final long serialVersionUID = 0L;
           }
         }
       }
+      if (!other.getHostname().isEmpty()) {
+        hostname_ = other.hostname_;
+        bitField0_ |= 0x00000010;
+        onChanged();
+      }
+      if (!other.getIpAddress().isEmpty()) {
+        ipAddress_ = other.ipAddress_;
+        bitField0_ |= 0x00000020;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -578,6 +696,16 @@ private static final long serialVersionUID = 0L;
               }
               break;
             } // case 34
+            case 42: {
+              hostname_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 42
+            case 50: {
+              ipAddress_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000020;
+              break;
+            } // case 50
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -990,6 +1118,150 @@ private static final long serialVersionUID = 0L;
         metrics_ = null;
       }
       return metricsBuilder_;
+    }
+
+    private java.lang.Object hostname_ = "";
+    /**
+     * <code>string hostname = 5;</code>
+     * @return The hostname.
+     */
+    public java.lang.String getHostname() {
+      java.lang.Object ref = hostname_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        hostname_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string hostname = 5;</code>
+     * @return The bytes for hostname.
+     */
+    public com.google.protobuf.ByteString
+        getHostnameBytes() {
+      java.lang.Object ref = hostname_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        hostname_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string hostname = 5;</code>
+     * @param value The hostname to set.
+     * @return This builder for chaining.
+     */
+    public Builder setHostname(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      hostname_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string hostname = 5;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearHostname() {
+      hostname_ = getDefaultInstance().getHostname();
+      bitField0_ = (bitField0_ & ~0x00000010);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string hostname = 5;</code>
+     * @param value The bytes for hostname to set.
+     * @return This builder for chaining.
+     */
+    public Builder setHostnameBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      hostname_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object ipAddress_ = "";
+    /**
+     * <code>string ip_address = 6;</code>
+     * @return The ipAddress.
+     */
+    public java.lang.String getIpAddress() {
+      java.lang.Object ref = ipAddress_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ipAddress_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string ip_address = 6;</code>
+     * @return The bytes for ipAddress.
+     */
+    public com.google.protobuf.ByteString
+        getIpAddressBytes() {
+      java.lang.Object ref = ipAddress_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ipAddress_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string ip_address = 6;</code>
+     * @param value The ipAddress to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIpAddress(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      ipAddress_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string ip_address = 6;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearIpAddress() {
+      ipAddress_ = getDefaultInstance().getIpAddress();
+      bitField0_ = (bitField0_ & ~0x00000020);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string ip_address = 6;</code>
+     * @param value The bytes for ipAddress to set.
+     * @return This builder for chaining.
+     */
+    public Builder setIpAddressBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      ipAddress_ = value;
+      bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

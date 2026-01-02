@@ -66,7 +66,7 @@ async def run_command_listener(stub, executor):
                 # XDP Logic (L2)
                 case "xdp":
                     xdp = cmd.xdp
-                    mode = xdp.mode if xdp.mode else "src" # 기본값 처리
+                    mode = xdp.mode if xdp.mode else "src,dst" # 기본값 처리
 
                     # [비동기 래핑] 동기 함수를 스레드로 분리하여 Event Loop 멈춤 방지
                     # IP 제어

@@ -26,9 +26,7 @@ if _version_not_supported:
 
 
 class FilterAgentStub(object):
-    """----------------------------------------
-    Services
-    ----------------------------------------
+    """Services //
     """
 
     def __init__(self, channel):
@@ -60,9 +58,7 @@ class FilterAgentStub(object):
 
 
 class FilterAgentServicer(object):
-    """----------------------------------------
-    Services
-    ----------------------------------------
+    """Services //
     """
 
     def RegisterAgent(self, request, context):
@@ -125,9 +121,7 @@ def add_FilterAgentServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class FilterAgent(object):
-    """----------------------------------------
-    Services
-    ----------------------------------------
+    """Services //
     """
 
     @staticmethod

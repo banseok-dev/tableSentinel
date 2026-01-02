@@ -60,4 +60,28 @@ public interface AgentStatusOrBuilder extends
    */
   com.tbsen.proto.InterfaceMetricsOrBuilder getMetricsOrBuilder(
       int index);
+
+  /**
+   * <code>string hostname = 5;</code>
+   * @return The hostname.
+   */
+  java.lang.String getHostname();
+  /**
+   * <code>string hostname = 5;</code>
+   * @return The bytes for hostname.
+   */
+  com.google.protobuf.ByteString
+      getHostnameBytes();
+
+  /**
+   * <code>string ip_address = 6;</code>
+   * @return The ipAddress.
+   */
+  java.lang.String getIpAddress();
+  /**
+   * <code>string ip_address = 6;</code>
+   * @return The bytes for ipAddress.
+   */
+  com.google.protobuf.ByteString
+      getIpAddressBytes();
 }

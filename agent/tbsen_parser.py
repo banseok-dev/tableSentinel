@@ -3,6 +3,7 @@
 # 파이프라인 구성중입니다.
 
 import re
+import socket
 from typing import Tuple, Any
 
 class TbsenParser:

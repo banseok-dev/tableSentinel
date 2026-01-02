@@ -86,6 +86,9 @@ message AgentStatus {
     int64 timestamp = 2;
     AgentState global_state = 3;
     repeated InterfaceMetrics metrics = 4;
+
+    string hostname = 5;
+    string ip_address = 6;
 }
 
 message AgentIdentity {

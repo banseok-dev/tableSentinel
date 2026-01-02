@@ -7,6 +7,7 @@ import io.grpc.Context;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 import lombok.extern.slf4j.Slf4j;
+
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,7 +24,7 @@ public class FilterAgentService extends FilterAgentGrpc.FilterAgentImplBase {
     public void registerAgent(AgentIdentity request, StreamObserver<CommandResponse> responseObserver) {
         log.info("[INFO] 에이전트 등록 요청 수신: UUID={}, Host={}", request.getUuid(), request.getHostname());
 
-        // TODO: DB에 에이전트 정보(OS, 커널 버전 등) 업데이트 로직이 여기 들어가면 됩니다.
+        // TODO: 에이전트 등록시 정보 전달
 
         // 응답 생성 (성공)
         CommandResponse response = CommandResponse.newBuilder()
@@ -78,7 +79,7 @@ public class FilterAgentService extends FilterAgentGrpc.FilterAgentImplBase {
     }
 
 
-    // XDP Command 처리 로직 (L2 Firewall)
+    // XDP Command 처리 로직
     public boolean executeXdpCommand(String agentId, XdpCommandDto dto) {
         
         // 1. DTO -> Proto Builder 변환 (컨트롤러에서 가져온 로직)
@@ -120,7 +121,7 @@ public class FilterAgentService extends FilterAgentGrpc.FilterAgentImplBase {
         return pushCommand(agentId, grpcCommand);
     }
 
-    // NFT Command 처리 로직 (L3/L4 Firewall)
+    // NFT Command 처리 로직
     public boolean executeNftCommand(String agentId, NftCommandDto dto) {
         
         NftCommand.Builder nftBuilder = NftCommand.newBuilder();
@@ -151,7 +152,7 @@ public class FilterAgentService extends FilterAgentGrpc.FilterAgentImplBase {
             nftBuilder.setPort(dto.getPort());
         }
 
-        // Handle (규칙 삭제 시 사용되는 고유 번호)
+        // Handle (규칙 삭제 시 사용되는 고유 핸들 번호)
         if (hasText(dto.getHandle())) {
             nftBuilder.setHandle(dto.getHandle());
         }

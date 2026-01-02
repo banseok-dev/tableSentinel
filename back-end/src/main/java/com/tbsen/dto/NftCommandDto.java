@@ -1,5 +1,4 @@
 package com.tbsen.dto;
-
 import lombok.Data;
 
 @Data
