@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0c\x66ilter.proto\x12\x0f\x63om.tbsen.proto\"\xb8\x01\n\nXdpCommand\x12+\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32\x1b.com.tbsen.proto.ActionType\x12\x11\n\ttarget_ip\x18\x02 \x01(\t\x12\x12\n\ntarget_mac\x18\x03 \x01(\t\x12\x0c\n\x04mode\x18\x04 \x01(\t\x12\x16\n\x0einterface_name\x18\x05 \x01(\t\x12\x30\n\x0einterface_mode\x18\x06 \x01(\x0e\x32\x18.com.tbsen.proto.XdpMode\"\x8b\x01\n\nNftCommand\x12+\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32\x1b.com.tbsen.proto.ActionType\x12\r\n\x05\x63hain\x18\x02 \x01(\t\x12\x11\n\ttarget_ip\x18\x03 \x01(\t\x12\x10\n\x08protocol\x18\x04 \x01(\t\x12\x0c\n\x04port\x18\x05 \x01(\t\x12\x0e\n\x06handle\x18\x06 \x01(\t\"\x80\x01\n\x07\x43ommand\x12\x12\n\ncommand_id\x18\x01 \x01(\t\x12*\n\x03xdp\x18\x02 \x01(\x0b\x32\x1b.com.tbsen.proto.XdpCommandH\x00\x12*\n\x03nft\x18\x03 \x01(\x0b\x32\x1b.com.tbsen.proto.NftCommandH\x00\x42\t\n\x07payload\"G\n\x0f\x43ommandResponse\x12\x12\n\ncommand_id\x18\x01 \x01(\t\x12\x0f\n\x07success\x18\x02 \x01(\x08\x12\x0f\n\x07message\x18\x03 \x01(\t\"h\n\x10InterfaceMetrics\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x14\n\x0cxdp_attached\x18\x02 \x01(\x08\x12\x12\n\ndrop_count\x18\x03 \x01(\x04\x12\x12\n\npass_count\x18\x04 \x01(\x04\"\xbb\x01\n\x0b\x41gentStatus\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12\x31\n\x0cglobal_state\x18\x03 \x01(\x0e\x32\x1b.com.tbsen.proto.AgentState\x12\x32\n\x07metrics\x18\x04 \x03(\x0b\x32!.com.tbsen.proto.InterfaceMetrics\x12\x10\n\x08hostname\x18\x05 \x01(\t\x12\x12\n\nip_address\x18\x06 \x01(\t\"F\n\rAgentIdentity\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x10\n\x08hostname\x18\x02 \x01(\t\x12\x15\n\ragent_version\x18\x03 \x01(\t*V\n\nAgentState\x12\x11\n\rSTATE_UNKNOWN\x10\x00\x12\x11\n\rSTATE_RUNNING\x10\x01\x12\x11\n\rSTATE_WARNING\x10\x02\x12\x0f\n\x0bSTATE_ERROR\x10\x03*C\n\nActionType\x12\x12\n\x0e\x41\x43TION_UNKNOWN\x10\x00\x12\x0e\n\nACTION_ADD\x10\x01\x12\x11\n\rACTION_DELETE\x10\x02*\\\n\x07XdpMode\x12\x14\n\x10XDP_MODE_UNKNOWN\x10\x00\x12\x13\n\x0fXDP_MODE_NATIVE\x10\x01\x12\x10\n\x0cXDP_MODE_SKB\x10\x02\x12\x14\n\x10XDP_MODE_OFFLOAD\x10\x03\x32\xde\x02\n\x0b\x46ilterAgent\x12Q\n\rRegisterAgent\x12\x1e.com.tbsen.proto.AgentIdentity\x1a .com.tbsen.proto.CommandResponse\x12P\n\x0cReportStatus\x12\x1c.com.tbsen.proto.AgentStatus\x1a .com.tbsen.proto.CommandResponse(\x01\x12O\n\x11SubscribeCommands\x12\x1e.com.tbsen.proto.AgentIdentity\x1a\x18.com.tbsen.proto.Command0\x01\x12Y\n\x13ReportCommandResult\x12 .com.tbsen.proto.CommandResponse\x1a .com.tbsen.proto.CommandResponseB\x0f\x42\x0b\x46ilterProtoP\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0c\x66ilter.proto\x12\x0f\x63om.tbsen.proto\"\xb8\x01\n\nXdpCommand\x12+\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32\x1b.com.tbsen.proto.ActionType\x12\x11\n\ttarget_ip\x18\x02 \x01(\t\x12\x12\n\ntarget_mac\x18\x03 \x01(\t\x12\x0c\n\x04mode\x18\x04 \x01(\t\x12\x16\n\x0einterface_name\x18\x05 \x01(\t\x12\x30\n\x0einterface_mode\x18\x06 \x01(\x0e\x32\x18.com.tbsen.proto.XdpMode\"\x8b\x01\n\nNftCommand\x12+\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32\x1b.com.tbsen.proto.ActionType\x12\r\n\x05\x63hain\x18\x02 \x01(\t\x12\x11\n\ttarget_ip\x18\x03 \x01(\t\x12\x10\n\x08protocol\x18\x04 \x01(\t\x12\x0c\n\x04port\x18\x05 \x01(\t\x12\x0e\n\x06handle\x18\x06 \x01(\t\"\x80\x01\n\x07\x43ommand\x12\x12\n\ncommand_id\x18\x01 \x01(\t\x12*\n\x03xdp\x18\x02 \x01(\x0b\x32\x1b.com.tbsen.proto.XdpCommandH\x00\x12*\n\x03nft\x18\x03 \x01(\x0b\x32\x1b.com.tbsen.proto.NftCommandH\x00\x42\t\n\x07payload\"G\n\x0f\x43ommandResponse\x12\x12\n\ncommand_id\x18\x01 \x01(\t\x12\x0f\n\x07success\x18\x02 \x01(\x08\x12\x0f\n\x07message\x18\x03 \x01(\t\"h\n\x10InterfaceMetrics\x12\x16\n\x0einterface_name\x18\x01 \x01(\t\x12\x14\n\x0cxdp_attached\x18\x02 \x01(\x08\x12\x12\n\ndrop_count\x18\x03 \x01(\x04\x12\x12\n\npass_count\x18\x04 \x01(\x04\"V\n\x10XdpInterfaceInfo\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04mode\x18\x02 \x01(\t\x12\x12\n\ndrop_count\x18\x03 \x01(\x04\x12\x12\n\npass_count\x18\x04 \x01(\x04\"\xd3\x01\n\x0b\x41gentStatus\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12\x10\n\x08hostname\x18\x03 \x01(\t\x12\x12\n\nip_address\x18\x04 \x01(\t\x12\x36\n\x0bxdp_details\x18\x05 \x03(\x0b\x32!.com.tbsen.proto.XdpInterfaceInfo\x12*\n\x08xdp_mode\x18\x06 \x01(\x0e\x32\x18.com.tbsen.proto.XdpMode\x12\x19\n\x11nftables_raw_json\x18\x07 \x01(\t\"Z\n\rAgentIdentity\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x10\n\x08hostname\x18\x02 \x01(\t\x12\x15\n\ragent_version\x18\x03 \x01(\t\x12\x12\n\nip_address\x18\x04 \x01(\t*V\n\nAgentState\x12\x11\n\rSTATE_UNKNOWN\x10\x00\x12\x11\n\rSTATE_RUNNING\x10\x01\x12\x11\n\rSTATE_WARNING\x10\x02\x12\x0f\n\x0bSTATE_ERROR\x10\x03*C\n\nActionType\x12\x12\n\x0e\x41\x43TION_UNKNOWN\x10\x00\x12\x0e\n\nACTION_ADD\x10\x01\x12\x11\n\rACTION_DELETE\x10\x02*\\\n\x07XdpMode\x12\x14\n\x10XDP_MODE_UNKNOWN\x10\x00\x12\x13\n\x0fXDP_MODE_NATIVE\x10\x01\x12\x10\n\x0cXDP_MODE_SKB\x10\x02\x12\x14\n\x10XDP_MODE_OFFLOAD\x10\x03\x32\xde\x02\n\x0b\x46ilterAgent\x12Q\n\rRegisterAgent\x12\x1e.com.tbsen.proto.AgentIdentity\x1a .com.tbsen.proto.CommandResponse\x12P\n\x0cReportStatus\x12\x1c.com.tbsen.proto.AgentStatus\x1a .com.tbsen.proto.CommandResponse(\x01\x12O\n\x11SubscribeCommands\x12\x1e.com.tbsen.proto.AgentIdentity\x1a\x18.com.tbsen.proto.Command0\x01\x12Y\n\x13ReportCommandResult\x12 .com.tbsen.proto.CommandResponse\x1a .com.tbsen.proto.CommandResponseB\x0f\x42\x0b\x46ilterProtoP\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,12 +32,12 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'filter_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'B\013FilterProtoP\001'
-  _globals['_AGENTSTATE']._serialized_start=934
-  _globals['_AGENTSTATE']._serialized_end=1020
-  _globals['_ACTIONTYPE']._serialized_start=1022
-  _globals['_ACTIONTYPE']._serialized_end=1089
-  _globals['_XDPMODE']._serialized_start=1091
-  _globals['_XDPMODE']._serialized_end=1183
+  _globals['_AGENTSTATE']._serialized_start=1066
+  _globals['_AGENTSTATE']._serialized_end=1152
+  _globals['_ACTIONTYPE']._serialized_start=1154
+  _globals['_ACTIONTYPE']._serialized_end=1221
+  _globals['_XDPMODE']._serialized_start=1223
+  _globals['_XDPMODE']._serialized_end=1315
   _globals['_XDPCOMMAND']._serialized_start=34
   _globals['_XDPCOMMAND']._serialized_end=218
   _globals['_NFTCOMMAND']._serialized_start=221
@@ -48,10 +48,12 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_COMMANDRESPONSE']._serialized_end=564
   _globals['_INTERFACEMETRICS']._serialized_start=566
   _globals['_INTERFACEMETRICS']._serialized_end=670
-  _globals['_AGENTSTATUS']._serialized_start=673
-  _globals['_AGENTSTATUS']._serialized_end=860
-  _globals['_AGENTIDENTITY']._serialized_start=862
-  _globals['_AGENTIDENTITY']._serialized_end=932
-  _globals['_FILTERAGENT']._serialized_start=1186
-  _globals['_FILTERAGENT']._serialized_end=1536
+  _globals['_XDPINTERFACEINFO']._serialized_start=672
+  _globals['_XDPINTERFACEINFO']._serialized_end=758
+  _globals['_AGENTSTATUS']._serialized_start=761
+  _globals['_AGENTSTATUS']._serialized_end=972
+  _globals['_AGENTIDENTITY']._serialized_start=974
+  _globals['_AGENTIDENTITY']._serialized_end=1064
+  _globals['_FILTERAGENT']._serialized_start=1318
+  _globals['_FILTERAGENT']._serialized_end=1668
 # @@protoc_insertion_point(module_scope)

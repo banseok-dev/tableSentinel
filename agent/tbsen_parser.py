@@ -1,9 +1,4 @@
-# TableSentinel Parser 프로그램입니다.
-# 해당 프로그램의 목표는 각 Tool의 테이블을 불러오고, 모니터링 요약을 목적으로 가지고 있습니다.
-# 파이프라인 구성중입니다.
-
 import re
-import socket
 from typing import Tuple, Any
 
 class TbsenParser:
@@ -23,7 +18,6 @@ class TbsenParser:
                 "pass": {"pkts": 0, "kib": 0}
             },
             "interfaces": [],
-            "ports": [],
             "ips": [],
             "macs": []
         }
@@ -59,6 +53,7 @@ class TbsenParser:
                 continue
 
             # [macth section] 파싱 부분별 match
+            # TODO: 파싱 요소 추가필요
             match current_section:
                 case "stats":
                     match = re.search(patterns["stats"], line)
@@ -88,7 +83,6 @@ class TbsenParser:
                             "mode": mode_str.split(','),
                             "hits": int(hits)
                                 })
-                # (TODO: 'ports', 'macs' 케이스 추가)
 
                 case _:
                     pass

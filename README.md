@@ -41,19 +41,24 @@ tableSentinel 프로젝트는 XDP + netfilter을 웹 GUI로 수 많은 Agent를 
 - **Core:** eBPF/XDP, netfilter
 - **DevOps:** Docker
 
-## 계획(TODO)
-### 단기간 계획
- - ☐ 프론트엔드 Test UI → TailAdmin 리팩터링
- - ☐ 백엔드 springboot 및 agent 모니터링 기능 강화
- - ☑︎ 백엔드 및 에이전트 통신 gRPC 리팩터링 / 2026-01-01
- - ☑︎ 프로젝트 알파버전 v0.1.0 완성(기능 구현 PoC)
+## 요구사항 및 설치방법
+### 요구사항 (준비중)
+ - XDP Native 또는 Offload 기능 사용시 호환되는 NIC 필요
+ - 에이전트 실행을 위한 Docker가 설치된 호스트(또는 Dockerfile에 기재된 Python 구성 필요 - 추후 통합 예정)
+### 설치방법 (준비중)
+ - 현재 단계에서는 /docker/agent.Dockerfile 빌드 후 사용
 
-### 장기간 계획
- - ☐ nftables 및 XDP 필터링 지능적 분류
- - ☐ DDoS 의심 패킷 혹은 공격자 패킷 구분 기능 추가
- - ☐ Agent Rust로 전환
- - ☐ 프론트엔드, 백엔드, 에이전트 통신간 암호화 설정
- - ☐ DB 연결을 통한 계정 제어 및 감사
+## 계획
+### v0.2.0(Current) - 2026/01/04
+ - ☑︎ Core: XDP 및 nftables 기반 차단 로직 구현 (완료)
+ - ☑︎ Network: 백엔드-에이전트 간 gRPC 스트리밍 통신 구현 (완료)
+ - ☑︎ UI: Vue.js 기반 대시보드 및 실시간 제어 연동 (완료)
+
+### Future Plans
+ - ☐ Intelligence: 패킷 패턴 분석을 통한 자동 차단 (DDoS 감지)
+ - ☐ Security: 통신 구간(mTLS) 암호화 및 API 인증 강화
+ - ☐ Performance: 에이전트 코어 로직 Rust로 포팅 (메모리 안전성 확보)
+ - ☐ Logging & Audit : DB연동을 통한 대시보드 접근 제어 및 로그/감사 처리
 
 ## License & Credits
 The tableSentinel is released under the MIT License.

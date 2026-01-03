@@ -12,7 +12,6 @@ FROM ubuntu:24.04
 
 # 환경 설정
 ENV DEBIAN_FRONTEND=noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
 
 # 필수 패키지 설치
 RUN apt update && apt install -y \

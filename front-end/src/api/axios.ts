@@ -1,19 +1,17 @@
-// src/api/axios.ts
 import axios from 'axios'
 
-// Spring Boot 서버 주소 (CORS 설정해둔 8080)
 const instance = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: 'http://192.168.0.11:8080', 
+  timeout: 5000,
   headers: {
-    'Content-Type': 'application/json',
-  },
-  timeout: 5000, // 5초 안에 응답 없으면 에러
+    'Content-Type': 'application/json'
+  }
 })
 
 // 요청 인터셉터 (로그 찍기용)
 instance.interceptors.request.use(
   (config) => {
-    console.log(`🚀 [API Request] ${config.method?.toUpperCase()} ${config.url}`)
+    console.log(`[API Request] ${config.method?.toUpperCase()} ${config.url}`, config.data)
     return config
   },
   (error) => {

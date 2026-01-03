@@ -14,20 +14,21 @@ import filter_pb2
 import filter_pb2_grpc
 
 # 설정 (Back-end -> netty 8081 Port)
-SERVER_ADDR = "192.168.0.11:8081"
-
+SERVER_ADDR = "192.168.0.11:8081" # TODO: 추후 .env 파일에서 IP 로드 하도록 예정
 
 # Host Identity
 UUID_DIR = "/etc/tbsen-agent"
 HOST_UUID_FILE = f"{UUID_DIR}/agent-uuid"
 HOSTNAME = socket.gethostname()
 
+# 임시 - 확실하게 구분 가능한 인터페이스 IP 추출 가능한 경우에 로직추가
+HOST_IP = "127.0.0.1" 
+
 if not os.path.exists(UUID_DIR):
     try:
         os.makedirs(UUID_DIR, exist_ok=True)
     except PermissionError:
         print(f"[ERROR] UUID: {UUID_DIR} 디렉터리를 생성할 권한이 없습니다.")
-        print(f"[SHUTDOWN] 에이전트를 종료합니다.")
         exit(1)
 
 if not os.path.exists(HOST_UUID_FILE):
@@ -38,7 +39,6 @@ if not os.path.exists(HOST_UUID_FILE):
             print(f"[INFO] UUID: {agent_uuid} 파일 생성 완료")
     except PermissionError:
         print(f"[ERROR] UUID: 파일 쓰기 권한이 없습니다.")
-        print(f"[SHUTDOWN] 에이전트를 종료합니다.")
         exit(1)
 else:
     with open(HOST_UUID_FILE, "r") as f:
@@ -46,95 +46,86 @@ else:
         print(f"[INFO] UUID: {agent_uuid} 파일 읽기 성공")
 
 
-
-# Command Logic
+# Command Listener
 async def run_command_listener(stub, executor):
     identity = filter_pb2.AgentIdentity(
         uuid=agent_uuid, 
         hostname=HOSTNAME,
-        agent_version="0.2.0"
+        agent_version="0.2.0",
+        ip_address=HOST_IP # Placeholder 전송
     )
-    print(f"[START] tableSentinel-Agent: {HOSTNAME} 명령 서비스 시작")
+    print(f"[START] tableSentinel-Agent: {HOSTNAME} 명령 서비스 시작 (UUID: {agent_uuid})")
 
     try:
         stream = stub.SubscribeCommands(identity)
+
         async for cmd in stream:
             payload_type = cmd.WhichOneof('payload')
-            print(f"[INFO] COMMAND ID: {cmd.command_id} | Type: {payload_type}")
+            cid = cmd.command_id
+            print(f"[RECV] COMMAND ID: {cid} | Type: {payload_type}")
 
-            match payload_type:
-                # XDP Logic (L2)
-                case "xdp":
-                    xdp = cmd.xdp
-                    mode = xdp.mode if xdp.mode else "src,dst" # 기본값 처리
+            is_success = False
+            msg = ""
 
-                    # [비동기 래핑] 동기 함수를 스레드로 분리하여 Event Loop 멈춤 방지
-                    # IP 제어
-                    if xdp.target_ip:
-                        match xdp.action:
+            try:
+                match payload_type:
+                    # XDP Logic
+                    case "xdp":
+                        xdp = cmd.xdp
+                        mode = xdp.mode if xdp.mode else "src,dst"
+
+                        if xdp.target_ip:
+                            match xdp.action:
+                                case filter_pb2.ACTION_ADD:
+                                    await asyncio.to_thread(executor.add_xdp_ip_rule, xdp.target_ip, mode)
+                                    msg = f"XDP IP Blocked: {xdp.target_ip}"
+                                case filter_pb2.ACTION_DELETE:
+                                    await asyncio.to_thread(executor.delete_xdp_ip_rule, xdp.target_ip, mode)
+                                    msg = f"XDP IP Unblocked: {xdp.target_ip}"
+                        
+                        elif xdp.interface_name:
+                             match xdp.action:
+                                case filter_pb2.ACTION_ADD:
+                                    await asyncio.to_thread(executor.load_xdp_interface, xdp.interface_name)
+                                    msg = f"XDP Loaded on {xdp.interface_name}"
+                                case filter_pb2.ACTION_DELETE:
+                                    await asyncio.to_thread(executor.unload_force_xdp_interface, xdp.interface_name)
+                                    msg = f"XDP Unloaded from {xdp.interface_name}"
+                        
+                        is_success = True
+
+                    # NFTables Logic
+                    case "nft":
+                        nft = cmd.nft
+                        match nft.action:
                             case filter_pb2.ACTION_ADD:
-
-                                await asyncio.to_thread(executor.add_xdp_ip_rule, xdp.target_ip, mode)
-                                print(f"[RESULT] XDP IP 차단: {xdp.target_ip} ({mode})")
-                            
+                                await asyncio.to_thread(executor.add_nft_drop_ip, nft.chain, nft.target_ip)
+                                msg = f"NFT IP Dropped: {nft.target_ip}"
                             case filter_pb2.ACTION_DELETE:
-                                await asyncio.to_thread(executor.delete_xdp_ip_rule, xdp.target_ip, mode)
-                                print(f"[RESULT] XDP IP 차단 해제: {xdp.target_ip} ({mode})")
-                    # MAC 제어
-                    elif xdp.target_mac:
-                        match xdp.action:
-                            case filter_pb2.ACTION_ADD:
-                                await asyncio.to_thread(executor.add_xdp_mac_rule, xdp.target_mac, mode)
-                                print(f"[RESULT] XDP MAC 차단: {xdp.target_mac} ({mode})")
-                            case filter_pb2.ACTION_DELETE:
-                                await asyncio.to_thread(executor.delete_xdp_mac_rule, xdp.target_mac, mode)
-                                print(f"[RESULT] XDP MAC 차단 해제: {xdp.target_mac} ({mode})")
+                                msg = f"NFT Rule Deleted"
+                        
+                        is_success = True
 
-                    # 인터페이스 제어
-                    elif xdp.interface_name:
-                        match xdp.action:
-                            case filter_pb2.ACTION_ADD:
-                                if xdp.interface_mode == filter_pb2.XDP_MODE_SKB:
-                                    await asyncio.to_thread(executor.load_xdp_interface_skb, xdp.interface_name)
-                                    print(f"[RESULT] XDP 로드 (SKB): {xdp.interface_name}")
-                                else:
-                                    await asyncio.to_thread(executor.load_xdp_interface, xdp.interface_name) 
-                                    print(f"[RESULT] XDP 로드 (Native): {xdp.interface_name}")
-                            
-                            case filter_pb2.ACTION_DELETE:
-                                await asyncio.to_thread(executor.unload_force_xdp_interface, xdp.interface_name)
-                                print(f"[RESULT] XDP 언로드: {xdp.interface_name}")
+                    case _:
+                        msg = f"Unknown payload: {payload_type}"
+                        is_success = False
 
-                # NFTables Logic (L3/L4) -> 추가 기능 구현 필요(현재 IP DROP만 구현)
-                case "nft":
-                    nft = cmd.nft
-                    
-                    match nft.action:
-                        case filter_pb2.ACTION_ADD:
-                            if nft.target_ip and nft.chain:
-                                if nft.protocol and nft.port:
-                                    # specific port DROP
-                                    await asyncio.to_thread(
-                                        executor.add_nft_drop_l4_protocol,
-                                        nft.chain, nft.protocol, nft.port, nft.target_ip
-                                    )
-                                    print(f"[SUCCESS] 정밀 차단({nft.protocol}/{nft.port}): {nft.target_ip}")
-                                else:
-                                    # IP DROP
-                                    await asyncio.to_thread(executor.add_nft_drop_ip,nft.chain, nft.target_ip)
-                                    print(f"[SUCCESS] 전면 차단(All Traffic): {nft.target_ip}")
-                            else:
-                                print(f"[ERROR] 규칙 추가 실패: IP 또는 Chain 누락")
+            except Exception as e:
+                is_success = False
+                msg = f"Execution Error: {str(e)}"
+                print(f"[FAIL] {msg}")
 
-                        case filter_pb2.ACTION_DELETE:
-                            if nft.chain and nft.handle:
-                                await asyncio.to_thread(executor.del_nft_rule, nft.chain, nft.handle)
-                                print(f"[SUCCESS] 규칙 삭제(Handle): {nft.handle}")
-                            else:
-                                print(f"[ERROR] 규칙 삭제 실패: Handle 누락")
-
-                case _:
-                    print(f"[ERROR] 알 수 없는 Payload: {payload_type}")
+            # 결과 보고 (Ack)
+            try:
+                report = filter_pb2.CommandResponse(
+                    command_id=cid,
+                    success=is_success,
+                    message=msg
+                )
+                await stub.ReportCommandResult(report)
+                print(f"[REPORT] 결과 전송 완료: {msg}")
+            except grpc.RpcError as e:
+                print(f"[WARN] 결과 보고 실패: {e}")
 
     except grpc.RpcError as e:
         print(f"[ERROR] gRPC 연결 끊김: {e}, 5초 대기")
@@ -142,27 +133,55 @@ async def run_command_listener(stub, executor):
 
 
 # Report Generator
-async def run_status_reporter(stub, executor):
-    print(f"[START] tableSentinel-Agent: 리포트 서비스 시작")
+async def generate_status_reports(executor):
+    print(f"[START] 에이전트 리포트 스트림 시작")
+    
     while True:
-        try:
-            success, raw_data = await asyncio.to_thread(executor.get_xdp_status)
-            
-            if success:
-                p_success, clean_data = TbsenParser.parse_xdp_status(raw_data)
-                
-                if p_success:
-                    status_msg = filter_pb2.AgentStatus(
-                        uuid=agent_uuid,
-                        timestamp=int(time.time()),
-                    )
-                    
-                    print(f"[INFO] 상태 보고 전송 완료 (Timestamp: {status_msg.timestamp})")
-            
-        except Exception as e:
-            print(f"[ERROR] 상태 보고 전송 실패: {e}")
-            
-        await asyncio.sleep(10)
+        xdp_task = asyncio.to_thread(executor.get_xdp_status)
+        nft_task = asyncio.to_thread(executor.get_nft_ruleset)
+        
+        raw_xdp_result, raw_nft_result = await asyncio.gather(xdp_task, nft_task)
+
+        xdp_proto_details = []
+        nft_json_str = ""
+
+        # XDP Parsing
+        match raw_xdp_result:
+            case (True, raw_data):
+                match TbsenParser.parse_xdp_status(raw_data):
+                    case (True, parsed_data):
+                        for iface in parsed_data.get("interfaces", []):
+                            stats = parsed_data.get("stats", {}).get(iface["name"], {})
+                            xdp_proto_details.append(filter_pb2.XdpInterfaceInfo(
+                                name=iface.get("name", "unknown"),
+                                mode=iface.get("mode", "unknown"),
+                                drop_count=int(stats.get("drop", 0)),
+                                pass_count=int(stats.get("pass", 0))
+                            ))
+            case (False, err):
+                pass 
+
+        # NFT Parsing
+        match raw_nft_result:
+            case (True, raw_json):
+                match raw_json:
+                    case str(): nft_json_str = raw_json
+                    case _: 
+                        import json
+                        nft_json_str = json.dumps(raw_json)
+
+        yield filter_pb2.AgentStatus(
+            uuid=agent_uuid,
+            timestamp=int(time.time()),
+            hostname=HOSTNAME,
+            ip_address=HOST_IP, # Placeholder
+            xdp_details=xdp_proto_details,
+            xdp_mode=filter_pb2.XDP_MODE_NATIVE,
+            nftables_raw_json=nft_json_str
+        )
+
+        await asyncio.sleep(5)
+
 
 # Main Entry Point
 async def main():
@@ -171,22 +190,28 @@ async def main():
     async with grpc.aio.insecure_channel(SERVER_ADDR) as channel:
         stub = filter_pb2_grpc.FilterAgentStub(channel)
         
-        # Agent 서버 등록
+        # 에이전트 등록
         try:
-            reg_resp = await stub.RegisterAgent(filter_pb2.AgentIdentity(uuid=agent_uuid))
-            print(f"[INFO] 에이전트 서버 등록 성공: {reg_resp.message}")
+            reg_resp = await stub.RegisterAgent(filter_pb2.AgentIdentity(
+                uuid=agent_uuid,
+                hostname=HOSTNAME,
+                agent_version="0.2.0",
+                ip_address=HOST_IP
+            ))
+            print(f"[INFO] 등록 성공: {reg_resp.message}")
         except grpc.RpcError as e:
-            print(f"[INFO] 에이전트 서버 등록 실패 (서버 연결 확인): {e}")
-            return
+            print(f"[WARN] 등록 실패 (서버 확인 필요): {e}")
 
-        # 비동기 병렬 실행
-        await asyncio.gather(
-            run_command_listener(stub, executor),
-            run_status_reporter(stub, executor)
+        # 비동기로 작업 실행
+        listener_task = asyncio.create_task(run_command_listener(stub, executor))
+        reporter_task = asyncio.create_task(
+            stub.ReportStatus(generate_status_reports(executor))
         )
+
+        await asyncio.gather(listener_task, reporter_task)
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        print("[GRACEFUL_SHUTDOWN] 에이전트 사용자 요청종료")
+        print("[SHUTDOWN] 에이전트 종료")

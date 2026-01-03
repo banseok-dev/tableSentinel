@@ -56,7 +56,7 @@ message NftCommand {
 
 // Main Command Structure //
 
-// 서버 -> 에이전트 명령
+// 백엔드 -> 에이전트 명령
 message Command {
     string command_id = 1;
     
@@ -76,7 +76,14 @@ message CommandResponse {
 
 message InterfaceMetrics {
     string interface_name = 1;
-    bool xdp_attached = 2;
+    bool xdp_attached = 2; // 프론트에서 분기(리포트 확인받은 후 처리) - 추후 사용
+    uint64 drop_count = 3;
+    uint64 pass_count = 4;
+}
+
+message XdpInterfaceInfo {
+    string name = 1;
+    string mode = 2;
     uint64 drop_count = 3;
     uint64 pass_count = 4;
 }
@@ -84,17 +91,18 @@ message InterfaceMetrics {
 message AgentStatus {
     string uuid = 1;
     int64 timestamp = 2;
-    AgentState global_state = 3;
-    repeated InterfaceMetrics metrics = 4;
-
-    string hostname = 5;
-    string ip_address = 6;
+    string hostname = 3;
+    string ip_address = 4;
+    repeated XdpInterfaceInfo xdp_details = 5;
+    XdpMode xdp_mode = 6;
+    string nftables_raw_json = 7;
 }
 
 message AgentIdentity {
     string uuid = 1;
     string hostname = 2;
     string agent_version = 3;
+    string ip_address = 4;
 }
 
 // Services //
