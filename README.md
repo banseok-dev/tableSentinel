@@ -56,19 +56,19 @@ tableSentinel 프로젝트는 XDP + netfilter을 웹 GUI로 수 많은 Agent를 
 The tableSentinel is released under the MIT License.
 See [LICENSE](LICENSE) file for details.
 
-# Third Party Notices
+### Third Party Notices
 This project uses the following open source software:
 
-## Frontend (Vue.js)
+#### Frontend (Vue.js)
 * **Vue.js** (MIT License) - Copyright (c) 2015-present Evan You
 * **TailAdmin** (MIT License / Free) - Copyright (c) 2023 TailAdmin
 * **Axios** (MIT License)
 
-## Backend (Spring Boot)
+#### Backend (Spring Boot)
 * **Spring Boot** (Apache License 2.0)
 * **Netty** (Apache License 2.0)
 * **gRPC** (Apache License 2.0)
 
-## Agent (Python & Kernel)
+#### Agent (Python & Kernel)
 * **xdp-tools** (GPL-2.0, LGPL-2.1 and BSD-2-Clause) - *Used via CLI interactions*
 * **nftables** (GPL v2) - *Used via CLI interactions*

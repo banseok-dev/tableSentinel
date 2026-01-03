@@ -6,6 +6,7 @@ class TbsenExecutor:
     def __init__(self, use_sudo: bool = True):
         self.command_prefix = ["sudo"] if use_sudo else []
 
+    # 내부 API만 접근 가능
     def _execute_command(self, command: list[str], is_json_output: bool = False) -> Tuple[bool, Any]:
         full_command = self.command_prefix + command
 
@@ -48,7 +49,7 @@ class TbsenExecutor:
     
     # [ip] add ip accept
     def add_nft_allow_ip(self, chain: str, ip_address: str) -> Tuple[bool, Any]:
-        command = ["nft", "add", "rule", "inet", "filter", chain, "ip", "saddr", ip_address, "accept"]
+        command = ["nft", "insert", "rule", "inet", "filter", chain, "ip", "saddr", ip_address, "accept"]
         return self._execute_command(command)
 
     # [ip] add ip drop
@@ -58,7 +59,7 @@ class TbsenExecutor:
     
     # [ip] add TCP/UDP accept
     def add_nft_accept_l4_protocol(self, chain: str, l4_protocol: str, port:str, ip_address: str) -> Tuple[bool, Any]:
-        command = ["nft", "add", "rule", "inet", "filter", chain, l4_protocol, "dport", port, "ip", "saddr", ip_address, "accept"]
+        command = ["nft", "insert", "rule", "inet", "filter", chain, l4_protocol, "dport", port, "ip", "saddr", ip_address, "accept"]
         return self._execute_command(command)
 
     # [ip] add TCP/UDP drop
@@ -79,7 +80,7 @@ class TbsenExecutor:
         return self._execute_command(command)
     
     # [interface] 인터페이스 로드
-    def load_xdp_ineterface(self, interface: str) -> Tuple[bool, Any]:
+    def load_xdp_interface(self, interface: str) -> Tuple[bool, Any]:
         # 로드 실패시 명령어 반환 되므로 기본 값으로 설정 -> 기본이 native이므로,
         # native가 아닐 경우 Couldn't attach XDP program on iface '인터페이스 이름': Operation not supported(-95)
         # 에러를 띄우므로 이걸 반환하도록 하면됨.

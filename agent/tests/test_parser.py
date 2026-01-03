@@ -38,7 +38,7 @@ class TestTbsenParser(unittest.TestCase):
         self.assertTrue(success)
         self.assertEqual(data['interfaces'][0]['name'], 'enp1')
         
-        print("\n✅ XDP 파싱 테스트 통과")
+        print("\n [SUCCESS] XDP 파싱 테스트 통과")
 
 if __name__ == '__main__':
     unittest.main()

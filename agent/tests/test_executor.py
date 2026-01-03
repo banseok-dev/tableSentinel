@@ -29,7 +29,7 @@ class TestTbsenExecutor(unittest.TestCase):
         args, _ = mock_run.call_args
         self.assertEqual(args[0], expected_cmd)
         
-        print("\n✅ Executor 명령어 조립 테스트 통과")
+        print("\n[SUCCESS] Executor 명령어 조립 테스트 통과")
 
 if __name__ == '__main__':
     unittest.main()
