@@ -13,6 +13,7 @@
 
 # tableSentinel Project
 tableSentinel 프로젝트는 XDP + netfilter을 웹 GUI로 수 많은 Agent를 동시에 제어할 수 있는 통합 관제 시스템입니다.
+Disclaimer: 이 프로젝트는 eBPF(XDP), nftables 통합 처리 파이프라인을 gRPC 아키텍처로 구성하기 위한 PoC 프로젝트입니다. 현재 개발 중인 단계이며, 상용 환경 사용을 권장하지 않습니다.
 
 ## 목표
 - nftables, xdptool 등 방화벽 유기적 연결
