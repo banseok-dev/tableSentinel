@@ -29,20 +29,17 @@ const agentRules = ref<any[]>([]) // 선택된 에이전트의 차단 규칙 목
 let pollInterval: any = null      // 폴링용 인터벌 변수
 
 // 백엔드 API 연동 함수
-// fetchAgents 함수 수정
 const fetchAgents = async () => {
   try {
     const response = await api.get('/api/v1/agents')
     
-    agents.value = response.data.map((agent: any) => {
-      return {
-        id: agent.uuid,
-        name: agent.hostname || 'No-Name',
-        ip: agent.ip_address || 'Unknown',
-        status: agent.status || 'Offline', 
-        drop_rate: 'Monitoring' 
-      }
-    })
+    agents.value = response.data.map((agent: any) => ({
+        id: agent.uuid, 
+        name: agent.hostname,
+        ip: agent.ip_address, 
+        status: agent.status || 'Offline',
+        drop_rate: 'Monitoring'
+    }))
   } catch (error) {
     console.error('Failed to fetch agents:', error)
   }
@@ -76,13 +73,12 @@ const sendBlockCommand = async () => {
       })
     }
 
-    // 성공 시 UI 업데이트
-    // 실제로는 백엔드에서 룰 리스트를 다시 받아와야 하지만, 반응성을 위해 로컬 리스트에 먼저 추가(추후 수정)
+    // agent 연결 성공 시 UI 업데이트
     agentRules.value.push({
       ip: targetIp.value,
       type: blockMode.value,
       interface: blockMode.value === 'XDP' ? 'eth0' : 'input',
-      status: 'Active' // TODO: 코드 리팩터링 준비
+      status: '🔗 Syncing'
     })
 
     alertMessage.value = {
@@ -182,35 +178,40 @@ onUnmounted(() => {
           <div class="grid grid-cols-3 border-b border-stroke bg-gray-2 py-2 px-4 dark:border-strokedark dark:bg-meta-4">
             <div class="p-2 font-medium">Hostname</div>
             <div class="p-2 text-center font-medium">Status</div>
-            <div class="p-2 text-center font-medium">Info</div>
+            <div class="p-2 text-center font-medium">UUID</div>
           </div>
+
           <div class="flex flex-col">
             <div v-if="agents.length === 0" class="p-4 text-center text-gray-500 text-sm">
-              호스트 대기중...
+              호스트 등록 대기중
             </div>
 
             <div 
-              v-for="agent in agents" 
-              :key="agent.id" 
-              @click="selectAgent(agent)"
-              :class="[
-                'grid grid-cols-3 border-b border-stroke dark:border-strokedark cursor-pointer hover:bg-gray-100 dark:hover:bg-meta-4 transition items-center py-3 px-4',
-                selectedAgent?.id === agent.id ? 'bg-primary/5 border-l-4 border-l-primary' : ''
-              ]"
-            >
-              <div class="flex flex-col">
+                v-for="agent in agents" 
+                :key="agent.uuid"  @click="selectAgent(agent)"
+                :class="[
+                  'grid grid-cols-3 ...',
+                  selectedAgent?.uuid === agent.uuid ? 'bg-primary/5 ...' : '' ]"
+              >
+              <div class="py-2 px-6 flex flex-col gap-1">
                 <span class="text-black dark:text-white font-bold text-sm">{{ agent.name }}</span>
-                <span class="text-xs text-gray-900">{{ agent.ip }}</span>
+                <span class="text-xs text-gray-500 font-medium">{{ agent.ip }}</span>
               </div>
-              <div class="text-center">
-                <span 
-                  :class="agent.status === 'Active' ? 'text-success bg-success/10' : 'text-danger bg-danger/10'" 
-                  class="px-2 py-1 rounded text-xs font-bold"
-                >
-                  {{ agent.status }}
-                </span>
+                <div class="py-4 px-4 text-center">
+                  <span 
+                    :class="{
+                      'text-success bg-success-700': agent.status === 'Online',
+                      'text-danger bg-error-700': agent.status === 'Offline',
+                      'text-warning bg-gray-700': agent.status === 'Checking...'
+                    }" 
+                    class="px-2 py-1 rounded text-xs font-bold"
+                  >
+                    {{ agent.status }}
+                  </span>
+                </div>
+              <div class="py-5 px-1 flex flex-col">
+                <span class="text-center text-black dark:text-white font-bold text-sm">{{ agent.id }}</span>
               </div>
-              <div class="text-center text-sm">{{ agent.drop_rate }}</div>
             </div>
           </div>
         </div>

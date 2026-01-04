@@ -9,6 +9,8 @@ class TbsenParser:
         print(parser_data)
         return True, parser_data
 
+
+    # eBPF 맵 직접 분석 필요
     @staticmethod
     def parse_xdp_status(xdp_raw_text: str) -> Tuple[bool, Any]:
         parsed_data = {

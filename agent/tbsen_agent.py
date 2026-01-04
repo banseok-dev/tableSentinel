@@ -182,6 +182,13 @@ async def generate_status_reports(executor):
 
         await asyncio.sleep(5)
 
+# 리포트 스트림 추가
+async def start_reporting(stub, executor):
+    try:
+        report_iterator = generate_status_reports(executor)
+        await stub.ReportStatus(report_iterator)
+    except grpc.RpcError as e:
+        print(f"[ERROR] 리포트 스트림 오류: {e}")
 
 # Main Entry Point
 async def main():
@@ -202,14 +209,10 @@ async def main():
         except grpc.RpcError as e:
             print(f"[WARN] 등록 실패 (서버 확인 필요): {e}")
 
-        # 비동기로 작업 실행
         listener_task = asyncio.create_task(run_command_listener(stub, executor))
-        reporter_task = asyncio.create_task(
-            stub.ReportStatus(generate_status_reports(executor))
-        )
+        reporter_task = asyncio.create_task(start_reporting(stub, executor))
 
         await asyncio.gather(listener_task, reporter_task)
-
 if __name__ == "__main__":
     try:
         asyncio.run(main())

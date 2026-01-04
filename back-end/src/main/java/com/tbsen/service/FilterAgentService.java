@@ -39,34 +39,7 @@ public class FilterAgentService extends FilterAgentGrpc.FilterAgentImplBase {
 
     // 프론트 조회용 메서드
     public List<AgentIdentityDto> getConnectedAgents() {
-        List<AgentIdentityDto> list = new ArrayList<>(connectedAgents.values());
-        
-        // 현재 서버 시간
-        LocalDateTime now = LocalDateTime.now();
-
-        for (AgentIdentityDto agent : list) {
-            String lastHbStr = agent.getLast_heartbeat();
-            
-            // TODO: HB 구성 전부 변경 예정
-            if (lastHbStr != null) {
-                // 저장된 시간 파싱
-                LocalDateTime lastHb = LocalDateTime.parse(lastHbStr);
-                
-                // 차이 계산 (초 단위)
-                long diffSeconds = java.time.Duration.between(lastHb, now).getSeconds();
-                
-                // 30초 이내면 Active, 아니면 Offline 판정
-                if (Math.abs(diffSeconds) < 30) {
-                    agent.setStatus("Active");
-                } else {
-                    agent.setStatus("Offline");
-                }
-            } else {
-                agent.setStatus("Offline");
-            }
-        }
-        
-        return list;
+        return new ArrayList<>(connectedAgents.values());
     }
 
     // 에이전트 등록 - rpc RegisterAgent
@@ -87,7 +60,7 @@ public class FilterAgentService extends FilterAgentGrpc.FilterAgentImplBase {
                 .agent_version(agentVersion)
                 .ip_address(ipAddress)
                 .last_heartbeat(LocalDateTime.now().toString()) // 서버 시간 기준
-                .status("Active") // TODO: 추후 개선 준비중 -> Online, Offline 리팩터링
+                .status("Online")
                 .build();
 
         // Map에 저장
@@ -109,22 +82,20 @@ public class FilterAgentService extends FilterAgentGrpc.FilterAgentImplBase {
         return new StreamObserver<AgentStatus>() {
             @Override
             public void onNext(AgentStatus status) {
+                log.info("[DEBUG-RAW] Incoming Status -> UUID: {}, Host: {}, IP: {}", 
+                        status.getUuid(), 
+                        status.getHostname(), 
+                        status.getIpAddress());
+
                 String uuid = status.getUuid();
-                
-                // 에이전트 정보 실시간 동기화
                 AgentIdentityDto agentInfo = connectedAgents.get(uuid);
-                
+            
                 if (agentInfo != null) {
-                    // HB 갱신
-                    java.time.ZonedDateTime.now(java.time.ZoneId.of("Asia/Seoul")).toLocalDateTime().toString();
-                    
-                    // Hostname이나 IP가 바뀌었으면 갱신 (유동 IP 환경 대비)
-                    if (!status.getHostname().equals(agentInfo.getHostname())) {
-                        agentInfo.setHostname(status.getHostname());
-                    }
-                    if (!status.getIpAddress().equals(agentInfo.getIp_address())) {
-                        agentInfo.setIp_address(status.getIpAddress());
-                    }
+                    // 데이터 강제 갱신
+                    agentInfo.setHostname(status.getHostname());
+                    agentInfo.setIp_address(status.getIpAddress());
+                    agentInfo.setStatus("Online");
+                    agentInfo.setLast_heartbeat(LocalDateTime.now().toString());
                 } else {
                     // 미등록 에이전트 처리
                     log.warn("[UNKNOWN] 미등록 에이전트 보고 수신: {}", uuid);
@@ -223,6 +194,10 @@ public class FilterAgentService extends FilterAgentGrpc.FilterAgentImplBase {
         Context.current().addListener(context -> {
             agentChannels.remove(agentId);
             log.warn("[INFO] 에이전트 연결 끊김: {}", agentId);
+            AgentIdentityDto disconnectedAgent = connectedAgents.get(agentId);
+            if (disconnectedAgent != null) {
+                disconnectedAgent.setStatus("Offline");
+            }
         }, java.util.concurrent.Executors.newSingleThreadExecutor());
     }
 
