@@ -75,8 +75,8 @@ class TbsenExecutor:
     # 인터페이스는 XDP Filter에서 먼저 선택되어 처리되므로, nftables 인터페이스 선택기능은 빼기
 
     # [status] read rule
-    def get_xdp_status(self) -> Tuple[bool, Any]:
-        command = ["xdp-filter", "status"]
+    def get_bpf_dump(self, map_name) -> Tuple[bool, Any]:
+        command = ["bpftool", "-j", "map", "dump", "name", map_name]
         return self._execute_command(command)
     
     # [interface] 인터페이스 로드
