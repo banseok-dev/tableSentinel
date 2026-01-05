@@ -2,6 +2,8 @@ import unittest
 import sys
 import os
 
+## 사용주의! 현재 작동 안됨 -> 리팩터링 대기중
+
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 from tbsen_parser import TbsenParser
