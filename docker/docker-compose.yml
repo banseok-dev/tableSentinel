@@ -1,0 +1,17 @@
+services:
+  backend:
+    build:
+      context: ../
+      dockerfile: ./docker/back-end.Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    restart: always
+
+  frontend:
+    build:
+      context: ../
+      dockerfile: ./docker/front-end.Dockerfile
+    ports:
+      - "80:80"
+    restart: always
