@@ -13,7 +13,7 @@ import filter_pb2
 import filter_pb2_grpc
 
 # 설정 (Back-end -> netty 8081 Port)
-SERVER_ADDR = "localhost:8081" # TODO: 추후 .env 파일에서 IP 로드 하도록 예정
+SERVER_ADDR = "10.0.39.97:8081" # TODO: 추후 .env 파일에서 IP 로드 하도록 예정
 
 # Host Identity
 UUID_DIR = "/etc/tbsen-agent"
@@ -198,12 +198,12 @@ async def main():
         # keepalive 주기
         ('grpc.keepalive_time_ms', 10000),
         ('grpc.keepalive_timeout_ms', 10000),
-        ('grpc.keepalive_permit_without_calls', 1)
+        ('grpc.keepalive_permit_without_calls', 1),
 
         # ping 제한
         ('grpc.http2.max_pings_without_data', 0), 
         ('grpc.http2.min_time_between_pings_ms', 20000), 
-        ('grpc.http2.min_ping_interval_without_data_ms', 20000),
+        ('grpc.http2.min_ping_interval_without_data_ms', 20000)
     ]
     
     async with grpc.aio.insecure_channel(SERVER_ADDR, options=channel_options) as channel:
