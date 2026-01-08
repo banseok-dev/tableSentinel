@@ -12,16 +12,12 @@ from tbsen_parser import TbsenParser
 import filter_pb2
 import filter_pb2_grpc
 
-# 설정 (Back-end -> netty 8081 Port)
-SERVER_ADDR = "10.0.39.97:8081" # TODO: 추후 .env 파일에서 IP 로드 하도록 예정
-
 # Host Identity
+SERVER_ADDR = os.getenv("SERVER_ADDR", "localhost:8081")
 UUID_DIR = "/etc/tbsen-agent"
 HOST_UUID_FILE = f"{UUID_DIR}/agent-uuid"
 HOSTNAME = socket.gethostname()
-
-# 임시 IP - 확실하게 구분 가능한 인터페이스 IP 추출 가능한 경우에 로직추가
-HOST_IP = "127.0.0.1" 
+HOST_IP = os.getenv("SERVER_ADDR", "127.0.0.1")
 
 if not os.path.exists(UUID_DIR):
     try:
