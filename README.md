@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/logo.png" alt="tableSentinel Logo" width="1080">
+  <img src="assets/logo.png" alt="tableSentinel Logo" width="334">
   <p>
     <strong>eBPF/XDP + netfilter 하이브리드 기반의 리눅스 방화벽(Firewall) 프로젝트</strong>
   </p>
@@ -75,4 +75,5 @@ This project uses the following open source software:
 
 #### Agent (Python & Kernel)
 * **xdp-tools** (GPL-2.0, LGPL-2.1 and BSD-2-Clause) - *Used via CLI interactions*
+* **bpftool** (GPL-2.0, LGPL-2.1 and BSD-2-Clause) - *Used via CLI interactions*
 * **nftables** (GPL v2) - *Used via CLI interactions*
