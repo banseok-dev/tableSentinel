@@ -1,7 +1,7 @@
 <div align="center">
   <img src="assets/logo.png" alt="tableSentinel Logo" width="1080">
   <p>
-    <strong>eBPF/XDP + netfilter 기반의 리눅스 방화벽 및 통합 관제 시스템</strong>
+    <strong>eBPF/XDP + netfilter 하이브리드 기반의 리눅스 방화벽(Firewall) 프로젝트</strong>
   </p>
   <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white">
   <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white">
@@ -12,22 +12,16 @@
 
 
 # tableSentinel Project
-tableSentinel 프로젝트는 XDP + netfilter을 웹 GUI로 수 많은 Agent를 동시에 제어할 수 있는 통합 관제 시스템입니다.
-Disclaimer: 이 프로젝트는 eBPF(XDP), nftables 통합 처리 파이프라인을 gRPC 아키텍처로 구성하기 위한 PoC 프로젝트입니다. 현재 개발 중인 단계이며, 상용 환경 사용을 권장하지 않습니다.
+tableSentinel은 패킷의 L2/L3 영역은 xdp-filter를 통해 오프로딩하여 처리하며, L4 영역은 Netfilter로 유연한 처리 파이프라인을 구성하여 엣지(Edge) 서버나 Standalone 서버의 DDoS등의 외부 공격을 감지하고 방어하기 위한 프로젝트입니다.
 
-## 목표
-- nftables, xdptool 등 방화벽 유기적 연결
-- DB를 통한 유저/로그/감사 관리
-- 커널 소스를 통한 호스트 방화벽 실시간 모니터링
+- **⚠️ Disclaimer (PoC 단계 안내)** 본 프로젝트는 eBPF/XDP와 netfilter 통합 제어 파이프라인을 검증하기 위한 PoC(Proof of Concept) 단계입니다. 현재 통신 구간인 에이전트 ⇋ 백엔드의 gRPC와 백엔드 ⇋ 프론트엔드의 REST API 통신 파이프라인을 암호화하지 않았으므로, **프로덕션 환경에서의 사용은 권장하지 않습니다.**
+
+## Core Architecture
+- **L2/L3 영역 (eBPF/XDP)**: xdp-filter를 활용하여 패킷의 커널 진입 전(sk_buff 생성전) 단계에서 고속차단(Offloading) 수행
+- **L4 영역 (netfilter)**: 패킷의 sk_buff 전달 이후 netfilter의 기능을 활용한 유연한 처리 수행
 
 ## 프로젝트 구성
 본 프로젝트는 다음과 같은 구성으로 되어있습니다.
-### 아키텍쳐
-- **Agent:** Python + XDP (eBPF) for Kernel-level Packet Drop + netfilter (nftables)
-- **Backend:** Spring Boot (REST API, gRPC)
-- **Frontend:** Vue.js (Dashboard) + TailAdmin (Template)
-- **Infrastructure:** Docker (Privileged Container)
-
 ### 주요 기능
 - **XDP Native Mode**를 활용한 초고속 패킷 필터링
 - **netfilter** 기반 방화벽과 연계로 지능적 패킷 필터링 구현
@@ -35,14 +29,15 @@ Disclaimer: 이 프로젝트는 eBPF(XDP), nftables 통합 처리 파이프라�
 - **gRPC 구성**으로 기존 Polling 방식의 응답속도 개선
 - **3-Tier Layered Design**으로 확장성 및 유지보수성 확보
 
-### 기술 스택(Stack)
-- **Language:** Python, Java
-- **Design Pattern:** gRPC, REST API
-- **Framework:** Spring Boot, Vue.js
-- **Core:** eBPF/XDP, netfilter
-- **DevOps:** Docker
+### Tech Stack
+- **Kernel(Core):** eBPF/XDP, netfilter
+- **Agent:** Python
+- **Data Pipeline:** REST API, gRPC
+- **Backend:** Spring Boot (REST API, gRPC)
+- **Frontend:** Vue.js + TailAdmin (Template)
+- **CI/CD:** terraform, cloud-init, ansible, Docker Compose, awscli
 
-## 요구사항 및 설치방법
+## Installation
 ### 요구사항 (준비중)
  - XDP Native 또는 Offload 기능 사용시 호환되는 NIC 필요
  - 에이전트 실행을 위한 Docker가 설치된 호스트(또는 Dockerfile에 기재된 Python 구성 필요 - 추후 통합 예정)
