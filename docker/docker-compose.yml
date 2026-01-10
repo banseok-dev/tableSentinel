@@ -4,6 +4,7 @@ services:
       context: ../
       dockerfile: ./docker/back-end.Dockerfile
     ports:
+      # 변경 금지 <- port 변경 필요시 back-end 및 front-end 포트 변경 선행
       - "8080:8080"
       - "8081:8081"
     restart: always

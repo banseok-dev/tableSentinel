@@ -1,0 +1,55 @@
+---
+- name: Deploy TableSentinel Agent (Build from Source)
+  hosts: agents
+  become: true
+  vars:
+    repo_path: "/opt/tableSentinel"
+    build_context: "/opt/tableSentinel/agent"
+    dockerfile_path: "/opt/tableSentinel/docker/agent.Dockerfile"
+    target_interface: "{{ ansible_default_ipv4.interface }}"
+
+  tasks:
+    - name: Clone TableSentinel Repository
+      git:
+        repo: 'https://github.com/banseok-dev/tableSentinel.git'
+        dest: "{{ repo_path }}"
+        version: main
+        force: yes
+
+    - name: Load XDP Interface (Native or Generic)
+      shell: |
+        ethtool -L {{ target_interface }} combined 1 && \
+        ip link set dev {{ target_interface }} mtu 1500 && \
+        xdp-filter load {{ target_interface }} -m native || \
+        xdp-filter load {{ target_interface }} -m skb
+      register: xdp_load_result
+      changed_when: "'Loaded' in xdp_load_result.stdout"
+
+
+    - name: Build Agent Docker Image
+      community.docker.docker_image:
+        name: tbsen-agent
+        tag: dev
+        source: build
+        build:
+          path: "{{ build_context }}"
+          dockerfile: "{{ dockerfile_path }}"
+          pull: yes
+        state: present
+        force_source: yes
+
+    - name: Run Agent Container
+      docker_container:
+        name: tablesentinel-agent
+        image: tbsen-agent:dev
+        state: started
+        restart_policy: always
+        privileged: true
+        network_mode: host
+        pid_mode: host
+        volumes:
+          - /sys/fs/bpf:/sys/fs/bpf
+        env:
+          PYTHONUNBUFFERED: "1"
+          SERVER_ADDR: "{{ server_addr }}"
+          AGENT_IP: "{{ inventory_hostname }}"

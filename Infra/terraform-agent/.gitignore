@@ -1,0 +1,10 @@
+# Terraform 관련
+.terraform/
+*.tfstate
+*.tfstate.backup
+terraform.tfvars
+.terraform.lock.hcl
+
+# Ansible 관련 (생성된 인벤토리)
+inventory.ini
+*.pem

@@ -1,0 +1,14 @@
+# terraform.tfvars
+
+# AWS 지역설정
+aws_region     = "ap-northeast-2"
+
+# AWS에 등록할 키페어의 이름
+key_name       = "tableSentinel-ssh-key"
+
+# SSH 접속을 위한 공개키 값
+ansible_public_key = "{{ your ssh key }}"
+ansible_private_key_path = "{{ your ssh key location}}"
+
+# 백엔드 서버 주소 및 포트
+server_addr = "{{ back-end Server IP:Port }}"
