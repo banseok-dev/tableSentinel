@@ -234,6 +234,7 @@ async def main(server_addr, host_ip, agent_uuid, hostname):
 
 if __name__ == "__main__":
     try:
+        # init
         SERVER_ADDR = os.getenv("SERVER_ADDR", "localhost:8081") 
         UUID_DIR = os.getenv("UUID_DIR", "/etc/tbsen-agent")
         UUID_FILE = os.path.join(UUID_DIR, "agent-uuid")
@@ -243,6 +244,7 @@ if __name__ == "__main__":
         final_ip = get_host_ip(ENV_IP)
         final_uuid = check_and_get_uuid(UUID_DIR, UUID_FILE)
 
+        # main
         asyncio.run(main(SERVER_ADDR, final_ip, final_uuid, HOSTNAME))
 
     except KeyboardInterrupt:
