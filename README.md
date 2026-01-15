@@ -16,13 +16,10 @@ tableSentinel은 패킷의 L2/L3 영역은 xdp-filter를 통해 오프로딩하�
 
 - **⚠️ Disclaimer (PoC 단계 안내)** 본 프로젝트는 eBPF/XDP와 netfilter 통합 제어 파이프라인을 검증하기 위한 PoC(Proof of Concept) 단계입니다. 현재 통신 구간인 에이전트 ⇋ 백엔드의 gRPC와 백엔드 ⇋ 프론트엔드의 REST API 통신 파이프라인을 암호화하지 않았으므로, **프로덕션 환경에서의 사용은 권장하지 않습니다.**
 
-```mermaid
-graph LR
-    User((User)) -->|Axios| Web[Spring Boot]
-    Web -->|gRPC| Agent[Python Agent]
-    Agent -->|XDP/netfilter| Kernel{Linux Kernel}
-    Kernel -->|Drop/Pass| Traffic[Network Traffic]
-```
+<div align="center">
+  <img src="assets/project_diagram.png" alt="tableSentinel diagram" width="1080">
+</div>
+
 > 💡 **[상세 아키텍처 라이프사이클 확인](https://github.com/banseok-dev/tableSentinel/blob/main/docs/project-lifecycle.md)**
 
 ## Core Architecture

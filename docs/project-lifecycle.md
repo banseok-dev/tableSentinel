@@ -48,7 +48,7 @@ sequenceDiagram
                     Exec->>Kernel: xdp-filter (BPF Map Update)
                 else NFT Rule
                     Agent->>Exec: NFT Rule Action
-                    Exec->>Kernel: nftables (Rule Add)
+                    Exec->>Kernel: nftables (Rule Action)
                 end
                 Agent->>Server: filter_pb2.CommandResponse (ACK)
             end
