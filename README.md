@@ -43,13 +43,6 @@ tableSentinel은 패킷의 L2/L3 영역은 xdp-filter를 통해 오프로딩하�
 - **Frontend:** Vue.js + TailAdmin (Template)
 - **CI/CD:** terraform, cloud-init, ansible, Docker Compose, awscli
 
-## Installation
-### 요구사항 (준비중)
- - XDP Native 또는 Offload 기능 사용시 호환되는 NIC 필요
- - 에이전트 실행을 위한 Docker가 설치된 호스트(또는 Dockerfile에 기재된 Python 구성 필요 - 추후 통합 예정)
-### 설치방법 (준비중)
- - 현재 단계에서는 /docker/agent.Dockerfile 빌드 후 사용
-
 ## 계획
 ### v0.2.0(Current) - 2026/01/04
  - ☑︎ Core: XDP 및 nftables 기반 차단 로직 구현 (완료)
