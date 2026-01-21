@@ -20,8 +20,8 @@ tableSentinel은 패킷의 L2/L3 영역은 xdp-filter를 통해 오프로딩하�
   <img src="assets/project_diagram.png" alt="tableSentinel diagram" width="1080">
 </div>
 
-> **[상세 아키텍처 라이프사이클 확인](https://github.com/banseok-dev/tableSentinel/blob/main/docs/project-lifecycle.md)**
-> **[프로젝트 ADR 확인](https://banseok.dev/%ec%8b%9c%ec%8a%a4%ed%85%9c/tablesentinel-adr/)**
+- **[상세 아키텍처 라이프사이클 확인](https://github.com/banseok-dev/tableSentinel/blob/main/docs/project-lifecycle.md)**
+- **[프로젝트 ADR 확인](https://banseok.dev/%ec%8b%9c%ec%8a%a4%ed%85%9c/tablesentinel-adr/)**
 
 ## Core Architecture
 - **L2/L3 영역 (eBPF/XDP)**: xdp-filter를 활용하여 패킷의 커널 진입 전(sk_buff 생성전) 단계에서 고속차단(Offloading) 수행
