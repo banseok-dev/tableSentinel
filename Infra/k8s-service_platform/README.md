@@ -4,7 +4,6 @@
 
 # tableSentinel k8s CI/CD Project
 tableSentinel CI/CD 프로젝트입니다.
-Githuc Actions 
 
 ## 구성요소
  - argoCD - Local Infra or Cloud(ex. AWS EKS)
