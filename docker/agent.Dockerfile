@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+
 FROM ubuntu:24.04
 # AWS에서 Image 불러올 경우
 # FROM public.ecr.aws/ubuntu/ubuntu:24.04

@@ -57,7 +57,7 @@ tableSentinel은 패킷의 L2/L3 영역은 xdp-filter를 통해 오프로딩하�
  - ☐ Logging & Audit : DB연동을 통한 대시보드 접근 제어 및 로그/감사 처리
 
 ## License & Credits
-The tableSentinel is released under the MIT License.
+The tableSentinel is released under the AGPL License.
 See [LICENSE](LICENSE) file for details.
 
 ### Third Party Notices

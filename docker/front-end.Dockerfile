@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+
 FROM node:25.2.1-alpine AS builder
 WORKDIR /app
 

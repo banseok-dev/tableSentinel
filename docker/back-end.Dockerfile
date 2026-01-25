@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+
 FROM gradle:jdk21-jammy AS builder
 WORKDIR /home/gradle/project/back-end
 
