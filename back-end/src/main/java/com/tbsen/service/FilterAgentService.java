@@ -205,7 +205,7 @@ public class FilterAgentService extends FilterAgentGrpc.FilterAgentImplBase {
     // XDP Command 처리 로직
     public boolean executeXdpCommand(String agentId, XdpCommandDto dto) {
         
-        // 1. DTO -> Proto Builder 변환 (컨트롤러에서 가져온 로직)
+        // DTO -> Proto Builder 변환 (컨트롤러에서 가져온 로직)
         XdpCommand.Builder xdpBuilder = XdpCommand.newBuilder();
 
         // Action 변환

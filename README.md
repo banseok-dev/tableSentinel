@@ -45,7 +45,11 @@ tableSentinel은 패킷의 L2/L3 영역은 xdp-filter를 통해 오프로딩하�
 - **CI/CD:** terraform, cloud-init, ansible, Docker Compose, awscli
 
 ## 계획
-### v0.2.0(Current) - 2026/01/04
+
+### v0.3.0(Current) - 2026/02/04 ~
+ - ☐ Agent: Rust 변경 및 구조 개선
+
+### v0.2.0(Checkout) - 2026/01/04
  - ☑︎ Core: XDP 및 nftables 기반 차단 로직 구현 (완료)
  - ☑︎ Network: 백엔드-에이전트 간 gRPC 스트리밍 통신 구현 (완료)
  - ☑︎ UI: Vue.js 기반 대시보드 및 실시간 제어 연동 (완료)

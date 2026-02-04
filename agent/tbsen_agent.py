@@ -224,11 +224,12 @@ async def main(server_addr, host_ip, agent_uuid, hostname):
     )
 
     print(f"========================================")
-    print(f" tableSentinel Agent v0.2.0 ")
+    print(f" tableSentinel Agent v0.3.0 - tmp")
     print(f" - UUID: {agent_uuid}")
     print(f" - IP  : {host_ip}")
     print(f" - Host: {hostname}")
     print(f" - Target: {server_addr}")
+    print(f" - Refactor in progress")
     print(f"========================================")
 
     # gRPC 채널 옵션 (KeepAlive 설정)

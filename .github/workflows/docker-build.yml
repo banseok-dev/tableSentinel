@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-only
 
-name: Build and Push Docker Images
+name: tableSentienl GitOps
 
 on:
   push:
@@ -17,6 +17,26 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Backend metadata
+        id: meta-back
+        uses: docker/metadata-action@v5
+        with:
+          images: banseokdev/tbsen-backend
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
+            type=sha,format=short
+            type=ref,event=tag
+
+      - name: Frontend metadata
+        id: meta-front
+        uses: docker/metadata-action@v5
+        with:
+          images: banseokdev/tbsen-frontend
+          tags: |
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
+            type=sha,format=short
+            type=ref,event=tag
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -37,7 +57,8 @@ jobs:
           file: ./docker/back-end.Dockerfile
           platforms: linux/amd64
           push: true
-          tags: banseokdev/tbsen-backend:latest
+          tags: ${{ steps.meta-back.outputs.tags }}
+          labels: ${{ steps.meta-back.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -48,6 +69,7 @@ jobs:
           file: ./docker/front-end.Dockerfile
           platforms: linux/amd64
           push: true
-          tags: banseokdev/tbsen-frontend:latest
+          tags: ${{ steps.meta-front.outputs.tags }}
+          labels: ${{ steps.meta-front.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
