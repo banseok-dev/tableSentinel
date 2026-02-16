@@ -72,6 +72,9 @@ agent/build/
 agent/dist/
 agent/*.spec
 
+# Rust 예외처리
+agent-rust/target
+
 # ===================================
 # Infrastructure (Docker etc.)
 # ===================================
