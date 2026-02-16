@@ -1,8 +1,6 @@
 // tableSentienl agent rust project
 
-async fn say_hello() -> String {
-    "test async function".to_string()
-}
+use tokio;
 
 #[tokio::main]
 async fn main() {
@@ -10,4 +8,8 @@ async fn main() {
 
     let result = say_hello().await;
     println!("Result: {}", result);
+}
+
+async fn say_hello() -> String {
+    "test async function".to_string()
 }
