@@ -16,17 +16,24 @@ tableSentinel은 선언형 제어를 통해 망내의 Linux 호스트의 방화�
 ## Poject Design
 
 - eBPF/XDP, netfilter 등 리눅스 네트워크 스택을 제어하여 L2/L3 방화벽 제어
-- 선언적 구조를 통해 망내의 호스트 방화벽 규칙의 멱등성 보장을 목표
+- 선언적 구조를 통해 망내의 호스트 방화벽 정책에 대한 최종 일관성 및 멱등성 보장을 확보
 - gRPC 통신과 mTLS 통신 파이프라인을 통해 보안성 향상과 명세서 암호화를 통한 안전한 규칙 적용
+
+- 과거 v0.2.0-dev 디자인
+  - **[상세 아키텍처 라이프사이클 확인](https://github.com/banseok-dev/tableSentinel/blob/main/docs/project-lifecycle.md)**
+  - **[프로젝트 ADR 확인](https://banseok.dev/%ec%8b%9c%ec%8a%a4%ed%85%9c/tablesentinel-adr/)**
 
 ## Caution
 
-현재 프로젝트는 명령형 기반으로 구조적 문제점을 확인하여 명세형 기반 선언형 구조로 전환을 계획하고 있습니다. 전체적인 코드 구조개선과 기존에 작성한 ADR 대규모 변화가 있을 예정입니다.
+현재 프로젝트는 명령형 기반(v0.2.0)으로 구조적 문제점을 확인하여 v0.3.0에서 명세형 기반 선언형 구조로 대대적인 리팩터링을 진행하고 있습니다. 전체적인 코드 구조 개선과 기존에 작성된 ADR 문서도 대규모 변화가 있을 예정입니다.
 
 ## Require & Run (예정)
 
 - Agent
-  - Rust-Standalone - Linux Kernel >= 5.10 (예정)
+  - Rust-Standalone - Linux Kernel
+    - eBPF/XDP >= 5.10
+    - netfilter(iptables) >= ?
+    - netfilter(nftables) >= ?
 
 - Backend
   - Case.Container -> Docker
@@ -82,7 +89,7 @@ This project uses the following open source software:
 - **Netty** (Apache License 2.0)
 - **gRPC** (Apache License 2.0)
 
-#### Agent (Python & Kernel)
+#### Agent (Python -> Rust)
 
 - **xdp-tools** (GPL-2.0, LGPL-2.1 and BSD-2-Clause) - _Used via CLI interactions_ (제거 예정 및 네이티브 계획)
 - **bpftool** (GPL-2.0, LGPL-2.1 and BSD-2-Clause) - _Used via CLI interactions_ (제거 예정 및 네이티브 계획)
