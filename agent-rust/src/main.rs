@@ -3,7 +3,7 @@
 use tokio;
 use uuid;
 
-pub struct Agentidentity{
+struct Agentidentity{
     pub uuid: String
 }
 

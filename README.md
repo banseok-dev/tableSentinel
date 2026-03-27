@@ -1,28 +1,32 @@
 <div align="center">
   <img src="assets/logo.png" alt="tableSentinel Logo" width="334">
   <p>
-    <strong>eBPF/XDP + netfilter 하이브리드 기반의 리눅스 방화벽(Firewall) 프로젝트</strong>
+    <strong>선언적 명세를 활용한 eBPF/XDP + Netfilter 하이브리드 Zero Trust 보안 플랫폼</strong>
   </p>
 </div>
 
-# tableSentinel Project
+# tableSentinel project
 
-tableSentinel은 패킷의 L2/L3 영역은 xdp-filter를 통해 오프로딩하여 처리하며, L4 영역은 Netfilter로 유연한 처리 파이프라인을 구성하여 엣지(Edge) 서버나 Standalone 서버의 DDoS등의 외부 공격을 감지하고 방어하기 위한 프로젝트입니다.
-
-- **⚠️ Disclaimer (PoC 단계 안내)** 현재 통신 구간인 에이전트 ⇋ 백엔드의 gRPC와 백엔드 ⇋ 프론트엔드의 REST API 통신 암호 파이프라인 설계 진행중이므로, **프로덕션 환경에서의 사용은 권장하지 않습니다.**
+tableSentinel은 선언형 제어를 통해 망내의 Linux 호스트의 방화벽을 제어하여 Zero Trust 환경을 구성하기 위한 프로젝트입니다.
 
 <div align="center">
   <img src="assets/project_diagram.png" alt="tableSentinel diagram" width="1080">
 </div>
 
-- **[상세 아키텍처 라이프사이클 확인](https://github.com/banseok-dev/tableSentinel/blob/main/docs/project-lifecycle.md)**
-- **[프로젝트 ADR 확인](https://banseok.dev/%ec%8b%9c%ec%8a%a4%ed%85%9c/tablesentinel-adr/)**
+## Poject Design
 
-## Require & Run
+- eBPF/XDP, netfilter 등 리눅스 네트워크 스택을 제어하여 L2/L3 방화벽 제어
+- 선언적 구조를 통해 망내의 호스트 방화벽 규칙의 멱등성 보장을 목표
+- gRPC 통신과 mTLS 통신 파이프라인을 통해 보안성 향상과 명세서 암호화를 통한 안전한 규칙 적용
+
+## Caution
+
+현재 프로젝트는 명령형 기반으로 구조적 문제점을 확인하여 명세형 기반 선언형 구조로 전환을 계획하고 있습니다. 전체적인 코드 구조개선과 기존에 작성한 ADR 대규모 변화가 있을 예정입니다.
+
+## Require & Run (예정)
 
 - Agent
   - Rust-Standalone - Linux Kernel >= 5.10 (예정)
-  - Python -> Docker
 
 - Backend
   - Case.Container -> Docker
@@ -34,21 +38,28 @@ tableSentinel은 패킷의 L2/L3 영역은 xdp-filter를 통해 오프로딩하�
 
 ## Plan
 
-### v0.3.0(Current) - 2026/02/04 ~
+### 선언형 기반 v0.3.0(Current) - 2026/02/04
 
-- ☐ Agent: Rust 변경 및 구조 개선
-- ☐ Security: 통신 구간(mTLS) 암호화 및 API 인증 강화
+- Agent
+  - ☐ Rust 변경 및 구조 개선 (진행중)
+  - ☐ BPF/XDP Aya 라이브러리를 이용한 제어
+  - ☐ netfilter(iptables, nftables)는 CLI로 제어하여 호환성 및 명세서 처리
 
-### v0.2.0(Checkout) - 2026/01/04
+- Security
+  - ☐ 통신 구간(mTLS) 암호화 및 API 인증 강화
+  - ☐ 명세형 기반으로 gRPC byte 변수를 통해 암호화된 방화벽 규칙 적용
+
+- Backend
+  - ☐ DB 연결 및 방화벽 제어 사용자/감사/로그 등 구성
+
+- Frontend
+  - ☐ 사용자 방화벽 규칙 백엔드 전달 파이프라인 구성
+
+### 명령형 기반 v0.2.0(Checkout) - 2026/01/04
 
 - ☑︎ Core: XDP 및 nftables 기반 차단 로직 구현 (완료)
 - ☑︎ Network: 백엔드-에이전트 간 gRPC 스트리밍 통신 구현 (완료)
 - ☑︎ UI: Vue.js 기반 대시보드 및 실시간 제어 연동 (완료)
-
-### Future Plans
-
-- ☐ Intelligence: 패킷 패턴 분석을 통한 자동 차단
-- ☐ Logging & Audit : DB연동을 통한 대시보드 접근 제어 및 로그/감사 처리
 
 ## License & Credits
 
@@ -73,6 +84,7 @@ This project uses the following open source software:
 
 #### Agent (Python & Kernel)
 
-- **xdp-tools** (GPL-2.0, LGPL-2.1 and BSD-2-Clause) - _Used via CLI interactions_
-- **bpftool** (GPL-2.0, LGPL-2.1 and BSD-2-Clause) - _Used via CLI interactions_
+- **xdp-tools** (GPL-2.0, LGPL-2.1 and BSD-2-Clause) - _Used via CLI interactions_ (제거 예정 및 네이티브 계획)
+- **bpftool** (GPL-2.0, LGPL-2.1 and BSD-2-Clause) - _Used via CLI interactions_ (제거 예정 및 네이티브 계획)
 - **nftables** (GPL v2) - _Used via CLI interactions_
+- **iptables** (GPL v2) - _Used via CLI interactions_
