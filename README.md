@@ -70,7 +70,7 @@ tableSentinel은 선언형 제어를 통해 망내의 Linux 호스트의 방화�
 
 ## License & Credits
 
-The tableSentinel is released under the AGPL License.
+The tableSentinel is released under the MIT License.
 See [LICENSE](LICENSE) file for details.
 
 ### Third Party Notices
