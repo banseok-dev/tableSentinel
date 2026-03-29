@@ -1,13 +1,10 @@
 <div align="center">
   <img src="assets/logo.png" alt="tableSentinel Logo" width="334">
-  <p>
-    <strong>선언적 명세를 활용한 eBPF/XDP + Netfilter 하이브리드 Zero Trust 보안 플랫폼</strong>
-  </p>
 </div>
 
 # tableSentinel project
 
-tableSentinel은 선언형 제어를 통해 망내의 Linux 호스트의 방화벽을 제어하여 Zero Trust 환경을 구성하기 위한 프로젝트입니다.
+tableSentinel은 사설망내(Private Network) Linux 호스트의 방화벽을 제어하여 Zero Trust 환경을 구성하기 위한 프로젝트입니다.
 
 <div align="center">
   <img src="assets/project_diagram.png" alt="tableSentinel diagram" width="1080">
@@ -15,13 +12,14 @@ tableSentinel은 선언형 제어를 통해 망내의 Linux 호스트의 방화�
 
 ## Poject Design
 
-- eBPF/XDP, netfilter 등 리눅스 네트워크 스택을 제어하여 L2/L3 방화벽 제어
-- 선언적 구조를 통해 망내의 호스트 방화벽 정책에 대한 최종 일관성 및 멱등성 보장을 확보
-- gRPC 통신과 mTLS 통신 파이프라인을 통해 보안성 향상과 명세서 암호화를 통한 안전한 규칙 적용
+- eBPF/XDP, netfilter 등 리눅스 네트워크 스택을 제어하여 L2/L3 방화벽 제어 (명령형 -> 선언형 변경 예정)
+- 선언적 구조를 통해 망내의 호스트 방화벽 정책에 대한 최종 일관성 및 멱등성 보장 (예정)
+- gRPC 통신과 mTLS 통신 파이프라인을 통해 보안성 향상과 명세서 암호화를 통한 안전한 규칙 적용 (예정)
 
-- 과거 v0.2.0-dev 디자인
-  - **[상세 아키텍처 라이프사이클 확인](https://github.com/banseok-dev/tableSentinel/blob/main/docs/project-lifecycle.md)**
-  - **[프로젝트 ADR 확인](https://banseok.dev/%ec%8b%9c%ec%8a%a4%ed%85%9c/tablesentinel-adr/)**
+- 과거 v0.2.0-dev 디자인(명령형)
+  - **[v0.2.0-dev](https://github.com/banseok-dev/tableSentinel/tree/v0.2.0-dev?tab=readme-ov-file)**
+  - **[상세 아키텍처 라이프사이클](https://github.com/banseok-dev/tableSentinel/blob/main/docs/project-lifecycle.md)**
+  - **[프로젝트 ADR](https://banseok.dev/%ec%8b%9c%ec%8a%a4%ed%85%9c/tablesentinel-adr/)**
 
 ## Caution
 
